@@ -8,4 +8,9 @@ public class ListDistanceSolver {
     public List<Integer> sort(List<Integer> list) {
         return list.stream().sorted().collect(Collectors.toList());
     }
+
+    // TODO change to private later
+    public int distance(int firstNumber, int secondNumber) {
+        return Math.abs(firstNumber - secondNumber);
+    }
 }
