@@ -1,21 +1,21 @@
 package tkrippes.com.github.solver;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class ListDistanceSolver {
-    // TODO change to private later
-    public List<Integer> sort(List<Integer> list) {
-        return list.stream().sorted().collect(Collectors.toList());
-    }
+    public int solve(List<Integer> firstList, List<Integer> secondList) {
+        if (firstList.size() != secondList.size()) {
+            throw new IllegalArgumentException("firstList and secondList must have the same size");
+        }
 
-    // TODO change to private later
-    public int distance(int firstNumber, int secondNumber) {
-        return Math.abs(firstNumber - secondNumber);
-    }
+        List<Integer> sortedFirstList = firstList.stream().sorted().toList();
+        List<Integer> sortedSecondList = secondList.stream().sorted().toList();
 
-    // TODO change to private later
-    public int sum(List<Integer> list) {
-        return list.stream().mapToInt(Integer::intValue).sum();
+        int solution = 0;
+        for (int i = 0; i < sortedFirstList.size(); i++) {
+            solution += Math.abs(sortedFirstList.get(i) - (int) sortedSecondList.get(i));
+        }
+
+        return solution;
     }
 }
