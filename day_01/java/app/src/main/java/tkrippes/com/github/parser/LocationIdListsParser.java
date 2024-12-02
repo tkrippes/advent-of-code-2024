@@ -2,7 +2,6 @@ package tkrippes.com.github.parser;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class LocationIdListsParser {
@@ -12,7 +11,7 @@ public class LocationIdListsParser {
             throw new FileNotFoundException("Could not find input file: " + inputFileName);
         }
 
-        List<List<Integer>> locationIdLists = new ArrayList<>(Arrays.asList(new ArrayList<>(), new ArrayList<>()));
+        List<List<Integer>> locationIdLists = new ArrayList<>(List.of(new ArrayList<>(), new ArrayList<>()));
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
