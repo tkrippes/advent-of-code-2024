@@ -6,7 +6,6 @@ import java.util.Arrays;
 import java.util.List;
 
 public class LocationIdListsParser {
-    // TODO split function (private)
     public List<List<Integer>> parse(String inputFileName) throws IOException {
         File inputFile = new File(inputFileName);
         if (!inputFile.exists()) {
@@ -16,11 +15,10 @@ public class LocationIdListsParser {
         List<List<Integer>> locationIdLists = new ArrayList<>(Arrays.asList(new ArrayList<>(), new ArrayList<>()));
 
         try {
-            FileReader fileReader = new FileReader(inputFile);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             String line;
 
-            while ((line = bufferedReader.readLine()) != null) {
+            while ((line = reader.readLine()) != null) {
                 String[] tokens = line.split("\\s+");
                 if (tokens.length != 2) {
                     System.err.printf("Ignoring line, got %d instead of 2 tokens%n", tokens.length);
@@ -31,6 +29,8 @@ public class LocationIdListsParser {
                 locationIdLists.get(0).add(Integer.parseInt(tokens[0]));
                 locationIdLists.get(1).add(Integer.parseInt(tokens[1]));
             }
+
+            reader.close();
         } catch (IOException e) {
             throw new IOException("Error reading file: " + inputFileName, e);
         }
