@@ -1,4 +1,4 @@
-package tkrippes.com.github;
+package tkrippes.com.github.parser;
 
 import java.io.*;
 import java.util.ArrayList;
