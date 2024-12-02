@@ -32,5 +32,5 @@ java {
 
 application {
     // Define the main class for the application.
-    mainClass = "tkrippes.com.github.App"
+    mainClass = "tkrippes.com.github.Main"
 }
