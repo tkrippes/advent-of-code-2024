@@ -11,11 +11,11 @@ public class ListDistanceSolver {
         List<Integer> sortedFirstList = firstList.stream().sorted().toList();
         List<Integer> sortedSecondList = secondList.stream().sorted().toList();
 
-        int solution = 0;
+        int totalDistance = 0;
         for (int i = 0; i < sortedFirstList.size(); i++) {
-            solution += Math.abs(sortedFirstList.get(i) - (int) sortedSecondList.get(i));
+            totalDistance += Math.abs(sortedFirstList.get(i) - (int) sortedSecondList.get(i));
         }
 
-        return solution;
+        return totalDistance;
     }
 }
