@@ -34,21 +34,33 @@ public class ListDistanceSolverTest {
     }
 
     @Test
-    public void distanceBetweenTwoEqualNumbers() {
+    public void distanceBetweenTwoEqualNumbersIsCorrect() {
         int distance = solver.distance(3, 3);
         assertEquals(0, distance);
     }
 
     @Test
-    public void distanceBetweenBiggerAndSmallerNumber() {
+    public void distanceBetweenBiggerAndSmallerNumberIsCorrect() {
         int distance = solver.distance(4, 2);
         assertEquals(2, distance);
     }
 
     @Test
-    public void distanceBetweenSmallerAndBiggerNumber() {
+    public void distanceBetweenSmallerAndBiggerNumberIsCorrect() {
         int distance = solver.distance(5, 8);
         assertEquals(3, distance);
+    }
+
+    @Test
+    public void sumOfFistListIsCorrect() {
+        int sum = solver.sum(firstList);
+        assertEquals(16, sum);
+    }
+
+    @Test
+    public void sumOfSecondListIsCorrect() {
+        int sum = solver.sum(secondList);
+        assertEquals(27, sum);
     }
 
     @After

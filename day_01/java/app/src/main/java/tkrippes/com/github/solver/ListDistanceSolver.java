@@ -13,4 +13,9 @@ public class ListDistanceSolver {
     public int distance(int firstNumber, int secondNumber) {
         return Math.abs(firstNumber - secondNumber);
     }
+
+    // TODO change to private later
+    public int sum(List<Integer> list) {
+        return list.stream().mapToInt(Integer::intValue).sum();
+    }
 }
