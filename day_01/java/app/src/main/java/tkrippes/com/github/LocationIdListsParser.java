@@ -1,20 +1,15 @@
 package tkrippes.com.github;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class LocationIdListsParser {
     // TODO split function (private)
-    public List<List<Integer>> parse(String inputFileName) {
+    public List<List<Integer>> parse(String inputFileName) throws IOException {
         File inputFile = new File(inputFileName);
         if (!inputFile.exists()) {
-            System.err.println("Input file not found: " + inputFileName);
-
-            return null;
+            throw new FileNotFoundException("Could not find input file: " + inputFileName);
         }
 
         List<List<Integer>> locationIdLists = new ArrayList<>();
@@ -37,9 +32,7 @@ public class LocationIdListsParser {
                 secondLocationIdList.add(Integer.parseInt(tokens[1]));
             }
         } catch (IOException e) {
-            System.err.println("Error reading file: " + inputFileName + ": " + e.getMessage());
-
-            return null;
+            throw new IOException("Error reading file: " + inputFileName, e);
         }
 
         locationIdLists.add(firstLocationIdList);
