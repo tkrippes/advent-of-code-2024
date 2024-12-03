@@ -1,4 +1,4 @@
-package tkrippes.com.github.parser;
+package tkrippes.com.github.adventofcode2024.day01.parser;
 
 import org.junit.After;
 import org.junit.Before;

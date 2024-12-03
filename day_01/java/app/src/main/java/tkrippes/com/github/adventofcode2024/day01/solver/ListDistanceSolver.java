@@ -1,4 +1,4 @@
-package tkrippes.com.github.solver;
+package tkrippes.com.github.adventofcode2024.day01.solver;
 
 import java.util.List;
 

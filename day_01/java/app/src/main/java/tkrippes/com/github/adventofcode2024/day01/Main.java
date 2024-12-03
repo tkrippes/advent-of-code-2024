@@ -1,8 +1,8 @@
-package tkrippes.com.github;
+package tkrippes.com.github.adventofcode2024.day01;
 
-import tkrippes.com.github.parser.LocationIdListsParser;
-import tkrippes.com.github.solver.ListDistanceSolver;
-import tkrippes.com.github.solver.SimilarityScoreSolver;
+import tkrippes.com.github.adventofcode2024.day01.parser.LocationIdListsParser;
+import tkrippes.com.github.adventofcode2024.day01.solver.ListDistanceSolver;
+import tkrippes.com.github.adventofcode2024.day01.solver.SimilarityScoreSolver;
 
 import java.io.IOException;
 import java.util.List;
