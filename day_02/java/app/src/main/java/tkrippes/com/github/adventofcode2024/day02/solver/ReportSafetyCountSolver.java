@@ -13,39 +13,46 @@ public class ReportSafetyCountSolver {
         }
 
         int currentLevel = report.getFirst();
-        int initialStep = report.get(1) - report.get(0);
+        int currentStep = 0;
         int numberOfUnsafeSteps = 0;
+
         for (int nextLevel : report.subList(1, report.size())) {
-            if (isUnsafeStep(initialStep, currentLevel, nextLevel)) {
+            int nextStep = nextLevel - currentLevel;
+            if (isUnsafeStep(currentStep, nextStep)) {
                 numberOfUnsafeSteps++;
             }
 
             currentLevel = nextLevel;
+            currentStep = nextStep;
         }
 
         return numberOfUnsafeSteps <= tolerance;
     }
 
-    private boolean isUnsafeStep(int initialStep, int currentLevel, int nextLevel) {
+    private boolean isUnsafeStep(int currentStep, int nextStep) {
         final int minAllowedDifference = 1;
         final int maxAllowedDifference = 3;
 
-        if (Math.abs(nextLevel - currentLevel) < minAllowedDifference || Math.abs(nextLevel - currentLevel) > maxAllowedDifference) {
+        if (Math.abs(nextStep) < minAllowedDifference || Math.abs(nextStep) > maxAllowedDifference) {
             return true;
         }
 
-        return isDirectionChanging(initialStep, currentLevel, nextLevel);
+        return isDirectionChanging(currentStep, nextStep);
     }
 
-    private boolean isDirectionChanging(int initialStep, int currentLevel, int nextLevel) {
-        if (initialStep == 0) {
+    private boolean isDirectionChanging(int currentStep, int nextStep) {
+        if (nextStep == 0) {
             return true;
         }
 
-        return haveDifferentSign(initialStep, nextLevel - currentLevel);
+        return haveDifferentSign(currentStep, nextStep);
     }
 
     private boolean haveDifferentSign(int firstNumber, int secondNumber) {
+        if (firstNumber == 0 || secondNumber == 0) {
+            return false;
+        }
+
         return (firstNumber ^ secondNumber) < 0;
     }
 }
