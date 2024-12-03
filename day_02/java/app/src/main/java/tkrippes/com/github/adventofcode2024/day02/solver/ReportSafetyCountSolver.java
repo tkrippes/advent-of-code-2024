@@ -19,14 +19,18 @@ public class ReportSafetyCountSolver {
         for (int nextLevel : report.subList(1, report.size())) {
             int nextStep = nextLevel - currentLevel;
             if (isUnsafeStep(currentStep, nextStep)) {
-                numberOfUnsafeSteps++;
-            }
+                if (numberOfUnsafeSteps == tolerance) {
+                    return false;
+                }
 
-            currentLevel = nextLevel;
-            currentStep = nextStep;
+                numberOfUnsafeSteps++;
+            } else {
+                currentLevel = nextLevel;
+                currentStep = nextStep;
+            }
         }
 
-        return numberOfUnsafeSteps <= tolerance;
+        return true;
     }
 
     private boolean isUnsafeStep(int currentStep, int nextStep) {
