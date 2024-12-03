@@ -27,44 +27,44 @@ public class ReportSafetyCountSolverTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void oneLevelReportSafetyCheckShouldThrow() {
-        solver.isSafe(tooShortReport);
+        solver.isSafe(tooShortReport, 0);
     }
 
     @Test
     public void decreasingSafeReportShouldBeSafe() {
-        assertTrue(solver.isSafe(decreasingSafeReport));
+        assertTrue(solver.isSafe(decreasingSafeReport, 0));
     }
 
     @Test
     public void increasingSafeReportShouldBeSafe() {
-        assertTrue(solver.isSafe(increasingSafeReport));
+        assertTrue(solver.isSafe(increasingSafeReport, 0));
     }
 
     @Test
     public void increasingTooMuchUnsafeReportShouldBeUnsafe() {
-        assertFalse(solver.isSafe(increasingTooMuchUnsafeReport));
+        assertFalse(solver.isSafe(increasingTooMuchUnsafeReport, 0));
     }
 
     @Test
     public void decreasingTooMuchUnsafeReportShouldBeUnsafe() {
-        assertFalse(solver.isSafe(decreasingTooMuchUnsafeReport));
+        assertFalse(solver.isSafe(decreasingTooMuchUnsafeReport, 0));
     }
 
     @Test
     public void decreasingNotEnoughUnsafeReportShouldBeUnsafe() {
-        assertFalse(solver.isSafe(decreasingNotEnoughUnsafeReport));
+        assertFalse(solver.isSafe(decreasingNotEnoughUnsafeReport, 0));
     }
 
     @Test
     public void increasingDecreasingUnsafeReportShouldBeUnsafe() {
-        assertFalse(solver.isSafe(increasingDecreasingUnsafeReport));
+        assertFalse(solver.isSafe(increasingDecreasingUnsafeReport, 0));
     }
 
     @Test
     public void numberOfSafeReportsShouldBeCorrect() {
         int solution = solver.solve(new ArrayList<>(List.of(decreasingSafeReport, increasingSafeReport,
                 increasingTooMuchUnsafeReport, decreasingTooMuchUnsafeReport,
-                decreasingNotEnoughUnsafeReport, increasingDecreasingUnsafeReport)));
+                decreasingNotEnoughUnsafeReport, increasingDecreasingUnsafeReport)), 0);
         assertEquals(2, solution);
     }
 

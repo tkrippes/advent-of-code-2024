@@ -28,7 +28,7 @@ public class Main {
         ReportSafetyCountSolver solver = new ReportSafetyCountSolver();
         int numberOfSafeReports;
         try {
-            numberOfSafeReports = solver.solve(reportList);
+            numberOfSafeReports = solver.solve(reportList, 0);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
 
