@@ -13,12 +13,12 @@ public class ReportSafetyCountSolverTest {
     private ReportSafetyCountSolver solver;
 
     private final List<Integer> tooShortReport = new ArrayList<>(List.of(3));
-    private final List<Integer> decreasingSafeReport = new ArrayList<>(List.of(7, 6, 4, 2, 1));
-    private final List<Integer> increasingSafeReport = new ArrayList<>(List.of(1, 3, 6, 7, 9));
-    private final List<Integer> increasingTooMuchUnsafeReport = new ArrayList<>(List.of(1, 2, 7, 8, 9));
-    private final List<Integer> decreasingTooMuchUnsafeReport = new ArrayList<>(List.of(9, 7, 6, 2, 1));
-    private final List<Integer> decreasingNotEnoughUnsafeReport = new ArrayList<>(List.of(8, 6, 4, 4, 1));
-    private final List<Integer> increasingDecreasingUnsafeReport = new ArrayList<>(List.of(1, 3, 2, 4, 5));
+    private final List<Integer> decreasingReport = new ArrayList<>(List.of(7, 6, 4, 2, 1));
+    private final List<Integer> increasingReport = new ArrayList<>(List.of(1, 3, 6, 7, 9));
+    private final List<Integer> increasingTooMuchReport = new ArrayList<>(List.of(1, 2, 7, 8, 9));
+    private final List<Integer> decreasingTooMuchReport = new ArrayList<>(List.of(9, 7, 6, 2, 1));
+    private final List<Integer> decreasingOneEqualReport = new ArrayList<>(List.of(8, 6, 4, 4, 1));
+    private final List<Integer> increasingDecreasingReport = new ArrayList<>(List.of(1, 3, 2, 4, 5));
 
     @Before
     public void setUp() {
@@ -32,40 +32,51 @@ public class ReportSafetyCountSolverTest {
 
     @Test
     public void decreasingSafeReportShouldBeSafe() {
-        assertTrue(solver.isSafe(decreasingSafeReport, 0));
+        assertTrue(solver.isSafe(decreasingReport, 0));
+        assertTrue(solver.isSafe(decreasingReport, 1));
     }
 
     @Test
     public void increasingSafeReportShouldBeSafe() {
-        assertTrue(solver.isSafe(increasingSafeReport, 0));
+        assertTrue(solver.isSafe(increasingReport, 0));
+        assertTrue(solver.isSafe(increasingReport, 1));
     }
 
     @Test
     public void increasingTooMuchUnsafeReportShouldBeUnsafe() {
-        assertFalse(solver.isSafe(increasingTooMuchUnsafeReport, 0));
+        assertFalse(solver.isSafe(increasingTooMuchReport, 0));
+        assertFalse(solver.isSafe(increasingTooMuchReport, 1));
     }
 
     @Test
     public void decreasingTooMuchUnsafeReportShouldBeUnsafe() {
-        assertFalse(solver.isSafe(decreasingTooMuchUnsafeReport, 0));
+        assertFalse(solver.isSafe(decreasingTooMuchReport, 0));
+        assertFalse(solver.isSafe(decreasingTooMuchReport, 1));
     }
 
     @Test
-    public void decreasingNotEnoughUnsafeReportShouldBeUnsafe() {
-        assertFalse(solver.isSafe(decreasingNotEnoughUnsafeReport, 0));
+    public void decreasingNotEnoughUnsafeReportShouldBeUnsafeForToleranceZero() {
+        assertFalse(solver.isSafe(decreasingOneEqualReport, 0));
+        assertTrue(solver.isSafe(decreasingOneEqualReport, 1));
     }
 
     @Test
-    public void increasingDecreasingUnsafeReportShouldBeUnsafe() {
-        assertFalse(solver.isSafe(increasingDecreasingUnsafeReport, 0));
+    public void increasingDecreasingUnsafeReportShouldBeUnsafeForToleranceZero() {
+        assertFalse(solver.isSafe(increasingDecreasingReport, 0));
+        assertTrue(solver.isSafe(increasingDecreasingReport, 1));
     }
 
     @Test
     public void numberOfSafeReportsShouldBeCorrect() {
-        int solution = solver.solve(new ArrayList<>(List.of(decreasingSafeReport, increasingSafeReport,
-                increasingTooMuchUnsafeReport, decreasingTooMuchUnsafeReport,
-                decreasingNotEnoughUnsafeReport, increasingDecreasingUnsafeReport)), 0);
+        int solution = solver.solve(new ArrayList<>(List.of(decreasingReport, increasingReport,
+                increasingTooMuchReport, decreasingTooMuchReport,
+                decreasingOneEqualReport, increasingDecreasingReport)), 0);
         assertEquals(2, solution);
+
+        solution = solver.solve(new ArrayList<>(List.of(decreasingReport, increasingReport,
+                increasingTooMuchReport, decreasingTooMuchReport,
+                decreasingOneEqualReport, increasingDecreasingReport)), 1);
+        assertEquals(4, solution);
     }
 
     @After
