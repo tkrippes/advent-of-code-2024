@@ -9,7 +9,7 @@ public class ReportSafetyCountSolver {
 
     protected boolean isSafe(List<Integer> report) {
         if (report.size() < 2) {
-            return true;
+            throw new IllegalArgumentException("report must at least have 2 levels");
         }
 
         int currentLevel = report.getFirst();

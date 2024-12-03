@@ -12,6 +12,7 @@ import static org.junit.Assert.*;
 public class ReportSafetyCountSolverTest {
     private ReportSafetyCountSolver solver;
 
+    private final List<Integer> tooShortReport = new ArrayList<>(List.of(3));
     private final List<Integer> decreasingSafeReport = new ArrayList<>(List.of(7, 6, 4, 2, 1));
     private final List<Integer> increasingSafeReport = new ArrayList<>(List.of(1, 3, 6, 7, 9));
     private final List<Integer> increasingTooMuchUnsafeReport = new ArrayList<>(List.of(1, 2, 7, 8, 9));
@@ -22,6 +23,11 @@ public class ReportSafetyCountSolverTest {
     @Before
     public void setUp() {
         solver = new ReportSafetyCountSolver();
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void oneLevelReportSafetyCheckShouldThrow() {
+        solver.isSafe(tooShortReport);
     }
 
     @Test
