@@ -54,6 +54,14 @@ public class ReportSafetyCountSolverTest {
         assertFalse(solver.isSafe(increasingDecreasingUnsafeReport));
     }
 
+    @Test
+    public void numberOfSafeReportsShouldBeCorrect() {
+        int solution = solver.solve(new ArrayList<>(List.of(decreasingSafeReport, increasingSafeReport,
+                increasingTooMuchUnsafeReport, decreasingTooMuchUnsafeReport,
+                decreasingNotEnoughUnsafeReport, increasingDecreasingUnsafeReport)));
+        assertEquals(2, solution);
+    }
+
     @After
     public void tearDown() {
     }

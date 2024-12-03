@@ -3,8 +3,11 @@ package tkrippes.com.github.adventofcode2024.day02.solver;
 import java.util.List;
 
 public class ReportSafetyCountSolver {
-    // TODO make private
-    public boolean isSafe(List<Integer> report) {
+    public int solve(List<List<Integer>> reportList) {
+        return (int) reportList.stream().filter(this::isSafe).count();
+    }
+
+    protected boolean isSafe(List<Integer> report) {
         if (report.size() < 2) {
             return true;
         }
