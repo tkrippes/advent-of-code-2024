@@ -11,9 +11,18 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Result of part 1: " + part1(inputFileName));
+        System.out.println("Result of part 2: " + part2(inputFileName));
     }
 
     private static int part1(String inputFileName) {
+        return commonPart(inputFileName, 0);
+    }
+
+    private static int part2(String inputFileName) {
+        return commonPart(inputFileName, 1);
+    }
+
+    private static int commonPart(String inputFileName, int tolerance) {
         ReportListParser parser = new ReportListParser();
 
         List<List<Integer>> reportList;
@@ -28,7 +37,7 @@ public class Main {
         ReportSafetyCountSolver solver = new ReportSafetyCountSolver();
         int numberOfSafeReports;
         try {
-            numberOfSafeReports = solver.solve(reportList, 0);
+            numberOfSafeReports = solver.solve(reportList, tolerance);
         } catch (IllegalArgumentException e) {
             e.printStackTrace();
 
