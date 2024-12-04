@@ -1,6 +1,7 @@
 package tkrippes.com.github.adventofcode2024.day02.solver;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class ReportSafetyCountSolver {
     public int solve(List<List<Integer>> reportList, int tolerance) {
@@ -14,23 +15,36 @@ public class ReportSafetyCountSolver {
 
         int currentLevel = report.getFirst();
         int currentStep = 0;
-        int numberOfUnsafeSteps = 0;
 
         for (int nextLevel : report.subList(1, report.size())) {
             int nextStep = nextLevel - currentLevel;
             if (isUnsafeStep(currentStep, nextStep)) {
-                if (numberOfUnsafeSteps == tolerance) {
+                if (tolerance == 0) {
                     return false;
                 }
 
-                numberOfUnsafeSteps++;
-            } else {
-                currentLevel = nextLevel;
-                currentStep = nextStep;
+                return doesSafeSubReportExist(report, tolerance - 1);
             }
+
+            currentLevel = nextLevel;
+            currentStep = nextStep;
         }
 
         return true;
+    }
+
+    private boolean doesSafeSubReportExist(List<Integer> report, int tolerance) {
+        for (int i = 0; i < report.size(); i++) {
+            int finalI = i;
+            if (isSafe(IntStream.range(0, report.size())
+                    .filter(index -> index != finalI)
+                    .mapToObj(report::get).toList(), tolerance)) {
+
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private boolean isUnsafeStep(int currentStep, int nextStep) {
