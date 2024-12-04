@@ -6,6 +6,7 @@ import org.junit.Test;
 import tkrippes.com.github.adventofcode2024.day03.Memory;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -21,7 +22,7 @@ public class MemoryParserTest {
     }
 
     @Test(expected = FileNotFoundException.class)
-    public void parserThrowsForInvalidInputFileName() throws FileNotFoundException {
+    public void parserThrowsForInvalidInputFileName() throws IOException {
         parser.parse(invalidInputFileName);
     }
 
@@ -65,6 +66,13 @@ public class MemoryParserTest {
         assertTrue(parsedMultiplications.isEmpty());
         parsedMultiplications = parser.parseMultiplications("mul ( 2 , 4 )");
         assertTrue(parsedMultiplications.isEmpty());
+    }
+
+    @Test
+    public void parserParsesTestInputFileCorrectly() throws IOException {
+        Memory parsedMemory = parser.parse(validInputFileName);
+        assertEquals(new Memory(List.of(new Memory.Multiplication(2, 4), new Memory.Multiplication(5, 5),
+                new Memory.Multiplication(11, 8), new Memory.Multiplication(8, 5))), parsedMemory);
     }
 
     @After
