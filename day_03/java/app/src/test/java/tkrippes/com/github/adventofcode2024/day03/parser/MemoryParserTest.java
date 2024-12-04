@@ -13,8 +13,6 @@ import static org.junit.Assert.*;
 
 public class MemoryParserTest {
     private MemoryParser parser;
-    private final String invalidInputFileName = "../../input/invalid_test_input.txt";
-    private final String validInputFileName = "../../input/test_input.txt";
 
     @Before
     public void setUp() {
@@ -23,6 +21,7 @@ public class MemoryParserTest {
 
     @Test(expected = FileNotFoundException.class)
     public void parserThrowsForInvalidInputFileName() throws IOException {
+        String invalidInputFileName = "../../input/invalid_test_input.txt";
         parser.parse(invalidInputFileName);
     }
 
@@ -70,6 +69,8 @@ public class MemoryParserTest {
 
     @Test
     public void parserParsesTestInputFileCorrectly() throws IOException {
+        String validInputFileName = "../../input/test_input.txt";
+
         Memory parsedMemory = parser.parse(validInputFileName);
         assertEquals(new Memory(List.of(new Memory.Multiplication(2, 4), new Memory.Multiplication(5, 5),
                 new Memory.Multiplication(11, 8), new Memory.Multiplication(8, 5))), parsedMemory);
