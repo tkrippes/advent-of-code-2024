@@ -3,9 +3,8 @@ package tkrippes.com.github.adventofcode2024.day03.parser;
 import tkrippes.com.github.adventofcode2024.day03.Memory;
 
 import java.io.*;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -31,8 +30,8 @@ public class MemoryParser {
     }
 
     protected Map<Integer, Memory.Multiplication> parseMultiplications(String input) {
-        // LinkedHashMap needed to preserve insertion order
-        Map<Integer, Memory.Multiplication> multiplications = new LinkedHashMap<>();
+        // TreeMap needed to sort by position
+        Map<Integer, Memory.Multiplication> multiplications = new TreeMap<>();
 
         String regex = "mul\\((\\d{1,3}),(\\d{1,3})\\)";
         Pattern pattern = Pattern.compile(regex);
@@ -47,7 +46,8 @@ public class MemoryParser {
     }
 
     protected Map<Integer, Boolean> parseDosAndDonts(String input) {
-        Map<Integer, Boolean> dosAndDonts = new HashMap<>();
+        // TreeMap needed to sort by position
+        Map<Integer, Boolean> dosAndDonts = new TreeMap<>();
 
         String dosRegex = "do\\(\\)";
         Pattern dosPattern = Pattern.compile(dosRegex);
