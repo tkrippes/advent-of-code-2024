@@ -26,6 +26,20 @@ public class MemoryParser {
             throw new IOException("Error reading file: " + inputFile, e);
         }
 
+        Map<Integer, Boolean> dosAndDonts;
+
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            dosAndDonts = parseDosAndDonts(reader.lines().collect(Collectors.joining()));
+            reader.close();
+        } catch (IOException e) {
+            throw new IOException("Error reading file: " + inputFile, e);
+        }
+
+        // TODO apply do and donts to filter multiplications --> own function
+        // TODO iterate over multiplications and use iterator over dos and donts to determine if entry is enabled or
+        //  disabled
+
         return new Memory(multiplications.values().stream().toList());
     }
 
