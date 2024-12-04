@@ -71,6 +71,12 @@ public class MemoryParserTest {
     }
 
     @Test
+    public void parserParsesDosAndDontsCorrectly() {
+        Map<Integer, Boolean> parsedDosAndDonts = parser.parseDosAndDonts("do()do(dont(dont()dont()blado()");
+        assertEquals(Map.of(0, true, 12, false, 18, false, 27, true), parsedDosAndDonts);
+    }
+
+    @Test
     public void parserParsesTestInputFileCorrectly() throws IOException {
         String validInputFileName = "../../input/test_input.txt";
 

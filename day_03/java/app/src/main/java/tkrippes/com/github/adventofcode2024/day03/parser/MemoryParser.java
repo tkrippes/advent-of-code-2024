@@ -3,6 +3,7 @@ package tkrippes.com.github.adventofcode2024.day03.parser;
 import tkrippes.com.github.adventofcode2024.day03.Memory;
 
 import java.io.*;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -43,5 +44,27 @@ public class MemoryParser {
         }
 
         return multiplications;
+    }
+
+    protected Map<Integer, Boolean> parseDosAndDonts(String input) {
+        Map<Integer, Boolean> dosAndDonts = new HashMap<>();
+
+        String dosRegex = "do\\(\\)";
+        Pattern dosPattern = Pattern.compile(dosRegex);
+        Matcher dosMatcher = dosPattern.matcher(input);
+
+        while (dosMatcher.find()) {
+            dosAndDonts.put(dosMatcher.start(), true);
+        }
+
+        String dontsRegex = "dont\\(\\)";
+        Pattern dontsPattern = Pattern.compile(dontsRegex);
+        Matcher dontsMatcher = dontsPattern.matcher(input);
+
+        while (dontsMatcher.find()) {
+            dosAndDonts.put(dontsMatcher.start(), false);
+        }
+
+        return dosAndDonts;
     }
 }
