@@ -9,6 +9,8 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class MultiplicationsParser {
+    private final MultiplicationFilter filter = new MultiplicationFilter();
+
     public List<Multiplication> parse(String inputFileName) throws IOException {
         return parse(inputFileName, false);
     }
@@ -41,7 +43,7 @@ public class MultiplicationsParser {
             throw new IOException("Error reading file: " + inputFile, e);
         }
 
-        return filterMultiplications(multiplicationsMap, shouldParseMap);
+        return filter.filter(multiplicationsMap, shouldParseMap);
     }
 
     protected Map<Integer, Multiplication> parseMultiplications(String input) {
@@ -81,39 +83,5 @@ public class MultiplicationsParser {
         }
 
         return dosAndDonts;
-    }
-
-    protected List<Multiplication> filterMultiplications(Map<Integer, Multiplication> multiplicationsMap, Map<Integer, Boolean> shouldParseMap) {
-        if (shouldParseMap.isEmpty()) {
-            return multiplicationsMap.values().stream().toList();
-        }
-
-        List<Multiplication> multiplications = new ArrayList<>();
-
-        boolean shouldParse = true;
-        var shouldParseIterator = shouldParseMap.entrySet().iterator();
-        var shouldParseEntry = shouldParseIterator.next();
-
-        for (var multiplicationEntry : multiplicationsMap.entrySet()) {
-            int multiplicationPosition = multiplicationEntry.getKey();
-            int shouldParsePosition = shouldParseEntry.getKey();
-
-            while (multiplicationPosition > shouldParsePosition) {
-                shouldParse = shouldParseEntry.getValue();
-
-                if (!shouldParseIterator.hasNext()) {
-                    break;
-                }
-
-                shouldParseEntry = shouldParseIterator.next();
-                shouldParsePosition = shouldParseEntry.getKey();
-            }
-
-            if (shouldParse) {
-                multiplications.add(multiplicationEntry.getValue());
-            }
-        }
-
-        return multiplications;
     }
 }
