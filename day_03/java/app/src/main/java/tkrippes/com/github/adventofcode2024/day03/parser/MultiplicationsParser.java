@@ -1,36 +1,37 @@
 package tkrippes.com.github.adventofcode2024.day03.parser;
 
-import tkrippes.com.github.adventofcode2024.day03.Memory;
+import tkrippes.com.github.adventofcode2024.day03.Multiplication;
 
 import java.io.*;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-public class MemoryParser {
-    public Memory parse(String inputFileName) throws IOException {
+public class MultiplicationsParser {
+    public List<Multiplication> parse(String inputFileName) throws IOException {
         File inputFile = new File(inputFileName);
         if (!inputFile.exists()) {
             throw new FileNotFoundException("Could not find input file: " + inputFileName);
         }
 
-        Map<Integer, Memory.Multiplication> multiplications;
+        Map<Integer, Multiplication> multiplicationsMap;
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-            multiplications = parseMultiplications(reader.lines().collect(Collectors.joining()));
+            multiplicationsMap = parseMultiplications(reader.lines().collect(Collectors.joining()));
             reader.close();
         } catch (IOException e) {
             throw new IOException("Error reading file: " + inputFile, e);
         }
 
-        Map<Integer, Boolean> dosAndDonts;
+        Map<Integer, Boolean> dosAndDontsMap;
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-            dosAndDonts = parseDosAndDonts(reader.lines().collect(Collectors.joining()));
+            dosAndDontsMap = parseDosAndDonts(reader.lines().collect(Collectors.joining()));
             reader.close();
         } catch (IOException e) {
             throw new IOException("Error reading file: " + inputFile, e);
@@ -40,19 +41,19 @@ public class MemoryParser {
         // TODO iterate over multiplications and use iterator over dos and donts to determine if entry is enabled or
         //  disabled
 
-        return new Memory(multiplications.values().stream().toList());
+        return multiplicationsMap.values().stream().toList();
     }
 
-    protected Map<Integer, Memory.Multiplication> parseMultiplications(String input) {
+    protected Map<Integer, Multiplication> parseMultiplications(String input) {
         // TreeMap needed to sort by position
-        Map<Integer, Memory.Multiplication> multiplications = new TreeMap<>();
+        Map<Integer, Multiplication> multiplications = new TreeMap<>();
 
         String regex = "mul\\((\\d{1,3}),(\\d{1,3})\\)";
         Pattern pattern = Pattern.compile(regex);
         Matcher matcher = pattern.matcher(input);
 
         while (matcher.find()) {
-            multiplications.put(matcher.start(), new Memory.Multiplication(Integer.parseInt(matcher.group(1)),
+            multiplications.put(matcher.start(), new Multiplication(Integer.parseInt(matcher.group(1)),
                     Integer.parseInt(matcher.group(2))));
         }
 

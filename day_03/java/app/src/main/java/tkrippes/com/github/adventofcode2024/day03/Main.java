@@ -1,9 +1,10 @@
 package tkrippes.com.github.adventofcode2024.day03;
 
-import tkrippes.com.github.adventofcode2024.day03.parser.MemoryParser;
-import tkrippes.com.github.adventofcode2024.day03.solver.InstructionsResultSolver;
+import tkrippes.com.github.adventofcode2024.day03.parser.MultiplicationsParser;
+import tkrippes.com.github.adventofcode2024.day03.solver.MultiplicationsSolver;
 
 import java.io.IOException;
+import java.util.List;
 
 public class Main {
     private static final String inputFileName = "../../input/input.txt";
@@ -14,20 +15,20 @@ public class Main {
     }
 
     private static int part1() {
-        MemoryParser parser = new MemoryParser();
+        MultiplicationsParser parser = new MultiplicationsParser();
 
-        Memory memory;
+        List<Multiplication> multiplications;
         try {
-            memory = parser.parse(Main.inputFileName);
+            multiplications = parser.parse(Main.inputFileName);
         } catch (IOException e) {
             e.printStackTrace();
 
             return 0;
         }
 
-        InstructionsResultSolver solver = new InstructionsResultSolver();
+        MultiplicationsSolver solver = new MultiplicationsSolver();
 
-        return solver.solve(memory);
+        return solver.solve(multiplications);
     }
 
     private static int part2(String inputFileName) {
