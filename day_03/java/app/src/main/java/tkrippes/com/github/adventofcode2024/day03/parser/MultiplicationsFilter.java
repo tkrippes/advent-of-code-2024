@@ -7,7 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-class MultiplicationFilter {
+class MultiplicationsFilter {
     private Iterator<Map.Entry<Integer, Boolean>> shouldParseIterator;
     private Map.Entry<Integer, Boolean> shouldParseEntry;
     private boolean shouldParse;

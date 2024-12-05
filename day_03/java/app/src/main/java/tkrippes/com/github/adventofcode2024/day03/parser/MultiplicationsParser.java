@@ -9,7 +9,7 @@ import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
 public class MultiplicationsParser {
-    private final MultiplicationFilter filter = new MultiplicationFilter();
+    private final MultiplicationsFilter filter = new MultiplicationsFilter();
 
     public List<Multiplication> parse(String inputFileName) throws IOException {
         return parse(inputFileName, false);
