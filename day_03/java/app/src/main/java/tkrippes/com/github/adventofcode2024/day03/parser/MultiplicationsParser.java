@@ -12,6 +12,10 @@ import java.util.stream.Collectors;
 
 public class MultiplicationsParser {
     public List<Multiplication> parse(String inputFileName) throws IOException {
+        return parse(inputFileName, false);
+    }
+
+    public List<Multiplication> parse(String inputFileName, boolean useFilter) throws IOException {
         File inputFile = new File(inputFileName);
         if (!inputFile.exists()) {
             throw new FileNotFoundException("Could not find input file: " + inputFileName);
@@ -28,6 +32,9 @@ public class MultiplicationsParser {
         }
 
         Map<Integer, Boolean> dosAndDontsMap;
+        if (!useFilter) {
+            return multiplicationsMap.values().stream().toList();
+        }
 
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));

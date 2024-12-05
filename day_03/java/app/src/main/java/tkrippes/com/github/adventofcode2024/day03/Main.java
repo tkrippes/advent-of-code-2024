@@ -11,15 +11,23 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Result of part 1: " + part1());
-        System.out.println("Result of part 2: " + part2(inputFileName));
+        System.out.println("Result of part 2: " + part2());
     }
 
     private static int part1() {
+        return commonPart(false);
+    }
+
+    private static int part2() {
+        return commonPart(true);
+    }
+
+    private static int commonPart(boolean useFilter) {
         MultiplicationsParser parser = new MultiplicationsParser();
 
         List<Multiplication> multiplications;
         try {
-            multiplications = parser.parse(Main.inputFileName);
+            multiplications = parser.parse(Main.inputFileName, useFilter);
         } catch (IOException e) {
             e.printStackTrace();
 
@@ -29,10 +37,5 @@ public class Main {
         MultiplicationsSolver solver = new MultiplicationsSolver();
 
         return solver.solve(multiplications);
-    }
-
-    private static int part2(String inputFileName) {
-        // TODO
-        return 0;
     }
 }
