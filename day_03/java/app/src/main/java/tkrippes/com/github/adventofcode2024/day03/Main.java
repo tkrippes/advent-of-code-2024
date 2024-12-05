@@ -1,10 +1,11 @@
 package tkrippes.com.github.adventofcode2024.day03;
 
+import tkrippes.com.github.adventofcode2024.day03.parser.FiltersParser;
 import tkrippes.com.github.adventofcode2024.day03.parser.MultiplicationsParser;
 import tkrippes.com.github.adventofcode2024.day03.solver.MultiplicationsSolver;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Map;
 
 public class Main {
     private static final String inputFileName = "../../input/input.txt";
@@ -23,19 +24,32 @@ public class Main {
     }
 
     private static int commonPart(boolean useFilter) {
-        MultiplicationsParser parser = new MultiplicationsParser();
-
-        List<Multiplication> multiplications;
+        MultiplicationsParser multiplicationsParser = new MultiplicationsParser();
+        Map<Integer, Multiplication> multiplications;
         try {
-            multiplications = parser.parse(Main.inputFileName, useFilter);
+            multiplications = multiplicationsParser.parse(Main.inputFileName);
         } catch (IOException e) {
             e.printStackTrace();
 
             return 0;
         }
 
+        FiltersParser filtersParser = new FiltersParser();
+        Map<Integer, Boolean> filters;
+        if (useFilter) {
+            try {
+                filters = filtersParser.parse(Main.inputFileName);
+            } catch (IOException e) {
+                e.printStackTrace();
+
+                return 0;
+            }
+        } else {
+            filters = Map.of();
+        }
+
         MultiplicationsSolver solver = new MultiplicationsSolver();
 
-        return solver.solve(multiplications);
+        return solver.solve(multiplications, filters);
     }
 }

@@ -6,7 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -19,11 +19,20 @@ public class MultiplicationsSolverTest {
     }
 
     @Test
-    public void solutionShouldBeCorrect() {
-        int solution = solver.solve(List.of(new Multiplication(2, 4), new Multiplication(5, 5),
-                new Multiplication(11, 8), new Multiplication(8, 5)));
+    public void solutionWithoutFiltersShouldBeCorrect() {
+        int solution = solver.solve(Map.of(1, new Multiplication(2, 4), 29, new Multiplication(5, 5),
+                53, new Multiplication(11, 8), 62, new Multiplication(8, 5)), Map.of());
         assertEquals(161, solution);
     }
+
+    @Test
+    public void solutionWithFiltersShouldBeCorrect() {
+        int solution = solver.solve(Map.of(1, new Multiplication(2, 4), 28, new Multiplication(5, 5),
+                        48, new Multiplication(11, 8), 64, new Multiplication(8, 5)),
+                Map.of(20, false, 59, true));
+        assertEquals(48, solution);
+    }
+
 
     @After
     public void tearDown() {

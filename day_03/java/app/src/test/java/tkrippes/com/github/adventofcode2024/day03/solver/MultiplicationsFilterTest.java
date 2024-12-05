@@ -1,4 +1,4 @@
-package tkrippes.com.github.adventofcode2024.day03.parser;
+package tkrippes.com.github.adventofcode2024.day03.solver;
 
 import tkrippes.com.github.adventofcode2024.day03.Multiplication;
 
@@ -24,32 +24,32 @@ public class MultiplicationsFilterTest {
     public void multiplicationsWithNoFilterShouldNotBeFiltered() {
         Map<Integer, Multiplication> multiplicationsMap = Map.of(0, new Multiplication(1, 2), 5, new Multiplication(2, 3),
                 10, new Multiplication(3, 4));
-        Map<Integer, Boolean> shouldParseMap = Map.of();
-        assertEquals(multiplicationsMap.values().stream().toList(), filter.filter(multiplicationsMap, shouldParseMap));
+        Map<Integer, Boolean> filterMap = Map.of();
+        assertEquals(multiplicationsMap.values().stream().toList(), filter.filter(multiplicationsMap, filterMap));
     }
 
     @Test
     public void multiplicationsWithDontAtBeginningShouldAllBeFiltered() {
         Map<Integer, Multiplication> multiplicationsMap = Map.of(5, new Multiplication(1, 2), 10, new Multiplication(2, 3),
                 15, new Multiplication(3, 4));
-        Map<Integer, Boolean> shouldParseMap = Map.of(0, false);
-        assertTrue(filter.filter(multiplicationsMap, shouldParseMap).isEmpty());
+        Map<Integer, Boolean> filterMap = Map.of(0, false);
+        assertTrue(filter.filter(multiplicationsMap, filterMap).isEmpty());
     }
 
     @Test
     public void multiplicationsWithDontAtEndShouldNotBeFiltered() {
         Map<Integer, Multiplication> multiplicationsMap = Map.of(5, new Multiplication(1, 2), 10, new Multiplication(2, 3),
                 15, new Multiplication(3, 4));
-        Map<Integer, Boolean> shouldParseMap = Map.of(20, false);
-        assertEquals(multiplicationsMap.values().stream().toList(), filter.filter(multiplicationsMap, shouldParseMap));
+        Map<Integer, Boolean> filterMap = Map.of(20, false);
+        assertEquals(multiplicationsMap.values().stream().toList(), filter.filter(multiplicationsMap, filterMap));
     }
 
     @Test
     public void multiplicationsWithOnlyDosShouldNotBeFiltered() {
         Map<Integer, Multiplication> multiplicationsMap = Map.of(5, new Multiplication(1, 2), 10, new Multiplication(2, 3),
                 15, new Multiplication(3, 4));
-        Map<Integer, Boolean> shouldParseMap = Map.of(0, true, 2, true, 7, true, 12, true);
-        assertEquals(multiplicationsMap.values().stream().toList(), filter.filter(multiplicationsMap, shouldParseMap));
+        Map<Integer, Boolean> filterMap = Map.of(0, true, 2, true, 7, true, 12, true);
+        assertEquals(multiplicationsMap.values().stream().toList(), filter.filter(multiplicationsMap, filterMap));
     }
 
     @Test
@@ -57,10 +57,10 @@ public class MultiplicationsFilterTest {
         Map<Integer, Multiplication> multiplicationsMap = Map.of(5, new Multiplication(1, 2), 10, new Multiplication(2, 3),
                 15, new Multiplication(3, 4), 20, new Multiplication(4, 5), 25, new Multiplication(5, 6),
                 30, new Multiplication(6, 7), 35, new Multiplication(7, 8));
-        Map<Integer, Boolean> shouldParseMap = Map.of(2, false, 7, true, 12, false,
+        Map<Integer, Boolean> filterMap = Map.of(2, false, 7, true, 12, false,
                 17, false, 22, true, 27, true, 32, false);
         assertEquals(List.of(new Multiplication(2, 3), new Multiplication(5, 6), new Multiplication(6, 7)),
-                filter.filter(new TreeMap<>(multiplicationsMap), new TreeMap<>(shouldParseMap)));
+                filter.filter(new TreeMap<>(multiplicationsMap), new TreeMap<>(filterMap)));
     }
 
     @After
