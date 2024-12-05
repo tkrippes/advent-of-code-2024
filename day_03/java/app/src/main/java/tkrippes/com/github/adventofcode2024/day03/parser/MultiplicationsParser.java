@@ -3,9 +3,7 @@ package tkrippes.com.github.adventofcode2024.day03.parser;
 import tkrippes.com.github.adventofcode2024.day03.Multiplication;
 
 import java.io.*;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -22,7 +20,6 @@ public class MultiplicationsParser {
         }
 
         Map<Integer, Multiplication> multiplicationsMap;
-
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             multiplicationsMap = parseMultiplications(reader.lines().collect(Collectors.joining()));
@@ -31,24 +28,20 @@ public class MultiplicationsParser {
             throw new IOException("Error reading file: " + inputFile, e);
         }
 
-        Map<Integer, Boolean> dosAndDontsMap;
         if (!useFilter) {
             return multiplicationsMap.values().stream().toList();
         }
 
+        Map<Integer, Boolean> shouldParseMap;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
-            dosAndDontsMap = parseDosAndDonts(reader.lines().collect(Collectors.joining()));
+            shouldParseMap = parseDosAndDonts(reader.lines().collect(Collectors.joining()));
             reader.close();
         } catch (IOException e) {
             throw new IOException("Error reading file: " + inputFile, e);
         }
 
-        // TODO apply do and donts to filter multiplications --> own function
-        // TODO iterate over multiplications and use iterator over dos and donts to determine if entry is enabled or
-        //  disabled
-
-        return multiplicationsMap.values().stream().toList();
+        return filterMultiplications(multiplicationsMap, shouldParseMap);
     }
 
     protected Map<Integer, Multiplication> parseMultiplications(String input) {
@@ -79,7 +72,7 @@ public class MultiplicationsParser {
             dosAndDonts.put(dosMatcher.start(), true);
         }
 
-        String dontsRegex = "dont\\(\\)";
+        String dontsRegex = "don't\\(\\)";
         Pattern dontsPattern = Pattern.compile(dontsRegex);
         Matcher dontsMatcher = dontsPattern.matcher(input);
 
@@ -88,5 +81,39 @@ public class MultiplicationsParser {
         }
 
         return dosAndDonts;
+    }
+
+    protected List<Multiplication> filterMultiplications(Map<Integer, Multiplication> multiplicationsMap, Map<Integer, Boolean> shouldParseMap) {
+        if (shouldParseMap.isEmpty()) {
+            return multiplicationsMap.values().stream().toList();
+        }
+
+        List<Multiplication> multiplications = new ArrayList<>();
+
+        boolean shouldParse = true;
+        var shouldParseIterator = shouldParseMap.entrySet().iterator();
+        var shouldParseEntry = shouldParseIterator.next();
+
+        for (var multiplicationEntry : multiplicationsMap.entrySet()) {
+            int multiplicationPosition = multiplicationEntry.getKey();
+            int shouldParsePosition = shouldParseEntry.getKey();
+
+            while (multiplicationPosition > shouldParsePosition) {
+                shouldParse = shouldParseEntry.getValue();
+
+                if (!shouldParseIterator.hasNext()) {
+                    break;
+                }
+
+                shouldParseEntry = shouldParseIterator.next();
+                shouldParsePosition = shouldParseEntry.getKey();
+            }
+
+            if (shouldParse) {
+                multiplications.add(multiplicationEntry.getValue());
+            }
+        }
+
+        return multiplications;
     }
 }

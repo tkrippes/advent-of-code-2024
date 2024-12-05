@@ -73,8 +73,8 @@ public class MultiplicationsParserTest {
 
     @Test
     public void parserParsesDosAndDontsCorrectly() {
-        Map<Integer, Boolean> parsedDosAndDonts = parser.parseDosAndDonts("do()do(dont(dont()dont()blado()");
-        assertEquals(Map.of(0, true, 12, false, 18, false, 27, true), parsedDosAndDonts);
+        Map<Integer, Boolean> parsedDosAndDonts = parser.parseDosAndDonts("do()do(dont()don't()don't()blado()");
+        assertEquals(Map.of(0, true, 13, false, 20, false, 30, true), parsedDosAndDonts);
     }
 
     @Test
@@ -84,6 +84,14 @@ public class MultiplicationsParserTest {
         List<Multiplication> parsedMultiplications = parser.parse(validInputFileName);
         assertEquals(List.of(new Multiplication(2, 4), new Multiplication(5, 5),
                 new Multiplication(11, 8), new Multiplication(8, 5)), parsedMultiplications);
+    }
+
+    @Test
+    public void parserParsesTestInputFile2Correctly() throws IOException {
+        String validInputFileName = "../../input/test_input_2.txt";
+
+        List<Multiplication> parsedMultiplications = parser.parse(validInputFileName, true);
+        assertEquals(List.of(new Multiplication(2, 4), new Multiplication(8, 5)), parsedMultiplications);
     }
 
     @After
