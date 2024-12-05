@@ -27,7 +27,7 @@ public class FiltersParserTest {
     @Test
     public void parseFiltersCorrectly() {
         Map<Integer, Boolean> parsedFiltersMap = parser.parseFilters("do()do(dont()don't()don't()blado()");
-        assertEquals(Map.of(0, true, 13, false, 20, false, 30, true), parsedFiltersMap);
+        assertEquals(Map.of(0, false, 13, true, 20, true, 30, false), parsedFiltersMap);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class FiltersParserTest {
         String validInputFileName = "../../input/test_input_2.txt";
 
         Map<Integer, Boolean> parsedFilters = parser.parse(validInputFileName);
-        assertEquals(Map.of(20, false, 59, true), parsedFilters);
+        assertEquals(Map.of(20, true, 59, false), parsedFilters);
     }
 
     @After

@@ -32,7 +32,7 @@ public class MultiplicationsFilterTest {
     public void multiplicationsWithDontAtBeginningShouldAllBeFiltered() {
         Map<Integer, Multiplication> multiplicationsMap = Map.of(5, new Multiplication(1, 2), 10, new Multiplication(2, 3),
                 15, new Multiplication(3, 4));
-        Map<Integer, Boolean> filterMap = Map.of(0, false);
+        Map<Integer, Boolean> filterMap = Map.of(0, true);
         assertTrue(filter.filter(multiplicationsMap, filterMap).isEmpty());
     }
 
@@ -40,7 +40,7 @@ public class MultiplicationsFilterTest {
     public void multiplicationsWithDontAtEndShouldNotBeFiltered() {
         Map<Integer, Multiplication> multiplicationsMap = Map.of(5, new Multiplication(1, 2), 10, new Multiplication(2, 3),
                 15, new Multiplication(3, 4));
-        Map<Integer, Boolean> filterMap = Map.of(20, false);
+        Map<Integer, Boolean> filterMap = Map.of(20, true);
         assertEquals(multiplicationsMap.values().stream().toList(), filter.filter(multiplicationsMap, filterMap));
     }
 
@@ -48,7 +48,7 @@ public class MultiplicationsFilterTest {
     public void multiplicationsWithOnlyDosShouldNotBeFiltered() {
         Map<Integer, Multiplication> multiplicationsMap = Map.of(5, new Multiplication(1, 2), 10, new Multiplication(2, 3),
                 15, new Multiplication(3, 4));
-        Map<Integer, Boolean> filterMap = Map.of(0, true, 2, true, 7, true, 12, true);
+        Map<Integer, Boolean> filterMap = Map.of(0, false, 2, false, 7, false, 12, false);
         assertEquals(multiplicationsMap.values().stream().toList(), filter.filter(multiplicationsMap, filterMap));
     }
 
@@ -57,8 +57,8 @@ public class MultiplicationsFilterTest {
         Map<Integer, Multiplication> multiplicationsMap = Map.of(5, new Multiplication(1, 2), 10, new Multiplication(2, 3),
                 15, new Multiplication(3, 4), 20, new Multiplication(4, 5), 25, new Multiplication(5, 6),
                 30, new Multiplication(6, 7), 35, new Multiplication(7, 8));
-        Map<Integer, Boolean> filterMap = Map.of(2, false, 7, true, 12, false,
-                17, false, 22, true, 27, true, 32, false);
+        Map<Integer, Boolean> filterMap = Map.of(2, true, 7, false, 12, true,
+                17, true, 22, false, 27, false, 32, true);
         assertEquals(List.of(new Multiplication(2, 3), new Multiplication(5, 6), new Multiplication(6, 7)),
                 filter.filter(new TreeMap<>(multiplicationsMap), new TreeMap<>(filterMap)));
     }

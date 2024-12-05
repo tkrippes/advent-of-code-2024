@@ -29,7 +29,7 @@ public class MultiplicationsSolverTest {
     public void solutionWithFiltersShouldBeCorrect() {
         int solution = solver.solve(Map.of(1, new Multiplication(2, 4), 28, new Multiplication(5, 5),
                         48, new Multiplication(11, 8), 64, new Multiplication(8, 5)),
-                Map.of(20, false, 59, true));
+                Map.of(20, true, 59, false));
         assertEquals(48, solution);
     }
 

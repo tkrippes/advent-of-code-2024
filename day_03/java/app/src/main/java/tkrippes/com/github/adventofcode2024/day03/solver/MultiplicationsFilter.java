@@ -19,14 +19,14 @@ class MultiplicationsFilter {
 
         List<Multiplication> multiplications = new ArrayList<>();
 
-        shouldFilter = true;
+        shouldFilter = false;
         filtersIterator = filtersMap.entrySet().iterator();
         filtersEntry = filtersIterator.next();
 
         for (var multiplicationsEntry : multiplicationsMap.entrySet()) {
             updateShouldFilter(multiplicationsEntry.getKey());
 
-            if (shouldFilter) {
+            if (!shouldFilter) {
                 multiplications.add(multiplicationsEntry.getValue());
             }
         }

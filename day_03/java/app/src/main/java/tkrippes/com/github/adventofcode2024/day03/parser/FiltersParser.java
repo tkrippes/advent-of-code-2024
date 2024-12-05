@@ -34,9 +34,8 @@ public class FiltersParser {
         Pattern dosPattern = Pattern.compile(dosRegex);
         Matcher dosMatcher = dosPattern.matcher(input);
 
-        // TODO invert?
         while (dosMatcher.find()) {
-            filtersMap.put(dosMatcher.start(), true);
+            filtersMap.put(dosMatcher.start(), false);
         }
 
         String dontsRegex = "don't\\(\\)";
@@ -44,7 +43,7 @@ public class FiltersParser {
         Matcher dontsMatcher = dontsPattern.matcher(input);
 
         while (dontsMatcher.find()) {
-            filtersMap.put(dontsMatcher.start(), false);
+            filtersMap.put(dontsMatcher.start(), true);
         }
 
         return filtersMap;
