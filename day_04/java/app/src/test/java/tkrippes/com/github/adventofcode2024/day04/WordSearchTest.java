@@ -59,6 +59,28 @@ public class WordSearchTest {
     }
 
     @Test
+    public void defaultWordSearchHasZeroDiagonals() {
+        assertEquals(0, wordSearch.diagonals());
+    }
+
+    @Test
+    public void wordSearchCalculatesDiagonalsOfSquareCorrectly() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+        assertEquals(5, wordSearch.diagonals());
+    }
+
+    @Test
+    public void wordSearchCalculatesDiagonalsOfNonSquareCorrectly() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+        wordSearch.add("JKL");
+        assertEquals(6, wordSearch.diagonals());
+    }
+
+    @Test
     public void wordSearchAddsCharactersCorrectly() {
         wordSearch.add("ABC");
         assertEquals(List.of("ABC"), wordSearch.wordSearch);

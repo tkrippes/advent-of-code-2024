@@ -53,11 +53,13 @@ public class WordSearch {
         return wordSearch.size();
     }
 
-    // TODO add diagonals?
-//    public int diagonals()
-//    {
-//        return width() + height() - 1;
-//    }
+    public int diagonals() {
+        if (isEmpty()) {
+            return 0;
+        }
+
+        return width() + height() - 1;
+    }
 
     @Override
     public boolean equals(Object obj) {
