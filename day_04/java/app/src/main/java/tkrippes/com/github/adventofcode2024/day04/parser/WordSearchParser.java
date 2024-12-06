@@ -1,18 +1,18 @@
 package tkrippes.com.github.adventofcode2024.day04.parser;
 
+import tkrippes.com.github.adventofcode2024.day04.WordSearch;
+
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 public class WordSearchParser {
-    public List<List<Character>> parse(String inputFileName) throws IOException {
+    public WordSearch parse(String inputFileName) throws IOException {
         File inputFile = new File(inputFileName);
         if (!inputFile.exists()) {
             throw new FileNotFoundException("Could not find input file: " + inputFileName);
         }
 
-        List<List<Character>> wordSearch;
+        WordSearch wordSearch;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
             wordSearch = parseWordSearch(reader.lines().collect(Collectors.joining("\n")));
@@ -24,12 +24,12 @@ public class WordSearchParser {
         return wordSearch;
     }
 
-    protected List<List<Character>> parseWordSearch(String input) {
+    WordSearch parseWordSearch(String input) {
         if (input.isEmpty()) {
-            return new ArrayList<>();
+            return new WordSearch();
         }
 
-        List<List<Character>> wordSearch = new ArrayList<>();
+        WordSearch wordSearch = new WordSearch();
         for (String inputLine : input.lines().toList()) {
             if (doLineLengthDiffer(inputLine, wordSearch)) {
                 throw new IllegalArgumentException("All input lines need to have the same length");
@@ -41,7 +41,7 @@ public class WordSearchParser {
         return wordSearch;
     }
 
-    private boolean doLineLengthDiffer(String inputLine, List<List<Character>> wordSearch) {
-        return !wordSearch.isEmpty() && inputLine.length() != wordSearch.getLast().size();
+    private boolean doLineLengthDiffer(String inputLine, WordSearch wordSearch) {
+        return !wordSearch.isEmpty() && inputLine.length() != wordSearch.width();
     }
 }
