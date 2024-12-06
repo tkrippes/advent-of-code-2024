@@ -35,7 +35,7 @@ public class WordSearchParser {
                 throw new IllegalArgumentException("All input lines need to have the same length");
             }
 
-            wordSearch.add(inputLine.chars().mapToObj(c -> (char) c).toList());
+            wordSearch.add(inputLine);
         }
 
         return wordSearch;

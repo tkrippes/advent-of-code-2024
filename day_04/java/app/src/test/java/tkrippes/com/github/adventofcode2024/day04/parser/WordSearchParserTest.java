@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -36,7 +35,7 @@ public class WordSearchParserTest {
     public void parseOneLineWordSearchCorrectly() {
         WordSearch parsedWordSearch = parser.parseWordSearch("FASDFKFASD");
         WordSearch expectedWordSearch = new WordSearch();
-        expectedWordSearch.add(List.of('F', 'A', 'S', 'D', 'F', 'K', 'F', 'A', 'S', 'D'));
+        expectedWordSearch.add("FASDFKFASD");
         assertEquals(expectedWordSearch, parsedWordSearch);
     }
 
@@ -44,8 +43,8 @@ public class WordSearchParserTest {
     public void parseTwoLineSameLengthWordSearchCorrectly() {
         WordSearch parsedWordSearch = parser.parseWordSearch("FASDFKFASD\nFGDLJDSFMX");
         WordSearch expectedWordSearch = new WordSearch();
-        expectedWordSearch.add(List.of('F', 'A', 'S', 'D', 'F', 'K', 'F', 'A', 'S', 'D'));
-        expectedWordSearch.add(List.of('F', 'G', 'D', 'L', 'J', 'D', 'S', 'F', 'M', 'X'));
+        expectedWordSearch.add("FASDFKFASD");
+        expectedWordSearch.add("FGDLJDSFMX");
         assertEquals(expectedWordSearch, parsedWordSearch);
     }
 
@@ -58,9 +57,9 @@ public class WordSearchParserTest {
     public void parseThreeLineSameLengthWordSearchCorrectly() {
         WordSearch parsedWordSearch = parser.parseWordSearch("FASDFKFASD\nFGDLJDSFMX\nAFSKLFASDJ");
         WordSearch expectedWordSearch = new WordSearch();
-        expectedWordSearch.add(List.of('F', 'A', 'S', 'D', 'F', 'K', 'F', 'A', 'S', 'D'));
-        expectedWordSearch.add(List.of('F', 'G', 'D', 'L', 'J', 'D', 'S', 'F', 'M', 'X'));
-        expectedWordSearch.add(List.of('A', 'F', 'S', 'K', 'L', 'F', 'A', 'S', 'D', 'J'));
+        expectedWordSearch.add("FASDFKFASD");
+        expectedWordSearch.add("FGDLJDSFMX");
+        expectedWordSearch.add("AFSKLFASDJ");
         assertEquals(expectedWordSearch, parsedWordSearch);
     }
 
@@ -80,16 +79,16 @@ public class WordSearchParserTest {
         WordSearch parsedWordSearch = parser.parse(validInputFileName);
 
         WordSearch expectedWordSearch = new WordSearch();
-        expectedWordSearch.add(List.of('M', 'M', 'M', 'S', 'X', 'X', 'M', 'A', 'S', 'M'));
-        expectedWordSearch.add(List.of('M', 'S', 'A', 'M', 'X', 'M', 'S', 'M', 'S', 'A'));
-        expectedWordSearch.add(List.of('A', 'M', 'X', 'S', 'X', 'M', 'A', 'A', 'M', 'M'));
-        expectedWordSearch.add(List.of('M', 'S', 'A', 'M', 'A', 'S', 'M', 'S', 'M', 'X'));
-        expectedWordSearch.add(List.of('X', 'M', 'A', 'S', 'A', 'M', 'X', 'A', 'M', 'M'));
-        expectedWordSearch.add(List.of('X', 'X', 'A', 'M', 'M', 'X', 'X', 'A', 'M', 'A'));
-        expectedWordSearch.add(List.of('S', 'M', 'S', 'M', 'S', 'A', 'S', 'X', 'S', 'S'));
-        expectedWordSearch.add(List.of('S', 'A', 'X', 'A', 'M', 'A', 'S', 'A', 'A', 'A'));
-        expectedWordSearch.add(List.of('M', 'A', 'M', 'M', 'M', 'X', 'M', 'M', 'M', 'M'));
-        expectedWordSearch.add(List.of('M', 'X', 'M', 'X', 'A', 'X', 'M', 'A', 'S', 'X'));
+        expectedWordSearch.add("MMMSXXMASM");
+        expectedWordSearch.add("MSAMXMSMSA");
+        expectedWordSearch.add("AMXSXMAAMM");
+        expectedWordSearch.add("MSAMASMSMX");
+        expectedWordSearch.add("XMASAMXAMM");
+        expectedWordSearch.add("XXAMMXXAMA");
+        expectedWordSearch.add("SMSMSASXSS");
+        expectedWordSearch.add("SAXAMASAAA");
+        expectedWordSearch.add("MAMMMXMMMM");
+        expectedWordSearch.add("MXMXAXMASX");
 
         assertEquals(expectedWordSearch, parsedWordSearch);
     }

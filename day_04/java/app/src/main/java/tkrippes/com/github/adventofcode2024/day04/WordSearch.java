@@ -5,18 +5,18 @@ import java.util.List;
 import java.util.Objects;
 
 public class WordSearch {
-    List<List<Character>> wordSearch;
+    List<String> wordSearch;
 
     public WordSearch() {
         wordSearch = new ArrayList<>();
     }
 
     public char getCharacter(int column, int row) {
-        return wordSearch.get(row).get(column);
+        return wordSearch.get(row).charAt(column);
     }
 
-    public void add(List<Character> characters) {
-        if (width() != 0 && characters.size() != width()) {
+    public void add(String characters) {
+        if (width() != 0 && characters.length() != width()) {
             throw new IllegalArgumentException("All input lines need to have the same width");
         }
 
@@ -32,7 +32,7 @@ public class WordSearch {
             return 0;
         }
 
-        return wordSearch.getFirst().size();
+        return wordSearch.getFirst().length();
     }
 
     public int height() {
