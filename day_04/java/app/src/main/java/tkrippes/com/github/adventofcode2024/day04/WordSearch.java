@@ -15,7 +15,13 @@ public class WordSearch {
         return wordSearch.get(index);
     }
 
-    // TODO add get column
+    public String getColumn(int index) {
+        if (height() == 0) {
+            throw new IndexOutOfBoundsException("no columns in word search");
+        }
+
+        return wordSearch.stream().reduce("", (column, row) -> column + row.charAt(index));
+    }
 
     // TODO get diagonal (two ways) (up until width + height - 1, twice)
 
