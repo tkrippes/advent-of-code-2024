@@ -76,6 +76,25 @@ public class WordSearchSolverTest {
         assertEquals(6, solver.solve(wordSearch, "Test"));
     }
 
+    @Test
+    public void solveShouldReturnOneIfWordIsContainedInReverse() {
+        wordSearch.add("ABCtseTEFG");
+        assertEquals(1, solver.solve(wordSearch, "Test"));
+    }
+
+    @Test
+    public void solveShouldReturnTwoIfWordIsContainedInTwoRowsInReverse() {
+        wordSearch.add("ABCtseTEFG");
+        wordSearch.add("AtseTBCEFG");
+        assertEquals(2, solver.solve(wordSearch, "Test"));
+    }
+
+    @Test
+    public void solveShouldReturnTwoIfWordIsContainedLeftToRightAndRightToLeft() {
+        wordSearch.add("TestseT");
+        assertEquals(2, solver.solve(wordSearch, "Test"));
+    }
+
     @After
     public void tearDown() {
     }

@@ -81,34 +81,34 @@ public class WordSearchTest {
     }
 
     @Test
-    public void wordSearchGetLineShouldReturnLineCorrectly() {
+    public void wordSearchGetLineShouldReturnRowCorrectly() {
         wordSearch.add("ABC");
         wordSearch.add("DEF");
         wordSearch.add("GHI");
-        assertEquals("ABC", wordSearch.getLine(0));
-        assertEquals("DEF", wordSearch.getLine(1));
-        assertEquals("GHI", wordSearch.getLine(2));
+        assertEquals("ABC", wordSearch.getRow(0));
+        assertEquals("DEF", wordSearch.getRow(1));
+        assertEquals("GHI", wordSearch.getRow(2));
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenAccessingLineOfEmptyWordSearch() {
-        wordSearch.getLine(0);
+    public void wordSearchThrowsWhenAccessingRowOfEmptyWordSearch() {
+        wordSearch.getRow(0);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenAccessingLineAtNegativeIndex() {
+    public void wordSearchThrowsWhenAccessingRowAtNegativeIndex() {
         wordSearch.add("ABC");
         wordSearch.add("DEF");
         wordSearch.add("GHI");
-        wordSearch.getLine(-1);
+        wordSearch.getRow(-1);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenAccessingLineAtInexistentIndex() {
+    public void wordSearchThrowsWhenAccessingRowAtInexistentIndex() {
         wordSearch.add("ABC");
         wordSearch.add("DEF");
         wordSearch.add("GHI");
-        wordSearch.getLine(3);
+        wordSearch.getRow(3);
     }
 
     @Test

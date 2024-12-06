@@ -11,9 +11,13 @@ public class WordSearch {
         wordSearch = new ArrayList<>();
     }
 
-    public String getLine(int index) {
+    public String getRow(int index) {
         return wordSearch.get(index);
     }
+
+    // TODO add get column
+
+    // TODO get diagonal (two ways) (up until width + height - 1, twice)
 
     public char getCharacter(int column, int row) {
         return wordSearch.get(row).charAt(column);
@@ -42,6 +46,12 @@ public class WordSearch {
     public int height() {
         return wordSearch.size();
     }
+
+    // TODO add diagonals?
+//    public int diagonals()
+//    {
+//        return width() + height() - 1;
+//    }
 
     @Override
     public boolean equals(Object obj) {

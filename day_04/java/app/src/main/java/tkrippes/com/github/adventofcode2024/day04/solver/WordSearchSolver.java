@@ -15,10 +15,27 @@ public class WordSearchSolver {
             return 0;
         }
 
+        return countWordsLeftToRight(wordSearch, word) + countWordsRightToLeft(wordSearch, word);
+    }
+
+    public int countWordsLeftToRight(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(word);
         for (int i = 0; i < wordSearch.height(); i++) {
-            Matcher matcher = pattern.matcher(wordSearch.getLine(i));
+            Matcher matcher = pattern.matcher(wordSearch.getRow(i));
+            while (matcher.find()) {
+                wordCount++;
+            }
+        }
+
+        return wordCount;
+    }
+
+    public int countWordsRightToLeft(WordSearch wordSearch, String word) {
+        int wordCount = 0;
+        Pattern pattern = Pattern.compile(new StringBuilder(word).reverse().toString());
+        for (int i = 0; i < wordSearch.height(); i++) {
+            Matcher matcher = pattern.matcher(wordSearch.getRow(i));
             while (matcher.find()) {
                 wordCount++;
             }
