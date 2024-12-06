@@ -81,7 +81,38 @@ public class WordSearchTest {
     }
 
     @Test
-    public void wordSearchGetCharacterShouldReturnRightCharactersCorrectly() {
+    public void wordSearchGetLineShouldReturnLineCorrectly() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+        assertEquals("ABC", wordSearch.getLine(0));
+        assertEquals("DEF", wordSearch.getLine(1));
+        assertEquals("GHI", wordSearch.getLine(2));
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void wordSearchThrowsWhenAccessingLineOfEmptyWordSearch() {
+        wordSearch.getLine(0);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void wordSearchThrowsWhenAccessingLineAtNegativeIndex() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+        wordSearch.getLine(-1);
+    }
+
+    @Test(expected = IndexOutOfBoundsException.class)
+    public void wordSearchThrowsWhenAccessingLineAtInexistentIndex() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+        wordSearch.getLine(3);
+    }
+
+    @Test
+    public void wordSearchGetCharacterShouldReturnCharactersCorrectly() {
         wordSearch.add("ABC");
         wordSearch.add("DEF");
         wordSearch.add("GHI");
@@ -93,7 +124,7 @@ public class WordSearchTest {
 
     @Test(expected = IndexOutOfBoundsException.class)
     public void wordSearchThrowsWhenAccessingCharacterOfEmptyWordSearch() {
-        assertEquals('A', wordSearch.getCharacter(0, 0));
+        wordSearch.getCharacter(0, 0);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -102,7 +133,7 @@ public class WordSearchTest {
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         wordSearch.add("JKL");
-        assertEquals('A', wordSearch.getCharacter(-2, 0));
+        wordSearch.getCharacter(-2, 0);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -111,7 +142,7 @@ public class WordSearchTest {
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         wordSearch.add("JKL");
-        assertEquals('A', wordSearch.getCharacter(0, -3));
+        wordSearch.getCharacter(0, -3);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -120,7 +151,7 @@ public class WordSearchTest {
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         wordSearch.add("JKL");
-        assertEquals('A', wordSearch.getCharacter(3, 0));
+        wordSearch.getCharacter(3, 0);
     }
 
     @Test(expected = IndexOutOfBoundsException.class)
@@ -129,7 +160,7 @@ public class WordSearchTest {
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         wordSearch.add("JKL");
-        assertEquals('A', wordSearch.getCharacter(0, 4));
+        wordSearch.getCharacter(0, 4);
     }
 
     @After

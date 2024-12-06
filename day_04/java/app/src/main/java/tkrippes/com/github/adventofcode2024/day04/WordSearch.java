@@ -11,6 +11,10 @@ public class WordSearch {
         wordSearch = new ArrayList<>();
     }
 
+    public String getLine(int index) {
+        return wordSearch.get(index);
+    }
+
     public char getCharacter(int column, int row) {
         return wordSearch.get(row).charAt(column);
     }
