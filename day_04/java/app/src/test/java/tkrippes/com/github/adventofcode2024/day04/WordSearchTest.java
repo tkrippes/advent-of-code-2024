@@ -18,7 +18,16 @@ public class WordSearchTest {
 
     @Test
     public void defaultWordSearchIsEmpty() {
-        assertTrue(wordSearch.get().isEmpty());
+        assertTrue(wordSearch.isEmpty());
+    }
+
+    @Test
+    public void wordSearchIndicatesIsEmptyCorrectly() {
+        wordSearch.add(List.of('A', 'B', 'C'));
+        wordSearch.add(List.of('D', 'E', 'F'));
+        wordSearch.add(List.of('G', 'H', 'I'));
+        wordSearch.add(List.of('J', 'K', 'L'));
+        assertFalse(wordSearch.isEmpty());
     }
 
     @Test
@@ -52,7 +61,7 @@ public class WordSearchTest {
     @Test
     public void wordSearchAddsCharacterLineCorrectly() {
         wordSearch.add(List.of('A', 'B', 'C'));
-        assertEquals(List.of(List.of('A', 'B', 'C')), wordSearch.get());
+        assertEquals(List.of(List.of('A', 'B', 'C')), wordSearch.wordSearch);
     }
 
     @Test
@@ -62,7 +71,7 @@ public class WordSearchTest {
         wordSearch.add(List.of('G', 'H', 'I'));
         wordSearch.add(List.of('J', 'K', 'L'));
         assertEquals(List.of(List.of('A', 'B', 'C'), List.of('D', 'E', 'F'),
-                List.of('G', 'H', 'I'), List.of('J', 'K', 'L')), wordSearch.get());
+                List.of('G', 'H', 'I'), List.of('J', 'K', 'L')), wordSearch.wordSearch);
     }
 
     @Test(expected = IllegalArgumentException.class)
