@@ -31,31 +31,31 @@ public class WordSearchTest {
     }
 
     @Test
-    public void defaultWordSearchHasZeroWidth() {
-        assertEquals(0, wordSearch.width());
+    public void defaultWordSearchHasZeroColumns() {
+        assertEquals(0, wordSearch.columns());
     }
 
     @Test
-    public void wordSearchCalculatesWidthCorrectly() {
+    public void wordSearchCalculatesColumnsCorrectly() {
         wordSearch.add("ABC");
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         wordSearch.add("JKL");
-        assertEquals(3, wordSearch.width());
+        assertEquals(3, wordSearch.columns());
     }
 
     @Test
-    public void defaultWordSearchHasZeroHeight() {
-        assertEquals(0, wordSearch.height());
+    public void defaultWordSearchHasZeroRows() {
+        assertEquals(0, wordSearch.rows());
     }
 
     @Test
-    public void wordSearchCalculatesHeightCorrectly() {
+    public void wordSearchCalculatesRowsCorrectly() {
         wordSearch.add("ABC");
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         wordSearch.add("JKL");
-        assertEquals(4, wordSearch.height());
+        assertEquals(4, wordSearch.rows());
     }
 
     @Test

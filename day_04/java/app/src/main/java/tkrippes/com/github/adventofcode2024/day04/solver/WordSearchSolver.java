@@ -15,13 +15,14 @@ public class WordSearchSolver {
             return 0;
         }
 
-        return countWordsLeftToRight(wordSearch, word) + countWordsRightToLeft(wordSearch, word);
+        return countWordsHorizontally(wordSearch, word) + countWordsHorizontallyReversed(wordSearch, word) +
+                countWordsVertically(wordSearch, word) + countWordsVerticallyReversed(wordSearch, word);
     }
 
-    public int countWordsLeftToRight(WordSearch wordSearch, String word) {
+    public int countWordsHorizontally(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(word);
-        for (int i = 0; i < wordSearch.height(); i++) {
+        for (int i = 0; i < wordSearch.rows(); i++) {
             Matcher matcher = pattern.matcher(wordSearch.getRow(i));
             while (matcher.find()) {
                 wordCount++;
@@ -31,11 +32,37 @@ public class WordSearchSolver {
         return wordCount;
     }
 
-    public int countWordsRightToLeft(WordSearch wordSearch, String word) {
+    public int countWordsHorizontallyReversed(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(new StringBuilder(word).reverse().toString());
-        for (int i = 0; i < wordSearch.height(); i++) {
+        for (int i = 0; i < wordSearch.rows(); i++) {
             Matcher matcher = pattern.matcher(wordSearch.getRow(i));
+            while (matcher.find()) {
+                wordCount++;
+            }
+        }
+
+        return wordCount;
+    }
+
+    public int countWordsVertically(WordSearch wordSearch, String word) {
+        int wordCount = 0;
+        Pattern pattern = Pattern.compile(word);
+        for (int i = 0; i < wordSearch.columns(); i++) {
+            Matcher matcher = pattern.matcher(wordSearch.getColumn(i));
+            while (matcher.find()) {
+                wordCount++;
+            }
+        }
+
+        return wordCount;
+    }
+
+    public int countWordsVerticallyReversed(WordSearch wordSearch, String word) {
+        int wordCount = 0;
+        Pattern pattern = Pattern.compile(new StringBuilder(word).reverse().toString());
+        for (int i = 0; i < wordSearch.columns(); i++) {
+            Matcher matcher = pattern.matcher(wordSearch.getColumn(i));
             while (matcher.find()) {
                 wordCount++;
             }

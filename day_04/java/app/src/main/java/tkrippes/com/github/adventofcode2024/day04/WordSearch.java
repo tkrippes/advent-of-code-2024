@@ -16,7 +16,7 @@ public class WordSearch {
     }
 
     public String getColumn(int index) {
-        if (height() == 0) {
+        if (rows() == 0) {
             throw new IndexOutOfBoundsException("no columns in word search");
         }
 
@@ -30,7 +30,7 @@ public class WordSearch {
     }
 
     public void add(String characters) {
-        if (width() != 0 && characters.length() != width()) {
+        if (columns() != 0 && characters.length() != columns()) {
             throw new IllegalArgumentException("All input lines need to have the same width");
         }
 
@@ -41,7 +41,7 @@ public class WordSearch {
         return wordSearch.isEmpty();
     }
 
-    public int width() {
+    public int columns() {
         if (wordSearch.isEmpty()) {
             return 0;
         }
@@ -49,7 +49,7 @@ public class WordSearch {
         return wordSearch.getFirst().length();
     }
 
-    public int height() {
+    public int rows() {
         return wordSearch.size();
     }
 
@@ -58,7 +58,7 @@ public class WordSearch {
             return 0;
         }
 
-        return width() + height() - 1;
+        return columns() + rows() - 1;
     }
 
     @Override

@@ -42,6 +42,6 @@ public class WordSearchParser {
     }
 
     private boolean doLineLengthDiffer(String inputLine, WordSearch wordSearch) {
-        return !wordSearch.isEmpty() && inputLine.length() != wordSearch.width();
+        return !wordSearch.isEmpty() && inputLine.length() != wordSearch.columns();
     }
 }

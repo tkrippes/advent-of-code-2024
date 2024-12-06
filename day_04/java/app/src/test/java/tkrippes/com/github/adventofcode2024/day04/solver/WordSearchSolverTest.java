@@ -90,9 +90,99 @@ public class WordSearchSolverTest {
     }
 
     @Test
-    public void solveShouldReturnTwoIfWordIsContainedLeftToRightAndRightToLeft() {
+    public void solveShouldReturnTwoIfWordsAreContainedHorizontallyInBothDirections() {
         wordSearch.add("TestseT");
         assertEquals(2, solver.solve(wordSearch, "Test"));
+    }
+
+    @Test
+    public void solveShouldReturnOneIfWordIsContainedVertically() {
+        wordSearch.add("T");
+        wordSearch.add("e");
+        wordSearch.add("s");
+        wordSearch.add("t");
+        assertEquals(1, solver.solve(wordSearch, "Test"));
+    }
+
+    @Test
+    public void solveShouldReturnTwoIfWordIsContainedTwoTimesVertically() {
+        wordSearch.add("TFa");
+        wordSearch.add("eFb");
+        wordSearch.add("soT");
+        wordSearch.add("tue");
+        wordSearch.add("ars");
+        wordSearch.add("bFt");
+        assertEquals(2, solver.solve(wordSearch, "Test"));
+    }
+
+    @Test
+    public void solveShouldReturnTwoIfWordIsContainedTwoTimesVerticallyInSameColumn() {
+        wordSearch.add("T");
+        wordSearch.add("e");
+        wordSearch.add("s");
+        wordSearch.add("t");
+        wordSearch.add("T");
+        wordSearch.add("e");
+        wordSearch.add("s");
+        wordSearch.add("t");
+        assertEquals(2, solver.solve(wordSearch, "Test"));
+    }
+
+    @Test
+    public void solveShouldReturnOneIfWordIsContainedVerticallyReversed() {
+        wordSearch.add("t");
+        wordSearch.add("s");
+        wordSearch.add("e");
+        wordSearch.add("T");
+        assertEquals(1, solver.solve(wordSearch, "Test"));
+    }
+
+    @Test
+    public void solveShouldReturnTwoIfWordIsContainedTwoTimesVerticallyReversed() {
+        wordSearch.add("bFt");
+        wordSearch.add("aFs");
+        wordSearch.add("toe");
+        wordSearch.add("suT");
+        wordSearch.add("era");
+        wordSearch.add("TFb");
+        assertEquals(2, solver.solve(wordSearch, "Test"));
+    }
+
+    @Test
+    public void solveShouldReturnTwoIfWordIsContainedTwoTimesVerticallyReversedInSameColumn() {
+        wordSearch.add("t");
+        wordSearch.add("s");
+        wordSearch.add("e");
+        wordSearch.add("T");
+        wordSearch.add("t");
+        wordSearch.add("s");
+        wordSearch.add("e");
+        wordSearch.add("T");
+        assertEquals(2, solver.solve(wordSearch, "Test"));
+    }
+
+    @Test
+    public void solveShouldReturnTwoIfWordsAreContainedVerticallyInBothDirections() {
+        wordSearch.add("T");
+        wordSearch.add("e");
+        wordSearch.add("s");
+        wordSearch.add("t");
+        wordSearch.add("s");
+        wordSearch.add("e");
+        wordSearch.add("T");
+        assertEquals(2, solver.solve(wordSearch, "Test"));
+    }
+
+    @Test
+    public void solveShouldReturnTwoIfWordsAreContainedHorizontallyAndVerticallyInBothDirections() {
+        wordSearch.add("TestseT");
+        wordSearch.add("eabcdee");
+        wordSearch.add("sabcdes");
+        wordSearch.add("tseTest");
+        wordSearch.add("sabcdes");
+        wordSearch.add("eabcdee");
+        wordSearch.add("TestseT");
+        assertEquals(10, solver.solve(wordSearch, "Test"));
     }
 
     @After
