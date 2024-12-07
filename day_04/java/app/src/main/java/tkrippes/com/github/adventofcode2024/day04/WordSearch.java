@@ -11,16 +11,23 @@ public class WordSearch {
         wordSearch = new ArrayList<>();
     }
 
-    public String getRow(int index) {
-        return wordSearch.get(index);
-    }
-
-    public String getColumn(int index) {
-        if (rowCount() == 0) {
-            throw new IndexOutOfBoundsException("no columns in word search");
+    public List<String> getRows() {
+        List<String> rows = new ArrayList<>();
+        for (int i = 0; i < rowCount(); i++) {
+            rows.add(wordSearch.get(i));
         }
 
-        return wordSearch.stream().reduce("", (column, row) -> column + row.charAt(index));
+        return rows;
+    }
+
+    public List<String> getColumns() {
+        List<String> columns = new ArrayList<>();
+        for (int i = 0; i < columnCount(); i++) {
+            int finalI = i;
+            columns.add(wordSearch.stream().reduce("", (column, row) -> column + row.charAt(finalI)));
+        }
+
+        return columns;
     }
 
     // TODO get diagonal (two ways) (up until width + height - 1, twice)

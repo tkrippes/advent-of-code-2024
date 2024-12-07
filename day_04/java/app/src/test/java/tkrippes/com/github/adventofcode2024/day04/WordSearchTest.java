@@ -102,34 +102,21 @@ public class WordSearchTest {
     }
 
     @Test
+    public void defaultWordSearchReturnsEmptyRows() {
+        assertTrue(wordSearch.getRows().isEmpty());
+    }
+
+    @Test
     public void wordSearchGetRowShouldReturnRowsCorrectly() {
         wordSearch.add("ABCD");
         wordSearch.add("EFGH");
         wordSearch.add("IJKL");
-        assertEquals("ABCD", wordSearch.getRow(0));
-        assertEquals("EFGH", wordSearch.getRow(1));
-        assertEquals("IJKL", wordSearch.getRow(2));
+        assertEquals(List.of("ABCD", "EFGH", "IJKL"), wordSearch.getRows());
     }
 
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenAccessingRowOfEmptyWordSearch() {
-        wordSearch.getRow(0);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenAccessingRowAtNegativeIndex() {
-        wordSearch.add("ABCD");
-        wordSearch.add("EFGH");
-        wordSearch.add("IJKL");
-        wordSearch.getRow(-1);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenAccessingRowAtInexistentIndex() {
-        wordSearch.add("ABCD");
-        wordSearch.add("EFGH");
-        wordSearch.add("IJKL");
-        wordSearch.getRow(3);
+    @Test
+    public void defaultWordSearchReturnsEmptyColumns() {
+        assertTrue(wordSearch.getColumns().isEmpty());
     }
 
     @Test
@@ -138,32 +125,7 @@ public class WordSearchTest {
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         wordSearch.add("JKL");
-        assertEquals("ADGJ", wordSearch.getColumn(0));
-        assertEquals("BEHK", wordSearch.getColumn(1));
-        assertEquals("CFIL", wordSearch.getColumn(2));
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenAccessingColumnOfEmptyWordSearch() {
-        wordSearch.getColumn(0);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenAccessingColumnAtNegativeIndex() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEF");
-        wordSearch.add("GHI");
-        wordSearch.add("JKL");
-        wordSearch.getColumn(-1);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenAccessingColumnAtInexistentIndex() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEF");
-        wordSearch.add("GHI");
-        wordSearch.add("JKL");
-        wordSearch.getColumn(3);
+        assertEquals(List.of("ADGJ", "BEHK", "CFIL"), wordSearch.getColumns());
     }
 
     @Test

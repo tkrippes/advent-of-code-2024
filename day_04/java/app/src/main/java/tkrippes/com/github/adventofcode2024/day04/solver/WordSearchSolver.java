@@ -22,8 +22,8 @@ public class WordSearchSolver {
     public int countWordsHorizontally(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(word);
-        for (int i = 0; i < wordSearch.rowCount(); i++) {
-            Matcher matcher = pattern.matcher(wordSearch.getRow(i));
+        for (String row : wordSearch.getRows()) {
+            Matcher matcher = pattern.matcher(row);
             while (matcher.find()) {
                 wordCount++;
             }
@@ -35,8 +35,8 @@ public class WordSearchSolver {
     public int countWordsHorizontallyReversed(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(new StringBuilder(word).reverse().toString());
-        for (int i = 0; i < wordSearch.rowCount(); i++) {
-            Matcher matcher = pattern.matcher(wordSearch.getRow(i));
+        for (String row : wordSearch.getRows()) {
+            Matcher matcher = pattern.matcher(row);
             while (matcher.find()) {
                 wordCount++;
             }
@@ -48,8 +48,8 @@ public class WordSearchSolver {
     public int countWordsVertically(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(word);
-        for (int i = 0; i < wordSearch.columnCount(); i++) {
-            Matcher matcher = pattern.matcher(wordSearch.getColumn(i));
+        for (String column : wordSearch.getColumns()) {
+            Matcher matcher = pattern.matcher(column);
             while (matcher.find()) {
                 wordCount++;
             }
@@ -61,8 +61,8 @@ public class WordSearchSolver {
     public int countWordsVerticallyReversed(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(new StringBuilder(word).reverse().toString());
-        for (int i = 0; i < wordSearch.columnCount(); i++) {
-            Matcher matcher = pattern.matcher(wordSearch.getColumn(i));
+        for (String column : wordSearch.getColumns()) {
+            Matcher matcher = pattern.matcher(column);
             while (matcher.find()) {
                 wordCount++;
             }
