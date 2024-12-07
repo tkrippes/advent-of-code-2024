@@ -11,6 +11,14 @@ public class WordSearch {
         wordSearch = new ArrayList<>();
     }
 
+    public void add(String characters) {
+        if (columnCount() != 0 && characters.length() != columnCount()) {
+            throw new IllegalArgumentException("All input lines need to have the same width");
+        }
+
+        wordSearch.add(characters);
+    }
+
     public List<String> getRows() {
         List<String> rows = new ArrayList<>();
         for (int i = 0; i < rowCount(); i++) {
@@ -31,18 +39,6 @@ public class WordSearch {
     }
 
     // TODO get diagonal (two ways) (up until width + height - 1, twice)
-
-    public char getCharacter(int column, int row) {
-        return wordSearch.get(row).charAt(column);
-    }
-
-    public void add(String characters) {
-        if (columnCount() != 0 && characters.length() != columnCount()) {
-            throw new IllegalArgumentException("All input lines need to have the same width");
-        }
-
-        wordSearch.add(characters);
-    }
 
     public boolean isEmpty() {
         return wordSearch.isEmpty();

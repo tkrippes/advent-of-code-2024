@@ -31,20 +31,6 @@ public class WordSearchTest {
     }
 
     @Test
-    public void defaultWordSearchHasZeroColumns() {
-        assertEquals(0, wordSearch.columnCount());
-    }
-
-    @Test
-    public void wordSearchCalculatesColumnsCorrectly() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEF");
-        wordSearch.add("GHI");
-        wordSearch.add("JKL");
-        assertEquals(3, wordSearch.columnCount());
-    }
-
-    @Test
     public void defaultWordSearchHasZeroRows() {
         assertEquals(0, wordSearch.rowCount());
     }
@@ -56,6 +42,20 @@ public class WordSearchTest {
         wordSearch.add("GHI");
         wordSearch.add("JKL");
         assertEquals(4, wordSearch.rowCount());
+    }
+
+    @Test
+    public void defaultWordSearchHasZeroColumns() {
+        assertEquals(0, wordSearch.columnCount());
+    }
+
+    @Test
+    public void wordSearchCalculatesColumnsCorrectly() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+        wordSearch.add("JKL");
+        assertEquals(3, wordSearch.columnCount());
     }
 
     @Test
@@ -126,58 +126,6 @@ public class WordSearchTest {
         wordSearch.add("GHI");
         wordSearch.add("JKL");
         assertEquals(List.of("ADGJ", "BEHK", "CFIL"), wordSearch.getColumns());
-    }
-
-    @Test
-    public void wordSearchGetCharacterShouldReturnCharactersCorrectly() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEF");
-        wordSearch.add("GHI");
-        wordSearch.add("JKL");
-        assertEquals('A', wordSearch.getCharacter(0, 0));
-        assertEquals('F', wordSearch.getCharacter(2, 1));
-        assertEquals('J', wordSearch.getCharacter(0, 3));
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenAccessingCharacterOfEmptyWordSearch() {
-        wordSearch.getCharacter(0, 0);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenColumnIsNegative() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEF");
-        wordSearch.add("GHI");
-        wordSearch.add("JKL");
-        wordSearch.getCharacter(-2, 0);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenRowIsNegative() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEF");
-        wordSearch.add("GHI");
-        wordSearch.add("JKL");
-        wordSearch.getCharacter(0, -3);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenColumnIsTooLarge() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEF");
-        wordSearch.add("GHI");
-        wordSearch.add("JKL");
-        wordSearch.getCharacter(3, 0);
-    }
-
-    @Test(expected = IndexOutOfBoundsException.class)
-    public void wordSearchThrowsWhenRowIsToLarge() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEF");
-        wordSearch.add("GHI");
-        wordSearch.add("JKL");
-        wordSearch.getCharacter(0, 4);
     }
 
     @After
