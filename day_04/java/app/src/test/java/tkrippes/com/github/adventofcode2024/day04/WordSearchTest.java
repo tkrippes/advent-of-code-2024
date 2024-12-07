@@ -104,6 +104,60 @@ public class WordSearchTest {
     }
 
     @Test
+    public void defaultWordSearchReturnsEmptySecondaryDiagonals() {
+        assertTrue(wordSearch.getSecondaryDiagonals().isEmpty());
+    }
+
+    @Test
+    public void singleCharacterWordSearchShouldReturnSecondaryDiagonalsCorrectly() {
+        wordSearch.add("A");
+        assertEquals(List.of("A"), wordSearch.getSecondaryDiagonals());
+    }
+
+    @Test
+    public void twoCharactersHorizontalWordSearchShouldReturnSecondaryDiagonalsCorrectly() {
+        wordSearch.add("AB");
+        assertEquals(List.of("A", "B"), wordSearch.getSecondaryDiagonals());
+    }
+
+    @Test
+    public void twoCharactersVerticalWordSearchShouldReturnSecondaryDiagonalsCorrectly() {
+        wordSearch.add("A");
+        wordSearch.add("B");
+        assertEquals(List.of("A", "B"), wordSearch.getSecondaryDiagonals());
+    }
+
+    @Test
+    public void twoByTwoWordSearchShouldReturnSecondaryDiagonalsCorrectly() {
+        wordSearch.add("AB");
+        wordSearch.add("CD");
+        assertEquals(List.of("A", "BC", "D"), wordSearch.getSecondaryDiagonals());
+    }
+
+    @Test
+    public void twoByThreeWordSearchShouldReturnSecondaryDiagonalsCorrectly() {
+        wordSearch.add("AB");
+        wordSearch.add("CD");
+        wordSearch.add("EF");
+        assertEquals(List.of("A", "BC", "DE", "F"), wordSearch.getSecondaryDiagonals());
+    }
+
+    @Test
+    public void threeByTwoWordSearchShouldReturnSecondaryDiagonalsCorrectly() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        assertEquals(List.of("A", "BD", "CE", "F"), wordSearch.getSecondaryDiagonals());
+    }
+
+    @Test
+    public void threeByThreeWordSearchShouldReturnSecondaryDiagonalsCorrectly() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+        assertEquals(List.of("A", "BD", "CEG", "FH", "I"), wordSearch.getSecondaryDiagonals());
+    }
+
+    @Test
     public void defaultWordSearchIsEmpty() {
         assertTrue(wordSearch.isEmpty());
     }

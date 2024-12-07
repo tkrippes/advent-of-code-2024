@@ -39,7 +39,7 @@ public class WordSearch {
     }
 
     /*
-     * Primary diagonals are those that run from the top left to the bottom righ
+     * Primary diagonals are those that run from the top left to the bottom right
      *
      * Example:
      * A B C D
@@ -73,7 +73,40 @@ public class WordSearch {
         return primaryDiagonal.toString();
     }
 
-    // TODO get diagonal (two ways) (up until width + height - 1, twice)
+    /*
+     * Secondary diagonals are those that run from the top right to the bottom left
+     *
+     * Example:
+     * A B C D
+     * E F G H
+     * I J K L
+     *
+     * --> primary diagonals: A, BE, CFI, DGJ, HK, L
+     */
+    public List<String> getSecondaryDiagonals() {
+        List<String> secondaryDiagonals = new ArrayList<>();
+
+        for (int i = 0; i < columnCount(); i++) {
+            secondaryDiagonals.add(getSecondaryDiagonal(i, 0));
+        }
+
+        for (int j = 1; j < rowCount(); j++) {
+            secondaryDiagonals.add(getSecondaryDiagonal(columnCount() - 1, j));
+        }
+
+        return secondaryDiagonals;
+    }
+
+    private String getSecondaryDiagonal(int startColumn, int startRow) {
+        StringBuilder primaryDiagonal = new StringBuilder();
+        while (startColumn >= 0 && startRow < rowCount()) {
+            primaryDiagonal.append(wordSearch.get(startRow).charAt(startColumn));
+            startColumn--;
+            startRow++;
+        }
+
+        return primaryDiagonal.toString();
+    }
 
     public boolean isEmpty() {
         return wordSearch.isEmpty();
