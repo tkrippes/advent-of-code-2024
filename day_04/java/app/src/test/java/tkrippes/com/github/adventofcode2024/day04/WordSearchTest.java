@@ -32,7 +32,7 @@ public class WordSearchTest {
 
     @Test
     public void defaultWordSearchHasZeroColumns() {
-        assertEquals(0, wordSearch.columns());
+        assertEquals(0, wordSearch.columnCount());
     }
 
     @Test
@@ -41,12 +41,12 @@ public class WordSearchTest {
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         wordSearch.add("JKL");
-        assertEquals(3, wordSearch.columns());
+        assertEquals(3, wordSearch.columnCount());
     }
 
     @Test
     public void defaultWordSearchHasZeroRows() {
-        assertEquals(0, wordSearch.rows());
+        assertEquals(0, wordSearch.rowCount());
     }
 
     @Test
@@ -55,12 +55,12 @@ public class WordSearchTest {
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         wordSearch.add("JKL");
-        assertEquals(4, wordSearch.rows());
+        assertEquals(4, wordSearch.rowCount());
     }
 
     @Test
     public void defaultWordSearchHasZeroDiagonals() {
-        assertEquals(0, wordSearch.diagonals());
+        assertEquals(0, wordSearch.diagonalCount());
     }
 
     @Test
@@ -68,7 +68,7 @@ public class WordSearchTest {
         wordSearch.add("ABC");
         wordSearch.add("DEF");
         wordSearch.add("GHI");
-        assertEquals(5, wordSearch.diagonals());
+        assertEquals(5, wordSearch.diagonalCount());
     }
 
     @Test
@@ -77,7 +77,7 @@ public class WordSearchTest {
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         wordSearch.add("JKL");
-        assertEquals(6, wordSearch.diagonals());
+        assertEquals(6, wordSearch.diagonalCount());
     }
 
     @Test

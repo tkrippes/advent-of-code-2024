@@ -22,7 +22,7 @@ public class WordSearchSolver {
     public int countWordsHorizontally(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(word);
-        for (int i = 0; i < wordSearch.rows(); i++) {
+        for (int i = 0; i < wordSearch.rowCount(); i++) {
             Matcher matcher = pattern.matcher(wordSearch.getRow(i));
             while (matcher.find()) {
                 wordCount++;
@@ -35,7 +35,7 @@ public class WordSearchSolver {
     public int countWordsHorizontallyReversed(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(new StringBuilder(word).reverse().toString());
-        for (int i = 0; i < wordSearch.rows(); i++) {
+        for (int i = 0; i < wordSearch.rowCount(); i++) {
             Matcher matcher = pattern.matcher(wordSearch.getRow(i));
             while (matcher.find()) {
                 wordCount++;
@@ -48,7 +48,7 @@ public class WordSearchSolver {
     public int countWordsVertically(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(word);
-        for (int i = 0; i < wordSearch.columns(); i++) {
+        for (int i = 0; i < wordSearch.columnCount(); i++) {
             Matcher matcher = pattern.matcher(wordSearch.getColumn(i));
             while (matcher.find()) {
                 wordCount++;
@@ -61,7 +61,7 @@ public class WordSearchSolver {
     public int countWordsVerticallyReversed(WordSearch wordSearch, String word) {
         int wordCount = 0;
         Pattern pattern = Pattern.compile(new StringBuilder(word).reverse().toString());
-        for (int i = 0; i < wordSearch.columns(); i++) {
+        for (int i = 0; i < wordSearch.columnCount(); i++) {
             Matcher matcher = pattern.matcher(wordSearch.getColumn(i));
             while (matcher.find()) {
                 wordCount++;
