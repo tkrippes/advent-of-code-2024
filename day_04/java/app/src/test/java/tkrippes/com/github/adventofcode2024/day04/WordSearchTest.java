@@ -50,6 +50,60 @@ public class WordSearchTest {
     }
 
     @Test
+    public void defaultWordSearchReturnsEmptyPrimaryDiagonals() {
+        assertTrue(wordSearch.getPrimaryDiagonals().isEmpty());
+    }
+
+    @Test
+    public void singleCharacterWordSearchShouldReturnPrimaryDiagonalsCorrectly() {
+        wordSearch.add("A");
+        assertEquals(List.of("A"), wordSearch.getPrimaryDiagonals());
+    }
+
+    @Test
+    public void twoCharactersHorizontalWordSearchShouldReturnPrimaryDiagonalsCorrectly() {
+        wordSearch.add("AB");
+        assertEquals(List.of("B", "A"), wordSearch.getPrimaryDiagonals());
+    }
+
+    @Test
+    public void twoCharactersVerticalWordSearchShouldReturnPrimaryDiagonalsCorrectly() {
+        wordSearch.add("A");
+        wordSearch.add("B");
+        assertEquals(List.of("A", "B"), wordSearch.getPrimaryDiagonals());
+    }
+
+    @Test
+    public void twoByTwoWordSearchShouldReturnPrimaryDiagonalsCorrectly() {
+        wordSearch.add("AB");
+        wordSearch.add("CD");
+        assertEquals(List.of("B", "AD", "C"), wordSearch.getPrimaryDiagonals());
+    }
+
+    @Test
+    public void twoByThreeWordSearchShouldReturnPrimaryDiagonalsCorrectly() {
+        wordSearch.add("AB");
+        wordSearch.add("CD");
+        wordSearch.add("EF");
+        assertEquals(List.of("B", "AD", "CF", "E"), wordSearch.getPrimaryDiagonals());
+    }
+
+    @Test
+    public void threeByTwoWordSearchShouldReturnPrimaryDiagonalsCorrectly() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        assertEquals(List.of("C", "BF", "AE", "D"), wordSearch.getPrimaryDiagonals());
+    }
+
+    @Test
+    public void threeByThreeWordSearchShouldReturnPrimaryDiagonalsCorrectly() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+        assertEquals(List.of("C", "BF", "AEI", "DH", "G"), wordSearch.getPrimaryDiagonals());
+    }
+
+    @Test
     public void defaultWordSearchIsEmpty() {
         assertTrue(wordSearch.isEmpty());
     }

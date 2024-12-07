@@ -38,6 +38,41 @@ public class WordSearch {
         return columns;
     }
 
+    /*
+     * Primary diagonals are those that run from the top left to the bottom righ
+     *
+     * Example:
+     * A B C D
+     * E F G H
+     * I J K L
+     *
+     * --> primary diagonals: D, CH, BGL, AFK, EJ, I
+     */
+    public List<String> getPrimaryDiagonals() {
+        List<String> primaryDiagonals = new ArrayList<>();
+
+        for (int i = columnCount() - 1; i >= 0; i--) {
+            primaryDiagonals.add(getPrimaryDiagonal(i, 0));
+        }
+
+        for (int j = 1; j < rowCount(); j++) {
+            primaryDiagonals.add(getPrimaryDiagonal(0, j));
+        }
+
+        return primaryDiagonals;
+    }
+
+    private String getPrimaryDiagonal(int startColumn, int startRow) {
+        StringBuilder primaryDiagonal = new StringBuilder();
+        while (startColumn < columnCount() && startRow < rowCount()) {
+            primaryDiagonal.append(wordSearch.get(startRow).charAt(startColumn));
+            startColumn++;
+            startRow++;
+        }
+
+        return primaryDiagonal.toString();
+    }
+
     // TODO get diagonal (two ways) (up until width + height - 1, twice)
 
     public boolean isEmpty() {
