@@ -2,6 +2,7 @@ package tkrippes.com.github.adventofcode2024.day04.solver;
 
 import tkrippes.com.github.adventofcode2024.day04.WordSearch;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,55 +20,33 @@ public class WordSearchSolver {
                 countWordsVertically(wordSearch, word) + countWordsVerticallyReversed(wordSearch, word);
     }
 
-    public int countWordsHorizontally(WordSearch wordSearch, String word) {
-        int wordCount = 0;
-        Pattern pattern = Pattern.compile(word);
-        for (String row : wordSearch.getRows()) {
-            Matcher matcher = pattern.matcher(row);
-            while (matcher.find()) {
-                wordCount++;
-            }
-        }
-
-        return wordCount;
+    private int countWordsHorizontally(WordSearch wordSearch, String word) {
+        return countWords(wordSearch.getRows(), word, false);
     }
 
-    public int countWordsHorizontallyReversed(WordSearch wordSearch, String word) {
-        int wordCount = 0;
-        Pattern pattern = Pattern.compile(new StringBuilder(word).reverse().toString());
-        for (String row : wordSearch.getRows()) {
-            Matcher matcher = pattern.matcher(row);
-            while (matcher.find()) {
-                wordCount++;
-            }
-        }
-
-        return wordCount;
+    private int countWordsHorizontallyReversed(WordSearch wordSearch, String word) {
+        return countWords(wordSearch.getRows(), word, true);
     }
 
-    public int countWordsVertically(WordSearch wordSearch, String word) {
-        int wordCount = 0;
-        Pattern pattern = Pattern.compile(word);
-        for (String column : wordSearch.getColumns()) {
-            Matcher matcher = pattern.matcher(column);
-            while (matcher.find()) {
-                wordCount++;
-            }
-        }
-
-        return wordCount;
+    private int countWordsVertically(WordSearch wordSearch, String word) {
+        return countWords(wordSearch.getColumns(), word, false);
     }
 
-    public int countWordsVerticallyReversed(WordSearch wordSearch, String word) {
+    private int countWordsVerticallyReversed(WordSearch wordSearch, String word) {
+        return countWords(wordSearch.getColumns(), word, true);
+    }
+
+    private int countWords(List<String> lines, String word, boolean reversed) {
         int wordCount = 0;
-        Pattern pattern = Pattern.compile(new StringBuilder(word).reverse().toString());
-        for (String column : wordSearch.getColumns()) {
-            Matcher matcher = pattern.matcher(column);
+        Pattern pattern = reversed ? Pattern.compile(new StringBuilder(word).reverse().toString()) :
+                Pattern.compile(word);
+
+        for (String line : lines) {
+            Matcher matcher = pattern.matcher(line);
             while (matcher.find()) {
                 wordCount++;
             }
         }
-
         return wordCount;
     }
 }
