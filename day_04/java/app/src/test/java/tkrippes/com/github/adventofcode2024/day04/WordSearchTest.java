@@ -16,6 +16,39 @@ public class WordSearchTest {
         wordSearch = new WordSearch();
     }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void wordSearchThrowsWhenAddingCharacterRowsOfDifferentLengths() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEFG");
+    }
+
+    @Test
+    public void defaultWordSearchReturnsEmptyRows() {
+        assertTrue(wordSearch.getRows().isEmpty());
+    }
+
+    @Test
+    public void wordSearchGetRowShouldReturnRowsCorrectly() {
+        wordSearch.add("ABCD");
+        wordSearch.add("EFGH");
+        wordSearch.add("IJKL");
+        assertEquals(List.of("ABCD", "EFGH", "IJKL"), wordSearch.getRows());
+    }
+
+    @Test
+    public void defaultWordSearchReturnsEmptyColumns() {
+        assertTrue(wordSearch.getColumns().isEmpty());
+    }
+
+    @Test
+    public void wordSearchGetColumnShouldReturnColumnsCorrectly() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+        wordSearch.add("JKL");
+        assertEquals(List.of("ADGJ", "BEHK", "CFIL"), wordSearch.getColumns());
+    }
+
     @Test
     public void defaultWordSearchIsEmpty() {
         assertTrue(wordSearch.isEmpty());
@@ -78,54 +111,6 @@ public class WordSearchTest {
         wordSearch.add("GHI");
         wordSearch.add("JKL");
         assertEquals(6, wordSearch.diagonalCount());
-    }
-
-    @Test
-    public void wordSearchAddsCharactersCorrectly() {
-        wordSearch.add("ABC");
-        assertEquals(List.of("ABC"), wordSearch.wordSearch);
-    }
-
-    @Test
-    public void wordSearchAddsCharacterRowsOfSameHeightCorrectly() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEF");
-        wordSearch.add("GHI");
-        wordSearch.add("JKL");
-        assertEquals(List.of("ABC", "DEF", "GHI", "JKL"), wordSearch.wordSearch);
-    }
-
-    @Test(expected = IllegalArgumentException.class)
-    public void wordSearchThrowsWhenAddingCharacterRowsOfDifferentLengths() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEFG");
-    }
-
-    @Test
-    public void defaultWordSearchReturnsEmptyRows() {
-        assertTrue(wordSearch.getRows().isEmpty());
-    }
-
-    @Test
-    public void wordSearchGetRowShouldReturnRowsCorrectly() {
-        wordSearch.add("ABCD");
-        wordSearch.add("EFGH");
-        wordSearch.add("IJKL");
-        assertEquals(List.of("ABCD", "EFGH", "IJKL"), wordSearch.getRows());
-    }
-
-    @Test
-    public void defaultWordSearchReturnsEmptyColumns() {
-        assertTrue(wordSearch.getColumns().isEmpty());
-    }
-
-    @Test
-    public void wordSearchGetColumnShouldReturnColumnsCorrectly() {
-        wordSearch.add("ABC");
-        wordSearch.add("DEF");
-        wordSearch.add("GHI");
-        wordSearch.add("JKL");
-        assertEquals(List.of("ADGJ", "BEHK", "CFIL"), wordSearch.getColumns());
     }
 
     @After

@@ -44,16 +44,16 @@ public class WordSearch {
         return wordSearch.isEmpty();
     }
 
+    public int rowCount() {
+        return wordSearch.size();
+    }
+
     public int columnCount() {
         if (wordSearch.isEmpty()) {
             return 0;
         }
 
         return wordSearch.getFirst().length();
-    }
-
-    public int rowCount() {
-        return wordSearch.size();
     }
 
     public int diagonalCount() {
