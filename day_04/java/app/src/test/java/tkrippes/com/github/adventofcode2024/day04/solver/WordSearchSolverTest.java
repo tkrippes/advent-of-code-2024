@@ -185,6 +185,21 @@ public class WordSearchSolverTest {
         assertEquals(10, solver.solve(wordSearch, "Test"));
     }
 
+    @Test
+    public void solveShouldSolveTestInputFileContentCorrectly() {
+        wordSearch.add("MMMSXXMASM");
+        wordSearch.add("MSAMXMSMSA");
+        wordSearch.add("AMXSXMAAMM");
+        wordSearch.add("MSAMASMSMX");
+        wordSearch.add("XMASAMXAMM");
+        wordSearch.add("XXAMMXXAMA");
+        wordSearch.add("SMSMSASXSS");
+        wordSearch.add("SAXAMASAAA");
+        wordSearch.add("MAMMMXMMMM");
+        wordSearch.add("MXMXAXMASX");
+        assertEquals(18, solver.solve(wordSearch, "XMAS"));
+    }
+
     @After
     public void tearDown() {
     }

@@ -16,8 +16,14 @@ public class WordSearchSolver {
             return 0;
         }
 
-        return countWordsHorizontally(wordSearch, word) + countWordsHorizontallyReversed(wordSearch, word) +
-                countWordsVertically(wordSearch, word) + countWordsVerticallyReversed(wordSearch, word);
+        return countWordsHorizontally(wordSearch, word) +
+                countWordsHorizontallyReversed(wordSearch, word) +
+                countWordsVertically(wordSearch, word) +
+                countWordsVerticallyReversed(wordSearch, word) +
+                countWordsPrimaryDiagonally(wordSearch, word) +
+                countWordsPrimaryDiagonallyReversed(wordSearch, word) +
+                countWordsSecondaryDiagonally(wordSearch, word) +
+                countWordsSecondaryDiagonallyReversed(wordSearch, word);
     }
 
     private int countWordsHorizontally(WordSearch wordSearch, String word) {
@@ -34,6 +40,22 @@ public class WordSearchSolver {
 
     private int countWordsVerticallyReversed(WordSearch wordSearch, String word) {
         return countWords(wordSearch.getColumns(), word, true);
+    }
+
+    private int countWordsPrimaryDiagonally(WordSearch wordSearch, String word) {
+        return countWords(wordSearch.getPrimaryDiagonals(), word, false);
+    }
+
+    private int countWordsPrimaryDiagonallyReversed(WordSearch wordSearch, String word) {
+        return countWords(wordSearch.getPrimaryDiagonals(), word, true);
+    }
+
+    private int countWordsSecondaryDiagonally(WordSearch wordSearch, String word) {
+        return countWords(wordSearch.getSecondaryDiagonals(), word, false);
+    }
+
+    private int countWordsSecondaryDiagonallyReversed(WordSearch wordSearch, String word) {
+        return countWords(wordSearch.getSecondaryDiagonals(), word, true);
     }
 
     private int countWords(List<String> lines, String word, boolean reversed) {
