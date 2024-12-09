@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -155,6 +156,196 @@ public class WordSearchTest {
         wordSearch.add("DEF");
         wordSearch.add("GHI");
         assertEquals(List.of("A", "BD", "CEG", "FH", "I"), wordSearch.getSecondaryDiagonals());
+    }
+
+    @Test
+    public void defaultWordSearchReturnsEmptyWindowsWithSizesDifferentFromZero() {
+        assertTrue(wordSearch.getWordSearchWindows(2, 2).isEmpty());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void defaultWordSearchGetEmptyWindowsThrowsWithSizesEqualToZero() {
+        assertTrue(wordSearch.getWordSearchWindows(0, 0).isEmpty());
+    }
+
+    @Test
+    public void wordSearchGetWordSearchWindowsShouldReturnSameWordSearchForOnlyOneCharcterAndSizesEqualToOne() {
+        wordSearch.add("A");
+        assertEquals(List.of(wordSearch), wordSearch.getWordSearchWindows(1, 1));
+    }
+
+    @Test
+    public void wordSearchGetWordSearchWindowsShouldReturnEmptyListForOnlyOneCharcterAndSizesGreaterThanOne() {
+        wordSearch.add("A");
+        assertEquals(List.of(), wordSearch.getWordSearchWindows(2, 2));
+    }
+
+    @Test
+    public void wordSearchGetWordSearchWindowsShouldReturnAllCharactersIndividuallyForSizesEqualToOne() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+
+        List<WordSearch> expectedWordSearches = new ArrayList<>();
+        for (int i = 0; i < wordSearch.rowCount() * wordSearch.columnCount(); i++) {
+            WordSearch expectedWordSearch = new WordSearch();
+            char expectedCharacter = (char) ('A' + i);
+            expectedWordSearch.add(String.valueOf(expectedCharacter));
+            expectedWordSearches.add(expectedWordSearch);
+        }
+
+        assertEquals(expectedWordSearches, wordSearch.getWordSearchWindows(1, 1));
+    }
+
+    @Test
+    public void wordSearchGetWordSearchWindowsShouldCalculateCorrectlyForSquaredWordSearchesAndSquaredWindows() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+
+        List<WordSearch> expectedWordSearches = new ArrayList<>();
+        WordSearch expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("AB");
+        expectedWordSearch.add("DE");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("BC");
+        expectedWordSearch.add("EF");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("DE");
+        expectedWordSearch.add("GH");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("EF");
+        expectedWordSearch.add("HI");
+        expectedWordSearches.add(expectedWordSearch);
+
+        assertEquals(expectedWordSearches, wordSearch.getWordSearchWindows(2, 2));
+    }
+
+    @Test
+    public void wordSearchGetWordSearchWindowsShouldCalculateCorrectlyForSquaredWordSearchesAndNonSquaredWindows() {
+        wordSearch.add("ABCD");
+        wordSearch.add("EFGH");
+        wordSearch.add("IJKL");
+        wordSearch.add("MNOP");
+
+        List<WordSearch> expectedWordSearches = new ArrayList<>();
+
+        WordSearch expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("AB");
+        expectedWordSearch.add("EF");
+        expectedWordSearch.add("IJ");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("BC");
+        expectedWordSearch.add("FG");
+        expectedWordSearch.add("JK");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("CD");
+        expectedWordSearch.add("GH");
+        expectedWordSearch.add("KL");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("EF");
+        expectedWordSearch.add("IJ");
+        expectedWordSearch.add("MN");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("FG");
+        expectedWordSearch.add("JK");
+        expectedWordSearch.add("NO");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("GH");
+        expectedWordSearch.add("KL");
+        expectedWordSearch.add("OP");
+        expectedWordSearches.add(expectedWordSearch);
+
+        assertEquals(expectedWordSearches, wordSearch.getWordSearchWindows(3, 2));
+    }
+
+    @Test
+    public void wordSearchGetWordSearchWindowsShouldCalculateCorrectlyForNonSquaredWordSearchesAndSquaredWindows() {
+        wordSearch.add("ABC");
+        wordSearch.add("DEF");
+        wordSearch.add("GHI");
+        wordSearch.add("JKL");
+
+        List<WordSearch> expectedWordSearches = new ArrayList<>();
+
+        WordSearch expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("AB");
+        expectedWordSearch.add("DE");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("BC");
+        expectedWordSearch.add("EF");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("DE");
+        expectedWordSearch.add("GH");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("EF");
+        expectedWordSearch.add("HI");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("GH");
+        expectedWordSearch.add("JK");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("HI");
+        expectedWordSearch.add("KL");
+        expectedWordSearches.add(expectedWordSearch);
+
+        assertEquals(expectedWordSearches, wordSearch.getWordSearchWindows(2, 2));
+    }
+
+    @Test
+    public void wordSearchGetWordSearchWindowsShouldCalculateCorrectlyForNonSquaredWordSearchesAndNonSquaredWindows() {
+        wordSearch.add("ABCD");
+        wordSearch.add("EFGH");
+        wordSearch.add("IJKL");
+
+        List<WordSearch> expectedWordSearches = new ArrayList<>();
+
+        WordSearch expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("ABC");
+        expectedWordSearch.add("EFG");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("BCD");
+        expectedWordSearch.add("FGH");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("EFG");
+        expectedWordSearch.add("IJK");
+        expectedWordSearches.add(expectedWordSearch);
+
+        expectedWordSearch = new WordSearch();
+        expectedWordSearch.add("FGH");
+        expectedWordSearch.add("JKL");
+        expectedWordSearches.add(expectedWordSearch);
+
+        assertEquals(expectedWordSearches, wordSearch.getWordSearchWindows(2, 3));
     }
 
     @Test

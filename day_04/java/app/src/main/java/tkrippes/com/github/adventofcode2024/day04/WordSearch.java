@@ -108,6 +108,35 @@ public class WordSearch {
         return primaryDiagonal.toString();
     }
 
+    public List<WordSearch> getWordSearchWindows(int windowRowCount, int windowColumnCount) {
+        if (windowRowCount == 0 || windowColumnCount == 0) {
+            throw new IllegalArgumentException("Window row and column counts must be greater than 0");
+        }
+
+        if (isEmpty() || isOutOfBounds(windowRowCount, windowColumnCount)) {
+            return new ArrayList<>();
+        }
+
+        List<WordSearch> wordSearchWindows = new ArrayList<>();
+        for (int currentRow = 0; currentRow < rowCount() - windowRowCount + 1; currentRow++) {
+            for (int currentColumn = 0; currentColumn < columnCount() - windowColumnCount + 1; currentColumn++) {
+                WordSearch wordSearchWindow = new WordSearch();
+                for (int currentRowOffset = 0; currentRowOffset < windowRowCount; currentRowOffset++) {
+                    wordSearchWindow.add(wordSearch.get(currentRow + currentRowOffset).substring(currentColumn,
+                            currentColumn + windowColumnCount));
+                }
+
+                wordSearchWindows.add(wordSearchWindow);
+            }
+        }
+
+        return wordSearchWindows;
+    }
+
+    private boolean isOutOfBounds(int rowIndex, int columnIndex) {
+        return rowIndex > rowCount() || columnIndex > columnCount();
+    }
+
     public boolean isEmpty() {
         return wordSearch.isEmpty();
     }
