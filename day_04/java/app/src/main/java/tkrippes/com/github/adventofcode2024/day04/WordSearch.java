@@ -62,6 +62,10 @@ public class WordSearch {
         return primaryDiagonals;
     }
 
+    public String getPrimaryDiagonal() {
+        return getPrimaryDiagonal(0, 0);
+    }
+
     private String getPrimaryDiagonal(int startColumn, int startRow) {
         StringBuilder primaryDiagonal = new StringBuilder();
         while (startColumn < columnCount() && startRow < rowCount()) {
@@ -95,6 +99,10 @@ public class WordSearch {
         }
 
         return secondaryDiagonals;
+    }
+
+    public String getSecondaryDiagonal() {
+        return getSecondaryDiagonal(columnCount() - 1, 0);
     }
 
     private String getSecondaryDiagonal(int startColumn, int startRow) {
