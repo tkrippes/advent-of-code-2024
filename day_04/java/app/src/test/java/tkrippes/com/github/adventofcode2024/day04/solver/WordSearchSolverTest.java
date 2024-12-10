@@ -1,9 +1,10 @@
 package tkrippes.com.github.adventofcode2024.day04.solver;
 
+import tkrippes.com.github.adventofcode2024.day04.WordSearch;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import tkrippes.com.github.adventofcode2024.day04.WordSearch;
 
 import static org.junit.Assert.*;
 
@@ -198,21 +199,6 @@ public class WordSearchSolverTest {
         wordSearch.add("MAMMMXMMMM");
         wordSearch.add("MXMXAXMASX");
         assertEquals(18, solver.solve(wordSearch, "XMAS"));
-    }
-
-    @Test
-    public void solveCrossedWordTestInputFileContentCorrectly() {
-        wordSearch.add("MMMSXXMASM");
-        wordSearch.add("MSAMXMSMSA");
-        wordSearch.add("AMXSXMAAMM");
-        wordSearch.add("MSAMASMSMX");
-        wordSearch.add("XMASAMXAMM");
-        wordSearch.add("XXAMMXXAMA");
-        wordSearch.add("SMSMSASXSS");
-        wordSearch.add("SAXAMASAAA");
-        wordSearch.add("MAMMMXMMMM");
-        wordSearch.add("MXMXAXMASX");
-        assertEquals(9, solver.solveCrossedWord(wordSearch, "MAS"));
     }
 
     @After

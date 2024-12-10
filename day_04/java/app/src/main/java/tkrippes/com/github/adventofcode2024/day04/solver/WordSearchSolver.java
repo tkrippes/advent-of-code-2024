@@ -71,36 +71,4 @@ public class WordSearchSolver {
         }
         return wordCount;
     }
-
-    // TODO move to WordSearchCrossSolver
-    public int solveCrossedWord(WordSearch wordSearch, String word) {
-        if (word.isEmpty()) {
-            throw new IllegalArgumentException("Cannot search for empty word");
-        }
-
-        if (wordSearch.isEmpty()) {
-            return 0;
-        }
-
-        int wordCount = 0;
-        for (WordSearch wordSearchWindow : wordSearch.getWordSearchWindows(word.length(), word.length())) {
-            if (containsCrossedWord(wordSearchWindow, word)) {
-                wordCount++;
-            }
-        }
-
-        return wordCount;
-    }
-
-    private boolean containsCrossedWord(WordSearch wordSearch, String word) {
-        // TODO use regex to count check pattern, 4 cases:
-        // primary, secondary
-        // primary, secondary reversed
-        // primary reversed, secondary
-        // primary reversed, secondary reversed
-        String serializedWordSearch = wordSearch.getRows().stream().reduce("", (a, b) -> a + b);
-        System.err.println(wordSearch.getRows());
-        System.err.println(serializedWordSearch);
-        return true;
-    }
 }
