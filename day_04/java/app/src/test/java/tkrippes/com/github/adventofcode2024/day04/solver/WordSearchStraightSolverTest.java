@@ -8,13 +8,13 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class WordSearchSolverTest {
-    private WordSearchSolver solver;
+public class WordSearchStraightSolverTest {
+    private WordSearchStraightSolver solver;
     private WordSearch wordSearch;
 
     @Before
     public void setUp() {
-        solver = new WordSearchSolver();
+        solver = new WordSearchStraightSolver();
         wordSearch = new WordSearch();
     }
 

@@ -2,7 +2,7 @@ package tkrippes.com.github.adventofcode2024.day04.solver;
 
 import tkrippes.com.github.adventofcode2024.day04.WordSearch;
 
-public class WordSearchCrossSolver {
+public class WordSearchCrossSolver implements WordSearchSolver {
     public int solve(WordSearch wordSearch, String word) {
         if (word.isEmpty()) {
             throw new IllegalArgumentException("Cannot search for empty word");
