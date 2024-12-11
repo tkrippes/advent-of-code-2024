@@ -92,9 +92,71 @@ public class ManualPrintingInstructionsSolverTest {
     }
 
     @Test
-    public void arePagesInRightOrderShouldThrowIfPageHasNoEntryInOrderingMap() {
+    public void arePagesInRightOrderShouldThrowsIfPageHasNoEntryInOrderingMap() {
         assertThrows(IllegalArgumentException.class, () -> solver.arePagesInRightOrder(Map.of(25, Map.of(26, true),
                 26, Map.of(25, false)), new ManualPrintingInstructions.PagesToProduce(List.of(25, 27))));
+    }
+
+    @Test
+    public void arePagesInRightOrderShouldThrowsIfOtherPageHasNoEntryInOrderingMapOfPage() {
+        assertThrows(IllegalArgumentException.class, () -> solver.arePagesInRightOrder(Map.of(25, Map.of(26, true, 27, true),
+                26, Map.of(25, false, 27, true), 27, Map.of(25, false)), new ManualPrintingInstructions.PagesToProduce(List.of(25, 26, 27))));
+    }
+
+    @Test
+    public void arePagesInRightOrderShouldReturnTrueForOnePage() {
+        assertTrue(solver.arePagesInRightOrder(Map.of(25, Map.of(26, true), 26, Map.of(25, false)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(25))));
+    }
+
+    @Test
+    public void arePagesInRightOrderShouldReturnTrueForTwoPagesInOrder() {
+        assertTrue(solver.arePagesInRightOrder(Map.of(25, Map.of(26, true), 26, Map.of(25, false)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(25, 26))));
+    }
+
+    @Test
+    public void arePagesInRightOrderShouldReturnFalseForTwoPagesInWrongOrder() {
+        assertFalse(solver.arePagesInRightOrder(Map.of(25, Map.of(26, true), 26, Map.of(25, false)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(26, 25))));
+    }
+
+    @Test
+    public void arePagesInRightOrderShouldReturnTrueForThreePagesInOrder() {
+        assertTrue(solver.arePagesInRightOrder(Map.of(
+                        25, Map.of(26, true, 27, true),
+                        26, Map.of(25, false, 27, true),
+                        27, Map.of(25, false, 26, false)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(25, 26, 27))));
+    }
+
+    @Test
+    public void arePagesInRightOrderShouldReturnFalseForThreePagesInWrongOrder() {
+        assertFalse(solver.arePagesInRightOrder(Map.of(
+                        25, Map.of(26, true, 27, true),
+                        26, Map.of(25, false, 27, true),
+                        27, Map.of(25, false, 26, false)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(25, 27, 26))));
+    }
+
+    @Test
+    public void arePagesInRightOrderShouldReturnTheCorrectResultsForTestInputFileContent() {
+        Map<Integer, Map<Integer, Boolean>> orderingMap = Map.of(
+                97, Map.of(53, true, 75, true, 13, true, 61, true, 29, true, 47, true),
+                53, Map.of(97, false, 75, false, 29, true, 61, false, 13, true, 47, false),
+                75, Map.of(97, false, 53, true, 29, true, 61, true, 13, true, 47, true),
+                13, Map.of(97, false, 53, false, 75, false, 61, false, 29, false, 47, false),
+                61, Map.of(97, false, 53, true, 75, false, 13, true, 29, true, 47, false),
+                29, Map.of(97, false, 53, false, 75, false, 13, true, 61, false, 47, false),
+                47, Map.of(97, false, 53, true, 75, false, 13, true, 61, true, 29, true)
+        );
+
+        assertTrue(solver.arePagesInRightOrder(orderingMap, new ManualPrintingInstructions.PagesToProduce(List.of(75, 47, 61, 53, 29))));
+        assertTrue(solver.arePagesInRightOrder(orderingMap, new ManualPrintingInstructions.PagesToProduce(List.of(97, 61, 53, 29, 13))));
+        assertTrue(solver.arePagesInRightOrder(orderingMap, new ManualPrintingInstructions.PagesToProduce(List.of(75, 29, 13))));
+        assertFalse(solver.arePagesInRightOrder(orderingMap, new ManualPrintingInstructions.PagesToProduce(List.of(75, 97, 47, 61, 53))));
+        assertFalse(solver.arePagesInRightOrder(orderingMap, new ManualPrintingInstructions.PagesToProduce(List.of(61, 13, 29))));
+        assertFalse(solver.arePagesInRightOrder(orderingMap, new ManualPrintingInstructions.PagesToProduce(List.of(97, 13, 75, 29, 47))));
     }
 
     @AfterEach

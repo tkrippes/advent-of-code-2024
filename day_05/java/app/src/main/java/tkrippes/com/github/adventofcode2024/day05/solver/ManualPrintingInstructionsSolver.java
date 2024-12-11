@@ -37,8 +37,28 @@ public class ManualPrintingInstructionsSolver {
                 throw new IllegalArgumentException("Page " + page + " is not in the ordering map");
             }
 
-            // TODO throw if there is a missing entry in the orderingMap.get(page)
-            // TODO check if all elements before have in map false and all elements after have in map true
+            Map<Integer, Boolean> orderingMapForPage = orderingMap.get(page);
+            for (int j = 0; j < i; j++) {
+                int pageBefore = pages.get(j);
+                if (!orderingMapForPage.containsKey(pageBefore)) {
+                    throw new IllegalArgumentException("Page " + page + " does not have page before " + pageBefore + " in the ordering map");
+                }
+
+                if (orderingMapForPage.get(pageBefore)) {
+                    return false;
+                }
+            }
+
+            for (int j = i + 1; j < pages.size(); j++) {
+                int pageAfter = pages.get(j);
+                if (!orderingMapForPage.containsKey(pageAfter)) {
+                    throw new IllegalArgumentException("Page " + page + " does not have page after " + pageAfter + " in the ordering map");
+                }
+
+                if (!orderingMapForPage.get(pageAfter)) {
+                    return false;
+                }
+            }
         }
 
         return true;
