@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 public class ManualPrintingInstructionsSolver {
-    Map<Integer, Map<Integer, Boolean>> createOrderingMap(List<ManualPrintingInstructions.PageOrderingRule> rules) {
+    Map<Integer, Map<Integer, Boolean>> createPageOrderingMap(List<ManualPrintingInstructions.PageOrderingRule> rules) {
         Map<Integer, Map<Integer, Boolean>> orderingMap = new HashMap<>();
 
         for (ManualPrintingInstructions.PageOrderingRule rule : rules) {
@@ -19,5 +19,28 @@ public class ManualPrintingInstructionsSolver {
         }
 
         return orderingMap;
+    }
+
+    boolean arePagesInRightOrder(Map<Integer, Map<Integer, Boolean>> orderingMap, ManualPrintingInstructions.PagesToProduce pagesToProduce) {
+        if (orderingMap.isEmpty()) {
+            throw new IllegalArgumentException("Ordering map is empty");
+        }
+
+        if (pagesToProduce.pages().isEmpty()) {
+            throw new IllegalArgumentException("Pages to produce is empty");
+        }
+
+        List<Integer> pages = pagesToProduce.pages();
+        for (int i = 0; i < pages.size(); i++) {
+            int page = pages.get(i);
+            if (!orderingMap.containsKey(page)) {
+                throw new IllegalArgumentException("Page " + page + " is not in the ordering map");
+            }
+
+            // TODO throw if there is a missing entry in the orderingMap.get(page)
+            // TODO check if all elements before have in map false and all elements after have in map true
+        }
+
+        return true;
     }
 }

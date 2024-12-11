@@ -20,43 +20,43 @@ public class ManualPrintingInstructionsSolverTest {
     }
 
     @Test
-    public void createOrderingMapShouldBeEmptyForEmptyRules() {
-        assertTrue(solver.createOrderingMap(List.of()).isEmpty());
+    public void createPageOrderingMapShouldBeEmptyForEmptyRules() {
+        assertTrue(solver.createPageOrderingMap(List.of()).isEmpty());
     }
 
     @Test
-    public void createOrderingMapForOneRuleShouldReturnCorrectOrderingMap() {
+    public void createOrderingMapForOneRuleShouldReturnCorrectPageOrderingMap() {
         List<ManualPrintingInstructions.PageOrderingRule> rules = List.of(
                 new ManualPrintingInstructions.PageOrderingRule(25, 26)
         );
 
-        assertEquals(Map.of(25, Map.of(26, true), 26, Map.of(25, false)), solver.createOrderingMap(rules));
+        assertEquals(Map.of(25, Map.of(26, true), 26, Map.of(25, false)), solver.createPageOrderingMap(rules));
     }
 
     @Test
-    public void createOrderingMapForTwoIndependentRulesShouldReturnCorrectOrderingMap() {
+    public void createOrderingMapForTwoIndependentRulesShouldReturnCorrectPageOrderingMap() {
         List<ManualPrintingInstructions.PageOrderingRule> rules = List.of(
                 new ManualPrintingInstructions.PageOrderingRule(25, 26),
                 new ManualPrintingInstructions.PageOrderingRule(27, 28)
         );
 
         assertEquals(Map.of(25, Map.of(26, true), 26, Map.of(25, false),
-                27, Map.of(28, true), 28, Map.of(27, false)), solver.createOrderingMap(rules));
+                27, Map.of(28, true), 28, Map.of(27, false)), solver.createPageOrderingMap(rules));
     }
 
     @Test
-    public void createOrderingMapForTwoDependentRulesShouldReturnCorrectOrderingMap() {
+    public void createOrderingMapForTwoDependentRulesShouldReturnCorrectPageOrderingMap() {
         List<ManualPrintingInstructions.PageOrderingRule> rules = List.of(
                 new ManualPrintingInstructions.PageOrderingRule(25, 26),
                 new ManualPrintingInstructions.PageOrderingRule(26, 27)
         );
 
         assertEquals(Map.of(25, Map.of(26, true), 26, Map.of(25, false, 27, true),
-                27, Map.of(26, false)), solver.createOrderingMap(rules));
+                27, Map.of(26, false)), solver.createPageOrderingMap(rules));
     }
 
     @Test
-    public void createOrderingMapForThreeRulesThatHaveTheSameNumberInFrontShouldReturnCorrectOrderingMap() {
+    public void createOrderingMapForThreeRulesThatHaveTheSameNumberInFrontShouldReturnCorrectPageOrderingMap() {
         List<ManualPrintingInstructions.PageOrderingRule> rules = List.of(
                 new ManualPrintingInstructions.PageOrderingRule(25, 26),
                 new ManualPrintingInstructions.PageOrderingRule(25, 27),
@@ -64,11 +64,11 @@ public class ManualPrintingInstructionsSolverTest {
         );
 
         assertEquals(Map.of(25, Map.of(26, true, 27, true, 28, true), 26, Map.of(25, false),
-                27, Map.of(25, false), 28, Map.of(25, false)), solver.createOrderingMap(rules));
+                27, Map.of(25, false), 28, Map.of(25, false)), solver.createPageOrderingMap(rules));
     }
 
     @Test
-    public void createOrderingMapForThreeRulesThatHaveTheSameNumberInBackShouldReturnCorrectOrderingMap() {
+    public void createOrderingMapForThreeRulesThatHaveTheSameNumberInBackShouldReturnCorrectPageOrderingMap() {
         List<ManualPrintingInstructions.PageOrderingRule> rules = List.of(
                 new ManualPrintingInstructions.PageOrderingRule(25, 28),
                 new ManualPrintingInstructions.PageOrderingRule(26, 28),
@@ -76,7 +76,25 @@ public class ManualPrintingInstructionsSolverTest {
         );
 
         assertEquals(Map.of(25, Map.of(28, true), 26, Map.of(28, true),
-                27, Map.of(28, true), 28, Map.of(25, false, 26, false, 27, false)), solver.createOrderingMap(rules));
+                27, Map.of(28, true), 28, Map.of(25, false, 26, false, 27, false)), solver.createPageOrderingMap(rules));
+    }
+
+    @Test
+    public void arePagesInRightOrderShouldThrowForEmptyOrderingMap() {
+        assertThrows(IllegalArgumentException.class, () -> solver.arePagesInRightOrder(Map.of(),
+                new ManualPrintingInstructions.PagesToProduce(List.of(25, 26))));
+    }
+
+    @Test
+    public void arePagesInRightOrderShouldThrowForEmptyPages() {
+        assertThrows(IllegalArgumentException.class, () -> solver.arePagesInRightOrder(Map.of(25, Map.of(26, true),
+                26, Map.of(25, false)), new ManualPrintingInstructions.PagesToProduce(List.of())));
+    }
+
+    @Test
+    public void arePagesInRightOrderShouldThrowIfPageHasNoEntryInOrderingMap() {
+        assertThrows(IllegalArgumentException.class, () -> solver.arePagesInRightOrder(Map.of(25, Map.of(26, true),
+                26, Map.of(25, false)), new ManualPrintingInstructions.PagesToProduce(List.of(25, 27))));
     }
 
     @AfterEach

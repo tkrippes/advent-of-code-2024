@@ -3,7 +3,6 @@ package tkrippes.com.github.adventofcode2024.day05.parser;
 import tkrippes.com.github.adventofcode2024.day05.ManualPrintingInstructions;
 
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -23,22 +22,22 @@ public class ManualPrintingInstructionsParserTest {
 
     @Test
     public void parseManualPrintingInstructionsThrowsOnEmptyInputs() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of()));
+        assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of()));
     }
 
     @Test
     public void parseManualPrintingInstructionsThrowsOnMissingEmptyLine() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of("25|26", "25,26")));
+        assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of("25|26", "25,26")));
     }
 
     @Test
     public void parseManualPrintingInstructionsThrowsOnMissingRules() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of("", "25,26")));
+        assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of("", "25,26")));
     }
 
     @Test
     public void parseManualPrintingInstructionsThrowsOnMissingPages() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of("25|26", "")));
+        assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of("25|26", "")));
     }
 
     @Test
@@ -63,42 +62,42 @@ public class ManualPrintingInstructionsParserTest {
 
     @Test
     public void parsePageOrderingRuleThrowsOnEmptyRule() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule(""));
+        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule(""));
     }
 
     @Test
     public void parsePageOrderingRuleThrowsOnSingleNumberRule() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("25"));
+        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("25"));
     }
 
     @Test
     public void parsePageOrderingRuleThrowsOnMissingNumbersRule() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("|"));
+        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("|"));
     }
 
     @Test
     public void parsePageOrderingRuleThrowsOnMissingFirstNumberRule() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("|26"));
+        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("|26"));
     }
 
     @Test
     public void parsePageOrderingRuleThrowsOnMissingSecondNumberRule() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("25|"));
+        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("25|"));
     }
 
     @Test
     public void parsePageOrderingRuleThrowsOnNonNumbersRule() {
-        Assertions.assertThrows(NumberFormatException.class, () -> parser.parsePageOrderingRule("AB|CD"));
+        assertThrows(NumberFormatException.class, () -> parser.parsePageOrderingRule("AB|CD"));
     }
 
     @Test
     public void parsePageOrderingRuleThrowsOnThreeNumbersRule() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("25|26|27"));
+        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("25|26|27"));
     }
 
     @Test
     public void parsePageOrderingRuleThrowsOnTwoNumbersIncludingSpacesRule() {
-        Assertions.assertThrows(NumberFormatException.class, () -> parser.parsePageOrderingRule("25 | 26"));
+        assertThrows(NumberFormatException.class, () -> parser.parsePageOrderingRule("25 | 26"));
     }
 
     @Test
@@ -109,27 +108,27 @@ public class ManualPrintingInstructionsParserTest {
 
     @Test
     public void parsePagesToProduceThrowsOnEmptyPages() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePagesToProduce(""));
+        assertThrows(IllegalArgumentException.class, () -> parser.parsePagesToProduce(""));
     }
 
     @Test
     public void parsePagesToProduceThrowsOnMissingNumbersPages() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePagesToProduce(","));
+        assertThrows(IllegalArgumentException.class, () -> parser.parsePagesToProduce(","));
     }
 
     @Test
     public void parsePagesToProduceThrowsOnMissingFirstNumberPages() {
-        Assertions.assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce(",26"));
+        assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce(",26"));
     }
 
     @Test
     public void parsePagesToProduceThrowsOnNonNumbersPages() {
-        Assertions.assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce("AB,CD"));
+        assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce("AB,CD"));
     }
 
     @Test
     public void parsePagesToProduceThrowsOnTwoNumbersIncludingSpacesPages() {
-        Assertions.assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce("25, 26"));
+        assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce("25, 26"));
     }
 
     @Test
@@ -160,7 +159,7 @@ public class ManualPrintingInstructionsParserTest {
     public void parseThrowsForInvalidInputFileName() {
         String invalidInputFileName = "../../input/invalid_test_input.txt";
 
-        Assertions.assertThrows(FileNotFoundException.class, () -> parser.parse(invalidInputFileName));
+        assertThrows(FileNotFoundException.class, () -> parser.parse(invalidInputFileName));
     }
 
     @Test
