@@ -13,18 +13,18 @@ public class ManualPrintingInstructionsParser {
             throw new FileNotFoundException("Could not find input file: " + inputFileName);
         }
 
-        ManualPrintingInstructions manualPrintingInstructions;
+        ManualPrintingInstructions instructions;
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 
-            manualPrintingInstructions = parseManualPrintingInstructions(reader.lines().toList());
+            instructions = parseManualPrintingInstructions(reader.lines().toList());
 
             reader.close();
         } catch (IOException e) {
             throw new IOException("Error reading file: " + inputFile, e);
         }
 
-        return manualPrintingInstructions;
+        return instructions;
     }
 
     ManualPrintingInstructions parseManualPrintingInstructions(List<String> inputs) {
