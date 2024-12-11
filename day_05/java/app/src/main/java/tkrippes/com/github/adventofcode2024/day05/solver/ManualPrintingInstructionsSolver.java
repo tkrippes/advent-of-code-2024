@@ -14,7 +14,7 @@ abstract public class ManualPrintingInstructionsSolver {
     }
 
     protected abstract int calculateResult(Map<Integer, Map<Integer, Boolean>> pageOrderingMap,
-                                           List<ManualPrintingInstructions.PageUpdate> updates);
+                                           List<List<Integer>> updates);
 
     Map<Integer, Map<Integer, Boolean>> createPageOrderingMap(List<ManualPrintingInstructions.PageOrderingRule> rules) {
         Map<Integer, Map<Integer, Boolean>> pageOrderingMap = new HashMap<>();
@@ -30,17 +30,16 @@ abstract public class ManualPrintingInstructionsSolver {
         return pageOrderingMap;
     }
 
-    boolean isPageUpdateInRightOrder(Map<Integer, Map<Integer, Boolean>> pageOrderingMap,
-                                     ManualPrintingInstructions.PageUpdate update) {
+    boolean arePagesInRightOrder(Map<Integer, Map<Integer, Boolean>> pageOrderingMap,
+                                 List<Integer> pages) {
         if (pageOrderingMap.isEmpty()) {
             throw new IllegalArgumentException("Page ordering map is empty");
         }
 
-        if (update.pages().isEmpty()) {
+        if (pages.isEmpty()) {
             throw new IllegalArgumentException("Pages to produce are empty");
         }
 
-        List<Integer> pages = update.pages();
         for (int pageIndex = 0; pageIndex < pages.size(); pageIndex++) {
             int page = pages.get(pageIndex);
             if (!pageOrderingMap.containsKey(page)) {
@@ -87,5 +86,9 @@ abstract public class ManualPrintingInstructionsSolver {
             }
         }
         return false;
+    }
+
+    protected static int getMiddlePage(List<Integer> pages) {
+        return pages.get(pages.size() / 2);
     }
 }

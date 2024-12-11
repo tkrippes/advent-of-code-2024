@@ -52,11 +52,8 @@ public class ManualPrintingInstructionsParserTest {
                 new ManualPrintingInstructions.PageOrderingRule(28, 29),
                 new ManualPrintingInstructions.PageOrderingRule(29, 30));
 
-        List<ManualPrintingInstructions.PageUpdate> expectedUpdates = List.of(
-                new ManualPrintingInstructions.PageUpdate(List.of(25, 26, 27)),
-                new ManualPrintingInstructions.PageUpdate(List.of(25, 27, 29)),
-                new ManualPrintingInstructions.PageUpdate(List.of(30, 28, 26)),
-                new ManualPrintingInstructions.PageUpdate(List.of(25, 28, 27, 30, 29, 26)));
+        List<List<Integer>> expectedUpdates = List.of(List.of(25, 26, 27), List.of(25, 27, 29), List.of(30, 28, 26),
+                List.of(25, 28, 27, 30, 29, 26));
 
         assertEquals(new ManualPrintingInstructions(expectedRules, expectedUpdates),
                 parser.parseInstructions(List.of("25|26", "26|27", "27|28", "28|29", "29|30", "",
@@ -136,26 +133,22 @@ public class ManualPrintingInstructionsParserTest {
 
     @Test
     public void parseUpdateSingleNumberPagesReturnsCorrectly() {
-        assertEquals(new ManualPrintingInstructions.PageUpdate(List.of(25)),
-                parser.parseUpdate("25"));
+        assertEquals(List.of(25), parser.parseUpdate("25"));
     }
 
     @Test
     public void parseUpdateTwoNumbersPagesReturnsCorrectly() {
-        assertEquals(new ManualPrintingInstructions.PageUpdate(List.of(25, 26)),
-                parser.parseUpdate("25,26"));
+        assertEquals(List.of(25, 26), parser.parseUpdate("25,26"));
     }
 
     @Test
-    public void parseUpdateOmitsEmptyNumberPageUpdateAtTheEnd() {
-        assertEquals(new ManualPrintingInstructions.PageUpdate(List.of(25, 26)),
-                parser.parseUpdate("25,26,"));
+    public void parseUpdateOmitsEmptyPageAtTheEnd() {
+        assertEquals(List.of(25, 26), parser.parseUpdate("25,26,"));
     }
 
     @Test
     public void parseUpdateTenNumbersPagesReturnCorrectly() {
-        assertEquals(new ManualPrintingInstructions.PageUpdate(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)),
-                parser.parseUpdate("1,2,3,4,5,6,7,8,9,10"));
+        assertEquals(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), parser.parseUpdate("1,2,3,4,5,6,7,8,9,10"));
     }
 
     @Test
@@ -192,13 +185,8 @@ public class ManualPrintingInstructionsParserTest {
                 new ManualPrintingInstructions.PageOrderingRule(75, 13),
                 new ManualPrintingInstructions.PageOrderingRule(53, 13));
 
-        List<ManualPrintingInstructions.PageUpdate> expectedUpdates = List.of(
-                new ManualPrintingInstructions.PageUpdate(List.of(75, 47, 61, 53, 29)),
-                new ManualPrintingInstructions.PageUpdate(List.of(97, 61, 53, 29, 13)),
-                new ManualPrintingInstructions.PageUpdate(List.of(75, 29, 13)),
-                new ManualPrintingInstructions.PageUpdate(List.of(75, 97, 47, 61, 53)),
-                new ManualPrintingInstructions.PageUpdate(List.of(61, 13, 29)),
-                new ManualPrintingInstructions.PageUpdate(List.of(97, 13, 75, 29, 47)));
+        List<List<Integer>> expectedUpdates = List.of(List.of(75, 47, 61, 53, 29), List.of(97, 61, 53, 29, 13),
+                List.of(75, 29, 13), List.of(75, 97, 47, 61, 53), List.of(61, 13, 29), List.of(97, 13, 75, 29, 47));
 
         assertEquals(new ManualPrintingInstructions(expectedRules, expectedUpdates), parser.parse(validInputFileName));
     }

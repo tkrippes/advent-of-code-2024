@@ -81,71 +81,68 @@ public class CorrectlyOrderedUpdatesSolverTest {
     }
 
     @Test
-    public void isPageUpdateInRightOrderShouldThrowForEmptyOrderingMap() {
-        assertThrows(IllegalArgumentException.class, () -> solver.isPageUpdateInRightOrder(Map.of(),
-                new ManualPrintingInstructions.PageUpdate(List.of(25, 26))));
+    public void arePagesInRightOrderShouldThrowForEmptyOrderingMap() {
+        assertThrows(IllegalArgumentException.class, () -> solver.arePagesInRightOrder(Map.of(), List.of(25, 26)));
     }
 
     @Test
-    public void isPageUpdateInRightOrderShouldThrowForEmptyPageUpdates() {
-        assertThrows(IllegalArgumentException.class, () -> solver.isPageUpdateInRightOrder(Map.of(25, Map.of(26,
-                        true),
-                26, Map.of(25, false)), new ManualPrintingInstructions.PageUpdate(List.of())));
+    public void arePagesInRightOrderShouldThrowForEmptyPages() {
+        assertThrows(IllegalArgumentException.class, () -> solver.arePagesInRightOrder(Map.of(
+                25, Map.of(26, true),
+                26, Map.of(25, false)), List.of()));
     }
 
     @Test
-    public void isPageUpdateInRightOrderShouldThrowsIfPageHasNoEntryToProduceInOrderingMap() {
-        assertThrows(IllegalArgumentException.class, () -> solver.isPageUpdateInRightOrder(Map.of(25, Map.of(26,
-                        true),
-                26, Map.of(25, false)), new ManualPrintingInstructions.PageUpdate(List.of(25, 27))));
+    public void arePagesInRightOrderShouldThrowsIfPageHasNoEntryToProduceInOrderingMap() {
+        assertThrows(IllegalArgumentException.class, () -> solver.arePagesInRightOrder(Map.of(
+                25, Map.of(26, true),
+                26, Map.of(25, false)), List.of(25, 27)));
     }
 
     @Test
-    public void isPageUpdateInRightOrderShouldThrowsIfOtherPageHasNoEntryToProduceInOrderingMapOfPage() {
-        assertThrows(IllegalArgumentException.class, () -> solver.isPageUpdateInRightOrder(Map.of(25, Map.of(26,
+    public void arePagesInRightOrderShouldThrowsIfOtherPageHasNoEntryToProduceInOrderingMapOfPage() {
+        assertThrows(IllegalArgumentException.class, () -> solver.arePagesInRightOrder(Map.of(25, Map.of(26,
                                 true, 27, true),
                         26, Map.of(25, false, 27, true), 27, Map.of(25, false)),
-                new ManualPrintingInstructions.PageUpdate(List.of(25, 26, 27))));
+                List.of(25, 26, 27)));
     }
 
     @Test
-    public void isPageUpdatesInRightOrderShouldReturnTrueForOnePage() {
-        assertTrue(solver.isPageUpdateInRightOrder(Map.of(25, Map.of(26, true), 26, Map.of(25, false)),
-                new ManualPrintingInstructions.PageUpdate(List.of(25))));
+    public void arePagessInRightOrderShouldReturnTrueForOnePage() {
+        assertTrue(solver.arePagesInRightOrder(Map.of(25, Map.of(26, true), 26, Map.of(25, false)),
+                List.of(25)));
     }
 
     @Test
-    public void isPageUpdateInRightOrderShouldReturnTrueForTwoPagesInOrder() {
-        assertTrue(solver.isPageUpdateInRightOrder(Map.of(25, Map.of(26, true), 26, Map.of(25, false)),
-                new ManualPrintingInstructions.PageUpdate(List.of(25, 26))));
+    public void arePagesInRightOrderShouldReturnTrueForTwoPagesInOrder() {
+        assertTrue(solver.arePagesInRightOrder(Map.of(25, Map.of(26, true), 26, Map.of(25, false)),
+                List.of(25, 26)));
     }
 
     @Test
-    public void isPageUpdateInRightOrderShouldReturnFalseForTwoPagesInWrongOrder() {
-        assertFalse(solver.isPageUpdateInRightOrder(Map.of(25, Map.of(26, true), 26, Map.of(25, false)),
-                new ManualPrintingInstructions.PageUpdate(List.of(26, 25))));
+    public void arePagesInRightOrderShouldReturnFalseForTwoPagesInWrongOrder() {
+        assertFalse(solver.arePagesInRightOrder(Map.of(25, Map.of(26, true), 26, Map.of(25, false)),
+                List.of(26, 25)));
     }
 
     @Test
-    public void isPageUpdateInRightOrderShouldReturnTrueForThreePagesInOrder() {
-        assertTrue(solver.isPageUpdateInRightOrder(Map.of(
-                        25, Map.of(26, true, 27, true),
-                        26, Map.of(25, false, 27, true),
-                        27, Map.of(25, false, 26, false)),
-                new ManualPrintingInstructions.PageUpdate(List.of(25, 26, 27))));
+    public void arePagesInRightOrderShouldReturnTrueForThreePagesInOrder() {
+        assertTrue(solver.arePagesInRightOrder(Map.of(
+                25, Map.of(26, true, 27, true),
+                26, Map.of(25, false, 27, true),
+                27, Map.of(25, false, 26, false)), List.of(25, 26, 27)));
     }
 
     @Test
-    public void isPageUpdateInRightOrderShouldReturnFalseForThreePagesInWrongOrder() {
-        assertFalse(solver.isPageUpdateInRightOrder(Map.of(
-                        25, Map.of(26, true, 27, true),
-                        26, Map.of(25, false, 27, true),
-                        27, Map.of(25, false, 26, false)),
-                new ManualPrintingInstructions.PageUpdate(List.of(25, 27, 26))));
+    public void arePagesInRightOrderShouldReturnFalseForThreePagesInWrongOrder() {
+        assertFalse(solver.arePagesInRightOrder(Map.of(
+                25, Map.of(26, true, 27, true),
+                26, Map.of(25, false, 27, true),
+                27, Map.of(25, false, 26, false)), List.of(25, 27, 26)));
     }
 
     @Test
-    public void isPageUpdateInRightOrderShouldReturnTheCorrectResultsForTestInputFileContent() {
+    public void arePagesInRightOrderShouldReturnTheCorrectResultsForTestInputFileContent() {
         Map<Integer, Map<Integer, Boolean>> orderingMap = Map.of(
                 97, Map.of(53, true, 75, true, 13, true, 61, true, 29, true, 47, true),
                 53, Map.of(97, false, 75, false, 29, true, 61, false, 13, true, 47, false),
@@ -156,18 +153,12 @@ public class CorrectlyOrderedUpdatesSolverTest {
                 47, Map.of(97, false, 53, true, 75, false, 13, true, 61, true, 29, true)
         );
 
-        assertTrue(solver.isPageUpdateInRightOrder(orderingMap,
-                new ManualPrintingInstructions.PageUpdate(List.of(75, 47, 61, 53, 29))));
-        assertTrue(solver.isPageUpdateInRightOrder(orderingMap,
-                new ManualPrintingInstructions.PageUpdate(List.of(97, 61, 53, 29, 13))));
-        assertTrue(solver.isPageUpdateInRightOrder(orderingMap,
-                new ManualPrintingInstructions.PageUpdate(List.of(75, 29, 13))));
-        assertFalse(solver.isPageUpdateInRightOrder(orderingMap,
-                new ManualPrintingInstructions.PageUpdate(List.of(75, 97, 47, 61, 53))));
-        assertFalse(solver.isPageUpdateInRightOrder(orderingMap,
-                new ManualPrintingInstructions.PageUpdate(List.of(61, 13, 29))));
-        assertFalse(solver.isPageUpdateInRightOrder(orderingMap,
-                new ManualPrintingInstructions.PageUpdate(List.of(97, 13, 75, 29, 47))));
+        assertTrue(solver.arePagesInRightOrder(orderingMap, List.of(75, 47, 61, 53, 29)));
+        assertTrue(solver.arePagesInRightOrder(orderingMap, List.of(97, 61, 53, 29, 13)));
+        assertTrue(solver.arePagesInRightOrder(orderingMap, List.of(75, 29, 13)));
+        assertFalse(solver.arePagesInRightOrder(orderingMap, List.of(75, 97, 47, 61, 53)));
+        assertFalse(solver.arePagesInRightOrder(orderingMap, List.of(61, 13, 29)));
+        assertFalse(solver.arePagesInRightOrder(orderingMap, List.of(97, 13, 75, 29, 47)));
     }
 
     @Test
@@ -195,15 +186,10 @@ public class CorrectlyOrderedUpdatesSolverTest {
                 new ManualPrintingInstructions.PageOrderingRule(75, 13),
                 new ManualPrintingInstructions.PageOrderingRule(53, 13));
 
-        List<ManualPrintingInstructions.PageUpdate> pages = List.of(
-                new ManualPrintingInstructions.PageUpdate(List.of(75, 47, 61, 53, 29)),
-                new ManualPrintingInstructions.PageUpdate(List.of(97, 61, 53, 29, 13)),
-                new ManualPrintingInstructions.PageUpdate(List.of(75, 29, 13)),
-                new ManualPrintingInstructions.PageUpdate(List.of(75, 97, 47, 61, 53)),
-                new ManualPrintingInstructions.PageUpdate(List.of(61, 13, 29)),
-                new ManualPrintingInstructions.PageUpdate(List.of(97, 13, 75, 29, 47)));
+        List<List<Integer>> updates = List.of(List.of(75, 47, 61, 53, 29), List.of(97, 61, 53, 29, 13),
+                List.of(75, 29, 13), List.of(75, 97, 47, 61, 53), List.of(61, 13, 29), List.of(97, 13, 75, 29, 47));
 
-        assertEquals(143, solver.solve(new ManualPrintingInstructions(rules, pages)));
+        assertEquals(143, solver.solve(new ManualPrintingInstructions(rules, updates)));
     }
 
     @AfterEach

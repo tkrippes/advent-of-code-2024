@@ -47,7 +47,7 @@ public class ManualPrintingInstructionsParser {
             throw new IllegalArgumentException("Inputs do not contain any pages");
         }
 
-        List<ManualPrintingInstructions.PageUpdate> updates = updatesInput
+        List<List<Integer>> updates = updatesInput
                 .stream()
                 .map(this::parseUpdate)
                 .toList();
@@ -65,12 +65,12 @@ public class ManualPrintingInstructionsParser {
                 Integer.parseInt(pageNumbers[1]));
     }
 
-    ManualPrintingInstructions.PageUpdate parseUpdate(String input) {
+    List<Integer> parseUpdate(String input) {
         String[] pageNumbers = input.split(",");
         if (pageNumbers.length == 0) {
             throw new IllegalArgumentException("Invalid input: '" + input + "' (expected: X,Y,Z,...");
         }
 
-        return new ManualPrintingInstructions.PageUpdate(Stream.of(pageNumbers).map(Integer::parseInt).toList());
+        return Stream.of(pageNumbers).map(Integer::parseInt).toList();
     }
 }
