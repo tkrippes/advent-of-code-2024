@@ -8,59 +8,70 @@ import java.util.Map;
 
 public class ManualPrintingInstructionsSolver {
     Map<Integer, Map<Integer, Boolean>> createPageOrderingMap(List<ManualPrintingInstructions.PageOrderingRule> rules) {
-        Map<Integer, Map<Integer, Boolean>> orderingMap = new HashMap<>();
+        Map<Integer, Map<Integer, Boolean>> pageOrderingMap = new HashMap<>();
 
         for (ManualPrintingInstructions.PageOrderingRule rule : rules) {
-            orderingMap.putIfAbsent(rule.pageToPrintedBefore(), new HashMap<>());
-            orderingMap.get(rule.pageToPrintedBefore()).put(rule.pageToPrintedAfter(), true);
+            pageOrderingMap.putIfAbsent(rule.pageToPrintedBefore(), new HashMap<>());
+            pageOrderingMap.get(rule.pageToPrintedBefore()).put(rule.pageToPrintedAfter(), true);
 
-            orderingMap.putIfAbsent(rule.pageToPrintedAfter(), new HashMap<>());
-            orderingMap.get(rule.pageToPrintedAfter()).put(rule.pageToPrintedBefore(), false);
+            pageOrderingMap.putIfAbsent(rule.pageToPrintedAfter(), new HashMap<>());
+            pageOrderingMap.get(rule.pageToPrintedAfter()).put(rule.pageToPrintedBefore(), false);
         }
 
-        return orderingMap;
+        return pageOrderingMap;
     }
 
-    boolean arePagesInRightOrder(Map<Integer, Map<Integer, Boolean>> orderingMap, ManualPrintingInstructions.PagesToProduce pagesToProduce) {
-        if (orderingMap.isEmpty()) {
-            throw new IllegalArgumentException("Ordering map is empty");
+    boolean arePagesToProduceInRightOrder(Map<Integer, Map<Integer, Boolean>> pageOrderingMap, ManualPrintingInstructions.PagesToProduce pagesToProduce) {
+        if (pageOrderingMap.isEmpty()) {
+            throw new IllegalArgumentException("Page ordering map is empty");
         }
 
         if (pagesToProduce.pages().isEmpty()) {
-            throw new IllegalArgumentException("Pages to produce is empty");
+            throw new IllegalArgumentException("Pages to produce are empty");
         }
 
         List<Integer> pages = pagesToProduce.pages();
-        for (int i = 0; i < pages.size(); i++) {
-            int page = pages.get(i);
-            if (!orderingMap.containsKey(page)) {
-                throw new IllegalArgumentException("Page " + page + " is not in the ordering map");
+        for (int pageIndex = 0; pageIndex < pages.size(); pageIndex++) {
+            int page = pages.get(pageIndex);
+            if (!pageOrderingMap.containsKey(page)) {
+                throw new IllegalArgumentException("Page " + page + " has no entry in the ordering map");
             }
 
-            Map<Integer, Boolean> orderingMapForPage = orderingMap.get(page);
-            for (int j = 0; j < i; j++) {
-                int pageBefore = pages.get(j);
-                if (!orderingMapForPage.containsKey(pageBefore)) {
-                    throw new IllegalArgumentException("Page " + page + " does not have page before " + pageBefore + " in the ordering map");
-                }
-
-                if (orderingMapForPage.get(pageBefore)) {
-                    return false;
-                }
-            }
-
-            for (int j = i + 1; j < pages.size(); j++) {
-                int pageAfter = pages.get(j);
-                if (!orderingMapForPage.containsKey(pageAfter)) {
-                    throw new IllegalArgumentException("Page " + page + " does not have page after " + pageAfter + " in the ordering map");
-                }
-
-                if (!orderingMapForPage.get(pageAfter)) {
-                    return false;
-                }
+            Map<Integer, Boolean> orderingMapEntry = pageOrderingMap.get(page);
+            if (isAnyPageBeforeNotSortedCorrectly(pageIndex, pages, orderingMapEntry) ||
+                    isAnyPageAfterNotSortedCorrectly(pageIndex, pages, orderingMapEntry)) {
+                return false;
             }
         }
 
         return true;
+    }
+
+    private static boolean isAnyPageAfterNotSortedCorrectly(int pageIndex, List<Integer> pages, Map<Integer, Boolean> orderingMapEntry) {
+        for (int i = pageIndex + 1; i < pages.size(); i++) {
+            int pageAfter = pages.get(i);
+            if (!orderingMapEntry.containsKey(pageAfter)) {
+                throw new IllegalArgumentException("Page " + pages.get(pageIndex) + " does not have an entry for page after " + pageAfter + " in its ordering map");
+            }
+
+            if (!orderingMapEntry.get(pageAfter)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isAnyPageBeforeNotSortedCorrectly(int pageIndex, List<Integer> pages, Map<Integer, Boolean> orderingMapForPage) {
+        for (int i = 0; i < pageIndex; i++) {
+            int pageBefore = pages.get(i);
+            if (!orderingMapForPage.containsKey(pageBefore)) {
+                throw new IllegalArgumentException("Page " + pages.get(pageIndex) + " does not have an entry for page before " + pageBefore + " in its ordering map");
+            }
+
+            if (orderingMapForPage.get(pageBefore)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
