@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -162,7 +163,43 @@ public class ManualPrintingInstructionsParserTest {
         Assertions.assertThrows(FileNotFoundException.class, () -> parser.parse(invalidInputFileName));
     }
 
-    // TODO add test for real input file
+    @Test
+    public void parseShouldParseInputFileCorrectly() throws IOException {
+        String validInputFileName = "../../input/test_input.txt";
+
+        List<ManualPrintingInstructions.PageOrderingRule> expectedRules = List.of(
+                new ManualPrintingInstructions.PageOrderingRule(47, 53),
+                new ManualPrintingInstructions.PageOrderingRule(97, 13),
+                new ManualPrintingInstructions.PageOrderingRule(97, 61),
+                new ManualPrintingInstructions.PageOrderingRule(97, 47),
+                new ManualPrintingInstructions.PageOrderingRule(75, 29),
+                new ManualPrintingInstructions.PageOrderingRule(61, 13),
+                new ManualPrintingInstructions.PageOrderingRule(75, 53),
+                new ManualPrintingInstructions.PageOrderingRule(29, 13),
+                new ManualPrintingInstructions.PageOrderingRule(97, 29),
+                new ManualPrintingInstructions.PageOrderingRule(53, 29),
+                new ManualPrintingInstructions.PageOrderingRule(61, 53),
+                new ManualPrintingInstructions.PageOrderingRule(97, 53),
+                new ManualPrintingInstructions.PageOrderingRule(61, 29),
+                new ManualPrintingInstructions.PageOrderingRule(47, 13),
+                new ManualPrintingInstructions.PageOrderingRule(75, 47),
+                new ManualPrintingInstructions.PageOrderingRule(97, 75),
+                new ManualPrintingInstructions.PageOrderingRule(47, 61),
+                new ManualPrintingInstructions.PageOrderingRule(75, 61),
+                new ManualPrintingInstructions.PageOrderingRule(47, 29),
+                new ManualPrintingInstructions.PageOrderingRule(75, 13),
+                new ManualPrintingInstructions.PageOrderingRule(53, 13));
+
+        List<ManualPrintingInstructions.PagesToProduce> expectedPages = List.of(
+                new ManualPrintingInstructions.PagesToProduce(List.of(75, 47, 61, 53, 29)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(97, 61, 53, 29, 13)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(75, 29, 13)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(75, 97, 47, 61, 53)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(61, 13, 29)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(97, 13, 75, 29, 47)));
+
+        assertEquals(new ManualPrintingInstructions(expectedRules, expectedPages), parser.parse(validInputFileName));
+    }
 
     @AfterEach
     public void tearDown() {
