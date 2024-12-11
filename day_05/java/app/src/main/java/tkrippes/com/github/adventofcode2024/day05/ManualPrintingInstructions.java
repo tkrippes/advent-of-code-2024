@@ -8,5 +8,8 @@ public record ManualPrintingInstructions(List<PageOrderingRule> rules,
     }
 
     public record PagesToProduce(List<Integer> pages) {
+        public int getCenterPage() {
+            return pages.get(pages.size() / 2);
+        }
     }
 }

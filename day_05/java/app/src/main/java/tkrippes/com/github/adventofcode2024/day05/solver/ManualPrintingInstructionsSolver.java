@@ -7,6 +7,19 @@ import java.util.List;
 import java.util.Map;
 
 public class ManualPrintingInstructionsSolver {
+    public int solve(ManualPrintingInstructions instructions) {
+        Map<Integer, Map<Integer, Boolean>> pageOrderingMap = createPageOrderingMap(instructions.rules());
+
+        int result = 0;
+        for (ManualPrintingInstructions.PagesToProduce pages : instructions.pagesList()) {
+            if (arePagesToProduceInRightOrder(pageOrderingMap, pages)) {
+                result += pages.getCenterPage();
+            }
+        }
+
+        return result;
+    }
+
     Map<Integer, Map<Integer, Boolean>> createPageOrderingMap(List<ManualPrintingInstructions.PageOrderingRule> rules) {
         Map<Integer, Map<Integer, Boolean>> pageOrderingMap = new HashMap<>();
 

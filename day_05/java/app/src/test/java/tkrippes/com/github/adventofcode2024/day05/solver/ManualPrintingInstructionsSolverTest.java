@@ -159,6 +159,42 @@ public class ManualPrintingInstructionsSolverTest {
         assertFalse(solver.arePagesToProduceInRightOrder(orderingMap, new ManualPrintingInstructions.PagesToProduce(List.of(97, 13, 75, 29, 47))));
     }
 
+    @Test
+    public void solveShouldReturnTheCorrectResultForTestInputFileContent() {
+        List<ManualPrintingInstructions.PageOrderingRule> rules = List.of(
+                new ManualPrintingInstructions.PageOrderingRule(47, 53),
+                new ManualPrintingInstructions.PageOrderingRule(97, 13),
+                new ManualPrintingInstructions.PageOrderingRule(97, 61),
+                new ManualPrintingInstructions.PageOrderingRule(97, 47),
+                new ManualPrintingInstructions.PageOrderingRule(75, 29),
+                new ManualPrintingInstructions.PageOrderingRule(61, 13),
+                new ManualPrintingInstructions.PageOrderingRule(75, 53),
+                new ManualPrintingInstructions.PageOrderingRule(29, 13),
+                new ManualPrintingInstructions.PageOrderingRule(97, 29),
+                new ManualPrintingInstructions.PageOrderingRule(53, 29),
+                new ManualPrintingInstructions.PageOrderingRule(61, 53),
+                new ManualPrintingInstructions.PageOrderingRule(97, 53),
+                new ManualPrintingInstructions.PageOrderingRule(61, 29),
+                new ManualPrintingInstructions.PageOrderingRule(47, 13),
+                new ManualPrintingInstructions.PageOrderingRule(75, 47),
+                new ManualPrintingInstructions.PageOrderingRule(97, 75),
+                new ManualPrintingInstructions.PageOrderingRule(47, 61),
+                new ManualPrintingInstructions.PageOrderingRule(75, 61),
+                new ManualPrintingInstructions.PageOrderingRule(47, 29),
+                new ManualPrintingInstructions.PageOrderingRule(75, 13),
+                new ManualPrintingInstructions.PageOrderingRule(53, 13));
+
+        List<ManualPrintingInstructions.PagesToProduce> pages = List.of(
+                new ManualPrintingInstructions.PagesToProduce(List.of(75, 47, 61, 53, 29)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(97, 61, 53, 29, 13)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(75, 29, 13)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(75, 97, 47, 61, 53)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(61, 13, 29)),
+                new ManualPrintingInstructions.PagesToProduce(List.of(97, 13, 75, 29, 47)));
+
+        assertEquals(143, solver.solve(new ManualPrintingInstructions(rules, pages)));
+    }
+
     @AfterEach
     public void tearDown() {
     }
