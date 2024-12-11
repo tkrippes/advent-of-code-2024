@@ -10,7 +10,15 @@ public class ManualPrintingInstructionsParser {
     }
 
     ManualPrintingInstructions.PageOrderingRule parsePageOrderingRule(String input) {
-        throw new IllegalArgumentException("Invalid input: '" + input + "' (expected: X|Y");
+        String[] pageNumbers = input.split("\\|");
+        if (pageNumbers.length != 2) {
+            throw new IllegalArgumentException("Invalid input: '" + input + "' (expected: X|Y");
+        }
+
+        int pageToPrintedBefore = Integer.parseInt(pageNumbers[0]);
+        int pageToPrintedAfter = Integer.parseInt(pageNumbers[1]);
+
+        return new ManualPrintingInstructions.PageOrderingRule(pageToPrintedBefore, pageToPrintedAfter);
     }
 
     ManualPrintingInstructions.PagesToProduce parsePagesToProduce(String input) {
