@@ -21,27 +21,30 @@ public class ManualPrintingInstructionsParserTest {
     }
 
     @Test
-    public void parseManualPrintingInstructionsThrowsOnEmptyInputs() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of()));
+    public void parseInstructionsThrowsOnEmptyInputs() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseInstructions(List.of()));
     }
 
     @Test
-    public void parseManualPrintingInstructionsThrowsOnMissingEmptyLine() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of("25|26", "25,26")));
+    public void parseInstructionsThrowsOnMissingEmptyLine() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseInstructions(List.of("25|26",
+                "25,26")));
     }
 
     @Test
-    public void parseManualPrintingInstructionsThrowsOnMissingRules() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of("", "25,26")));
+    public void parseInstructionsThrowsOnMissingRules() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseInstructions(List.of("",
+                "25,26")));
     }
 
     @Test
-    public void parseManualPrintingInstructionsThrowsOnMissingPages() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parseManualPrintingInstructions(List.of("25|26", "")));
+    public void parseInstructionsThrowsOnMissingPages() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseInstructions(List.of("25|26",
+                "")));
     }
 
     @Test
-    public void parseManualPrintingInstructionsReturnsManualCorrectly() {
+    public void parseInstructionsReturnsInstructionsCorrectly() {
         List<ManualPrintingInstructions.PageOrderingRule> expectedRules = List.of(
                 new ManualPrintingInstructions.PageOrderingRule(25, 26),
                 new ManualPrintingInstructions.PageOrderingRule(26, 27),
@@ -49,110 +52,110 @@ public class ManualPrintingInstructionsParserTest {
                 new ManualPrintingInstructions.PageOrderingRule(28, 29),
                 new ManualPrintingInstructions.PageOrderingRule(29, 30));
 
-        List<ManualPrintingInstructions.PagesToProduce> expectedPages = List.of(
-                new ManualPrintingInstructions.PagesToProduce(List.of(25, 26, 27)),
-                new ManualPrintingInstructions.PagesToProduce(List.of(25, 27, 29)),
-                new ManualPrintingInstructions.PagesToProduce(List.of(30, 28, 26)),
-                new ManualPrintingInstructions.PagesToProduce(List.of(25, 28, 27, 30, 29, 26)));
+        List<ManualPrintingInstructions.PageUpdate> expectedUpdates = List.of(
+                new ManualPrintingInstructions.PageUpdate(List.of(25, 26, 27)),
+                new ManualPrintingInstructions.PageUpdate(List.of(25, 27, 29)),
+                new ManualPrintingInstructions.PageUpdate(List.of(30, 28, 26)),
+                new ManualPrintingInstructions.PageUpdate(List.of(25, 28, 27, 30, 29, 26)));
 
-        assertEquals(new ManualPrintingInstructions(expectedRules, expectedPages),
-                parser.parseManualPrintingInstructions(List.of("25|26", "26|27", "27|28", "28|29", "29|30", "",
+        assertEquals(new ManualPrintingInstructions(expectedRules, expectedUpdates),
+                parser.parseInstructions(List.of("25|26", "26|27", "27|28", "28|29", "29|30", "",
                         "25,26,27", "25,27,29", "30,28,26", "25,28,27,30,29,26")));
     }
 
     @Test
-    public void parsePageOrderingRuleThrowsOnEmptyRule() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule(""));
+    public void parseRuleThrowsOnEmptyRule() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseRule(""));
     }
 
     @Test
-    public void parsePageOrderingRuleThrowsOnSingleNumberRule() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("25"));
+    public void parseRuleThrowsOnSingleNumberRule() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseRule("25"));
     }
 
     @Test
-    public void parsePageOrderingRuleThrowsOnMissingNumbersRule() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("|"));
+    public void parseRuleThrowsOnMissingNumbersRule() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseRule("|"));
     }
 
     @Test
-    public void parsePageOrderingRuleThrowsOnMissingFirstNumberRule() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("|26"));
+    public void parseRuleThrowsOnMissingFirstNumberRule() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseRule("|26"));
     }
 
     @Test
-    public void parsePageOrderingRuleThrowsOnMissingSecondNumberRule() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("25|"));
+    public void parseRuleThrowsOnMissingSecondNumberRule() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseRule("25|"));
     }
 
     @Test
-    public void parsePageOrderingRuleThrowsOnNonNumbersRule() {
-        assertThrows(NumberFormatException.class, () -> parser.parsePageOrderingRule("AB|CD"));
+    public void parseRuleThrowsOnNonNumbersRule() {
+        assertThrows(NumberFormatException.class, () -> parser.parseRule("AB|CD"));
     }
 
     @Test
-    public void parsePageOrderingRuleThrowsOnThreeNumbersRule() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("25|26|27"));
+    public void parseRuleThrowsOnThreeNumbersRule() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseRule("25|26|27"));
     }
 
     @Test
-    public void parsePageOrderingRuleThrowsOnTwoNumbersIncludingSpacesRule() {
-        assertThrows(NumberFormatException.class, () -> parser.parsePageOrderingRule("25 | 26"));
+    public void parseRuleThrowsOnTwoNumbersIncludingSpacesRule() {
+        assertThrows(NumberFormatException.class, () -> parser.parseRule("25 | 26"));
     }
 
     @Test
-    public void parsePageOrderingRuleTwoNumbersRuleCalculatesRuleCorrectly() {
+    public void parseRuleTwoNumbersRuleCalculatesRuleCorrectly() {
         assertEquals(new ManualPrintingInstructions.PageOrderingRule(25, 26),
-                parser.parsePageOrderingRule("25|26"));
+                parser.parseRule("25|26"));
     }
 
     @Test
-    public void parsePagesToProduceThrowsOnEmptyPages() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parsePagesToProduce(""));
+    public void parseUpdateThrowsOnEmptyPages() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseUpdate(""));
     }
 
     @Test
-    public void parsePagesToProduceThrowsOnMissingNumbersPages() {
-        assertThrows(IllegalArgumentException.class, () -> parser.parsePagesToProduce(","));
+    public void parseUpdateThrowsOnMissingNumbersPages() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseUpdate(","));
     }
 
     @Test
-    public void parsePagesToProduceThrowsOnMissingFirstNumberPages() {
-        assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce(",26"));
+    public void parseUpdateThrowsOnMissingFirstNumberPages() {
+        assertThrows(NumberFormatException.class, () -> parser.parseUpdate(",26"));
     }
 
     @Test
-    public void parsePagesToProduceThrowsOnNonNumbersPages() {
-        assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce("AB,CD"));
+    public void parseUpdateThrowsOnNonNumbersPages() {
+        assertThrows(NumberFormatException.class, () -> parser.parseUpdate("AB,CD"));
     }
 
     @Test
-    public void parsePagesToProduceThrowsOnTwoNumbersIncludingSpacesPages() {
-        assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce("25, 26"));
+    public void parseUpdateThrowsOnTwoNumbersIncludingSpacesPages() {
+        assertThrows(NumberFormatException.class, () -> parser.parseUpdate("25, 26"));
     }
 
     @Test
-    public void parsePagesToProduceSingleNumberPagesReturnsCorrectly() {
-        assertEquals(new ManualPrintingInstructions.PagesToProduce(List.of(25)),
-                parser.parsePagesToProduce("25"));
+    public void parseUpdateSingleNumberPagesReturnsCorrectly() {
+        assertEquals(new ManualPrintingInstructions.PageUpdate(List.of(25)),
+                parser.parseUpdate("25"));
     }
 
     @Test
-    public void parsePagesToProduceTwoNumbersPagesReturnsCorrectly() {
-        assertEquals(new ManualPrintingInstructions.PagesToProduce(List.of(25, 26)),
-                parser.parsePagesToProduce("25,26"));
+    public void parseUpdateTwoNumbersPagesReturnsCorrectly() {
+        assertEquals(new ManualPrintingInstructions.PageUpdate(List.of(25, 26)),
+                parser.parseUpdate("25,26"));
     }
 
     @Test
-    public void parsePagesToProduceOmitsEmptyNumberPagesToProduceAtTheEnd() {
-        assertEquals(new ManualPrintingInstructions.PagesToProduce(List.of(25, 26)),
-                parser.parsePagesToProduce("25,26,"));
+    public void parseUpdateOmitsEmptyNumberPageUpdateAtTheEnd() {
+        assertEquals(new ManualPrintingInstructions.PageUpdate(List.of(25, 26)),
+                parser.parseUpdate("25,26,"));
     }
 
     @Test
-    public void parsePagesToProduceTenNumbersPagesReturnCorrectly() {
-        assertEquals(new ManualPrintingInstructions.PagesToProduce(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)),
-                parser.parsePagesToProduce("1,2,3,4,5,6,7,8,9,10"));
+    public void parseUpdateTenNumbersPagesReturnCorrectly() {
+        assertEquals(new ManualPrintingInstructions.PageUpdate(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)),
+                parser.parseUpdate("1,2,3,4,5,6,7,8,9,10"));
     }
 
     @Test
@@ -189,15 +192,15 @@ public class ManualPrintingInstructionsParserTest {
                 new ManualPrintingInstructions.PageOrderingRule(75, 13),
                 new ManualPrintingInstructions.PageOrderingRule(53, 13));
 
-        List<ManualPrintingInstructions.PagesToProduce> expectedPages = List.of(
-                new ManualPrintingInstructions.PagesToProduce(List.of(75, 47, 61, 53, 29)),
-                new ManualPrintingInstructions.PagesToProduce(List.of(97, 61, 53, 29, 13)),
-                new ManualPrintingInstructions.PagesToProduce(List.of(75, 29, 13)),
-                new ManualPrintingInstructions.PagesToProduce(List.of(75, 97, 47, 61, 53)),
-                new ManualPrintingInstructions.PagesToProduce(List.of(61, 13, 29)),
-                new ManualPrintingInstructions.PagesToProduce(List.of(97, 13, 75, 29, 47)));
+        List<ManualPrintingInstructions.PageUpdate> expectedUpdates = List.of(
+                new ManualPrintingInstructions.PageUpdate(List.of(75, 47, 61, 53, 29)),
+                new ManualPrintingInstructions.PageUpdate(List.of(97, 61, 53, 29, 13)),
+                new ManualPrintingInstructions.PageUpdate(List.of(75, 29, 13)),
+                new ManualPrintingInstructions.PageUpdate(List.of(75, 97, 47, 61, 53)),
+                new ManualPrintingInstructions.PageUpdate(List.of(61, 13, 29)),
+                new ManualPrintingInstructions.PageUpdate(List.of(97, 13, 75, 29, 47)));
 
-        assertEquals(new ManualPrintingInstructions(expectedRules, expectedPages), parser.parse(validInputFileName));
+        assertEquals(new ManualPrintingInstructions(expectedRules, expectedUpdates), parser.parse(validInputFileName));
     }
 
     @AfterEach

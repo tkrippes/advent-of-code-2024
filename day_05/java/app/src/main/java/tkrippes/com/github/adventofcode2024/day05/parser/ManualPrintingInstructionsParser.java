@@ -17,7 +17,7 @@ public class ManualPrintingInstructionsParser {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(inputFile));
 
-            instructions = parseManualPrintingInstructions(reader.lines().toList());
+            instructions = parseInstructions(reader.lines().toList());
 
             reader.close();
         } catch (IOException e) {
@@ -27,7 +27,7 @@ public class ManualPrintingInstructionsParser {
         return instructions;
     }
 
-    ManualPrintingInstructions parseManualPrintingInstructions(List<String> inputs) {
+    ManualPrintingInstructions parseInstructions(List<String> inputs) {
         if (!inputs.contains("")) {
             throw new IllegalArgumentException("Inputs do not contain an empty line to separate rules and pages input");
         }
@@ -39,23 +39,23 @@ public class ManualPrintingInstructionsParser {
 
         List<ManualPrintingInstructions.PageOrderingRule> rules = rulesInput
                 .stream()
-                .map(this::parsePageOrderingRule)
+                .map(this::parseRule)
                 .toList();
 
-        List<String> pagesInput = inputs.subList(inputs.indexOf("") + 1, inputs.size());
-        if (pagesInput.isEmpty()) {
+        List<String> updatesInput = inputs.subList(inputs.indexOf("") + 1, inputs.size());
+        if (updatesInput.isEmpty()) {
             throw new IllegalArgumentException("Inputs do not contain any pages");
         }
 
-        List<ManualPrintingInstructions.PagesToProduce> pages = pagesInput
+        List<ManualPrintingInstructions.PageUpdate> updates = updatesInput
                 .stream()
-                .map(this::parsePagesToProduce)
+                .map(this::parseUpdate)
                 .toList();
 
-        return new ManualPrintingInstructions(rules, pages);
+        return new ManualPrintingInstructions(rules, updates);
     }
 
-    ManualPrintingInstructions.PageOrderingRule parsePageOrderingRule(String input) {
+    ManualPrintingInstructions.PageOrderingRule parseRule(String input) {
         String[] pageNumbers = input.split("\\|");
         if (pageNumbers.length != 2) {
             throw new IllegalArgumentException("Invalid input: '" + input + "' (expected: X|Y");
@@ -65,12 +65,12 @@ public class ManualPrintingInstructionsParser {
                 Integer.parseInt(pageNumbers[1]));
     }
 
-    ManualPrintingInstructions.PagesToProduce parsePagesToProduce(String input) {
+    ManualPrintingInstructions.PageUpdate parseUpdate(String input) {
         String[] pageNumbers = input.split(",");
         if (pageNumbers.length == 0) {
             throw new IllegalArgumentException("Invalid input: '" + input + "' (expected: X,Y,Z,...");
         }
 
-        return new ManualPrintingInstructions.PagesToProduce(Stream.of(pageNumbers).map(Integer::parseInt).toList());
+        return new ManualPrintingInstructions.PageUpdate(Stream.of(pageNumbers).map(Integer::parseInt).toList());
     }
 }
