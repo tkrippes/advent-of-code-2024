@@ -11,12 +11,12 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ManualPrintingInstructionsSolverTest {
-    private ManualPrintingInstructionsSolver solver;
+public class CorrectlyOrderedUpdatesSolverTest {
+    private CorrectlyOrderedUpdatesSolver solver;
 
     @BeforeEach
     public void setUp() {
-        solver = new ManualPrintingInstructionsSolver();
+        solver = new CorrectlyOrderedUpdatesSolver();
     }
 
     @Test

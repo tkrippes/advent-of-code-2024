@@ -6,19 +6,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ManualPrintingInstructionsSolver {
+abstract public class ManualPrintingInstructionsSolver {
     public int solve(ManualPrintingInstructions instructions) {
         Map<Integer, Map<Integer, Boolean>> pageOrderingMap = createPageOrderingMap(instructions.rules());
 
-        int result = 0;
-        for (ManualPrintingInstructions.PageUpdate update : instructions.updates()) {
-            if (isPageUpdateInRightOrder(pageOrderingMap, update)) {
-                result += update.getMiddlePage();
-            }
-        }
-
-        return result;
+        return calculateResult(pageOrderingMap, instructions.updates());
     }
+
+    protected abstract int calculateResult(Map<Integer, Map<Integer, Boolean>> pageOrderingMap,
+                                           List<ManualPrintingInstructions.PageUpdate> updates);
 
     Map<Integer, Map<Integer, Boolean>> createPageOrderingMap(List<ManualPrintingInstructions.PageOrderingRule> rules) {
         Map<Integer, Map<Integer, Boolean>> pageOrderingMap = new HashMap<>();
