@@ -8,6 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -43,7 +44,7 @@ public class ManualPrintingInstructionsParserTest {
 
     @Test
     public void parseThrowsOnMissingFirstNumberPageOrderingRule() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("|25"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("|26"));
     }
 
     @Test
@@ -63,11 +64,11 @@ public class ManualPrintingInstructionsParserTest {
 
     @Test
     public void parseThrowsOnTwoNumbersIncludingSpacesPageOrderingRule() {
-        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePageOrderingRule("25 | 26"));
+        Assertions.assertThrows(NumberFormatException.class, () -> parser.parsePageOrderingRule("25 | 26"));
     }
 
     @Test
-    public void parseOnTwoNumbersPageOrderingRuleIsCalculatedCorrectly() {
+    public void parseTwoNumbersPageOrderingRule() {
         assertEquals(new ManualPrintingInstructions.PageOrderingRule(25, 26),
                 parser.parsePageOrderingRule("25|26"));
     }
@@ -75,6 +76,50 @@ public class ManualPrintingInstructionsParserTest {
     @Test
     public void parseThrowsOnEmptyPagesToProduce() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePagesToProduce(""));
+    }
+
+    @Test
+    public void parseThrowsOnMissingNumbersPagesToProduce() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> parser.parsePagesToProduce(","));
+    }
+
+    @Test
+    public void parseThrowsOnMissingFirstNumberPagesToProduce() {
+        Assertions.assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce(",26"));
+    }
+
+    @Test
+    public void parseThrowsOnNonNumbersPagesToProduce() {
+        Assertions.assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce("AB,CD"));
+    }
+
+    @Test
+    public void parseThrowsOnTwoNumbersIncludingSpacesPagesToProduce() {
+        Assertions.assertThrows(NumberFormatException.class, () -> parser.parsePagesToProduce("25, 26"));
+    }
+
+    @Test
+    public void parseSingleNumberPagesToProduce() {
+        assertEquals(new ManualPrintingInstructions.PagesToProduce(List.of(25)),
+                parser.parsePagesToProduce("25"));
+    }
+
+    @Test
+    public void parseTwoNumbersPagesToProduce() {
+        assertEquals(new ManualPrintingInstructions.PagesToProduce(List.of(25, 26)),
+                parser.parsePagesToProduce("25,26"));
+    }
+
+    @Test
+    public void parseOmitsEmptyNumberPagesToProduceAtTheEnd() {
+        assertEquals(new ManualPrintingInstructions.PagesToProduce(List.of(25, 26)),
+                parser.parsePagesToProduce("25,26,"));
+    }
+
+    @Test
+    public void parseTenNumbersPagesToProduce() {
+        assertEquals(new ManualPrintingInstructions.PagesToProduce(List.of(1, 2, 3, 4, 5, 6, 7, 8, 9, 10)),
+                parser.parsePagesToProduce("1,2,3,4,5,6,7,8,9,10"));
     }
 
     @AfterEach
