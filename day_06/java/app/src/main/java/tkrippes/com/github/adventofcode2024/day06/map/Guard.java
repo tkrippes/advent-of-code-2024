@@ -25,6 +25,15 @@ public class Guard {
         return position;
     }
 
+    public Position getNextPosition() {
+        return switch (orientation) {
+            case UP -> new Position(position.row() - 1, position.column());
+            case RIGHT -> new Position(position.row(), position.column() + 1);
+            case DOWN -> new Position(position.row() + 1, position.column());
+            case LEFT -> new Position(position.row(), position.column() - 1);
+        };
+    }
+
     public Orientation getOrientation() {
         return orientation;
     }

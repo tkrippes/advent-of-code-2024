@@ -96,6 +96,35 @@ public class GuardTest {
         assertEquals(Guard.Orientation.LEFT, guard.getOrientation());
     }
 
+    @Test
+    public void getNextPositionUpReturnsCorrectly() {
+        assertEquals(new Position(9, 10), guard.getNextPosition());
+    }
+
+    @Test
+    public void getNextPositionRightReturnsCorrectly() {
+        guard.turnRight();
+
+        assertEquals(new Position(10, 11), guard.getNextPosition());
+    }
+
+    @Test
+    public void getNextPositionDownReturnsCorrectly() {
+        guard.turnRight();
+        guard.turnRight();
+
+        assertEquals(new Position(11, 10), guard.getNextPosition());
+    }
+
+    @Test
+    public void getNextPositionLeftReturnsCorrectly() {
+        guard.turnRight();
+        guard.turnRight();
+        guard.turnRight();
+
+        assertEquals(new Position(10, 9), guard.getNextPosition());
+    }
+
     @AfterEach
     public void tearDown() {
     }
