@@ -78,7 +78,7 @@ public class LabMapParserTest {
 
     @Test
     public void parseGuardForMapWithGuardShouldReturnGuard() {
-        assertEquals(new Guard(new Position(2, 1), Guard.Orientation.UP), parser.parseGuard("####\n#..#\n#^.#\n####"));
+        assertEquals(new Guard(new Position(2, 1)), parser.parseGuard("####\n#..#\n#^.#\n####"));
     }
 
     @Test
@@ -101,8 +101,7 @@ public class LabMapParserTest {
         expectedObstacleMap.put(new Position(8, 0), true);
         expectedObstacleMap.put(new Position(9, 6), true);
 
-        assertEquals(new LabMap(expectedObstacleMap, new Guard(new Position(6, 4), Guard.Orientation.UP)),
-                parser.parse(validInputFileName));
+        assertEquals(new LabMap(expectedObstacleMap, new Guard(new Position(6, 4))), parser.parse(validInputFileName));
     }
 
     @AfterEach
