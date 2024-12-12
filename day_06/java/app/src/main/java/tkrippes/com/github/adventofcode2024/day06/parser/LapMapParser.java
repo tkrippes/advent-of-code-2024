@@ -34,10 +34,10 @@ public class LapMapParser {
         Map<Position, Boolean> map = new HashMap<>();
 
         List<String> inputLines = input.lines().toList();
-        for (int x = 0; x < inputLines.size(); x++) {
-            String inputLine = inputLines.get(x);
-            for (int y = 0; y < inputLine.length(); y++) {
-                map.put(new Position(x, y), isObstacle(inputLine.charAt(y)));
+        for (int row = 0; row < inputLines.size(); row++) {
+            String inputLine = inputLines.get(row);
+            for (int column = 0; column < inputLine.length(); column++) {
+                map.put(new Position(row, column), isObstacle(inputLine.charAt(column)));
             }
         }
 
@@ -46,11 +46,11 @@ public class LapMapParser {
 
     Guard parseGuard(String input) {
         List<String> inputLines = input.lines().toList();
-        for (int x = 0; x < inputLines.size(); x++) {
-            String inputLine = inputLines.get(x);
-            for (int y = 0; y < inputLine.length(); y++) {
-                if (isGuard(inputLine.charAt(y))) {
-                    return new Guard(new Position(x, y));
+        for (int row = 0; row < inputLines.size(); row++) {
+            String inputLine = inputLines.get(row);
+            for (int column = 0; column < inputLine.length(); column++) {
+                if (isGuard(inputLine.charAt(column))) {
+                    return new Guard(new Position(row, column));
                 }
             }
         }

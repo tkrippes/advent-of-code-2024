@@ -1,6 +1,7 @@
 package tkrippes.com.github.adventofcode2024.day06.parser;
 
 import tkrippes.com.github.adventofcode2024.day06.map.Guard;
+import tkrippes.com.github.adventofcode2024.day06.map.LabMap;
 import tkrippes.com.github.adventofcode2024.day06.map.Orientation;
 import tkrippes.com.github.adventofcode2024.day06.map.Position;
 
@@ -9,6 +10,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,6 +80,29 @@ public class LabLapMapParserTest {
     @Test
     public void parseGuardForMapWithGuardShouldReturnGuard() {
         assertEquals(new Guard(new Position(2, 1), Orientation.UP), parser.parseGuard("####\n#..#\n#^.#\n####"));
+    }
+
+    @Test
+    public void parseShouldParseInputFileCorrectly() throws IOException {
+        String validInputFileName = "../../input/test_input.txt";
+
+        Map<Position, Boolean> expectedObstacleMap = new HashMap<>();
+        for (int row = 0; row < 10; row++) {
+            for (int column = 0; column < 10; column++) {
+                expectedObstacleMap.put(new Position(row, column), false);
+            }
+        }
+
+        expectedObstacleMap.put(new Position(0, 4), true);
+        expectedObstacleMap.put(new Position(1, 9), true);
+        expectedObstacleMap.put(new Position(3, 2), true);
+        expectedObstacleMap.put(new Position(4, 7), true);
+        expectedObstacleMap.put(new Position(6, 1), true);
+        expectedObstacleMap.put(new Position(7, 8), true);
+        expectedObstacleMap.put(new Position(8, 0), true);
+        expectedObstacleMap.put(new Position(9, 6), true);
+
+        assertEquals(new LabMap(expectedObstacleMap, new Guard(new Position(6, 4), Orientation.UP)), parser.parse(validInputFileName));
     }
 
     @AfterEach
