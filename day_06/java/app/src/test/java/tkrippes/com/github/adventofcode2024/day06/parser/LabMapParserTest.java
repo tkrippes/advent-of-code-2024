@@ -15,7 +15,7 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class LabLapMapParserTest {
+public class LabMapParserTest {
     private LapMapParser parser;
 
     @BeforeEach
@@ -101,7 +101,8 @@ public class LabLapMapParserTest {
         expectedObstacleMap.put(new Position(8, 0), true);
         expectedObstacleMap.put(new Position(9, 6), true);
 
-        assertEquals(new LabMap(expectedObstacleMap, new Guard(new Position(6, 4), Guard.Orientation.UP)), parser.parse(validInputFileName));
+        assertEquals(new LabMap(expectedObstacleMap, new Guard(new Position(6, 4), Guard.Orientation.UP)),
+                parser.parse(validInputFileName));
     }
 
     @AfterEach
