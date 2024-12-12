@@ -2,7 +2,6 @@ package tkrippes.com.github.adventofcode2024.day06.parser;
 
 import tkrippes.com.github.adventofcode2024.day06.map.Guard;
 import tkrippes.com.github.adventofcode2024.day06.map.LabMap;
-import tkrippes.com.github.adventofcode2024.day06.map.Orientation;
 import tkrippes.com.github.adventofcode2024.day06.map.Position;
 
 import org.junit.jupiter.api.AfterEach;
@@ -79,7 +78,7 @@ public class LabLapMapParserTest {
 
     @Test
     public void parseGuardForMapWithGuardShouldReturnGuard() {
-        assertEquals(new Guard(new Position(2, 1), Orientation.UP), parser.parseGuard("####\n#..#\n#^.#\n####"));
+        assertEquals(new Guard(new Position(2, 1), Guard.Orientation.UP), parser.parseGuard("####\n#..#\n#^.#\n####"));
     }
 
     @Test
@@ -102,7 +101,7 @@ public class LabLapMapParserTest {
         expectedObstacleMap.put(new Position(8, 0), true);
         expectedObstacleMap.put(new Position(9, 6), true);
 
-        assertEquals(new LabMap(expectedObstacleMap, new Guard(new Position(6, 4), Orientation.UP)), parser.parse(validInputFileName));
+        assertEquals(new LabMap(expectedObstacleMap, new Guard(new Position(6, 4), Guard.Orientation.UP)), parser.parse(validInputFileName));
     }
 
     @AfterEach

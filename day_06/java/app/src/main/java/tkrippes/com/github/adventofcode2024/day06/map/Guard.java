@@ -1,6 +1,13 @@
 package tkrippes.com.github.adventofcode2024.day06.map;
 
 public class Guard {
+    public enum Orientation {
+        UP,
+        DOWN,
+        LEFT,
+        RIGHT
+    }
+    
     private Position position;
     private Orientation orientation;
 
