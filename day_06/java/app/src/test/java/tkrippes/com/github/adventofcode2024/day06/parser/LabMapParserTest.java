@@ -16,11 +16,11 @@ import java.util.Map;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LabMapParserTest {
-    private LapMapParser parser;
+    private LabMapParser parser;
 
     @BeforeEach
     void setUp() {
-        parser = new LapMapParser();
+        parser = new LabMapParser();
     }
 
     @Test

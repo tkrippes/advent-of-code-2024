@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class LapMapParser {
+public class LabMapParser {
     public LabMap parse(String inputFileName) throws IOException {
         File inputFile = new File(inputFileName);
         if (!inputFile.exists()) {
