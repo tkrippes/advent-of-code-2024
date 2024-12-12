@@ -1,5 +1,7 @@
 package tkrippes.com.github.adventofcode2024.day06.parser;
 
+import tkrippes.com.github.adventofcode2024.day06.map.Guard;
+import tkrippes.com.github.adventofcode2024.day06.map.Orientation;
 import tkrippes.com.github.adventofcode2024.day06.map.Position;
 
 import org.junit.jupiter.api.AfterEach;
@@ -61,6 +63,21 @@ public class LabLapMapParserTest {
         expectedObstacleMap.put(new Position(3, 3), true);
 
         assertEquals(expectedObstacleMap, parser.parseObstacleMap("####\n#..#\n#..#\n####"));
+    }
+
+    @Test
+    public void parseGuardForEmptyMapShouldThrow() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseGuard(""));
+    }
+
+    @Test
+    public void parseGuardForMapWithoutGuardShouldThrow() {
+        assertThrows(IllegalArgumentException.class, () -> parser.parseGuard("####\n#..#\n#..#\n####"));
+    }
+
+    @Test
+    public void parseGuardForMapWithGuardShouldReturnGuard() {
+        assertEquals(new Guard(new Position(2, 1), Orientation.UP), parser.parseGuard("####\n#..#\n#^.#\n####"));
     }
 
     @AfterEach
