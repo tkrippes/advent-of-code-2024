@@ -21,10 +21,9 @@ public class MapParserTest {
         assertThrows(FileNotFoundException.class, () -> parser.parse("../../input/invalid_test_input.txt"));
     }
 
-    // TODO adapt to return type
     @Test
     public void parseEmptyMapShouldReturnEmptyMap() {
-        assertEquals(0, parser.parseMap(""));
+        assertTrue(parser.parseMap("").isEmpty());
     }
 
     @AfterEach
