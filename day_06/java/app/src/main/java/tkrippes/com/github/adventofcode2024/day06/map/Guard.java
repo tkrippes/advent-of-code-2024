@@ -33,6 +33,15 @@ public class Guard {
         return orientation;
     }
 
+    public Orientation getNextOrientation() {
+        return switch (orientation) {
+            case UP -> Orientation.RIGHT;
+            case RIGHT -> Orientation.DOWN;
+            case DOWN -> Orientation.LEFT;
+            case LEFT -> Orientation.UP;
+        };
+    }
+
     public void turnRight() {
         switch (orientation) {
             case UP -> orientation = Orientation.RIGHT;
