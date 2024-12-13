@@ -8,19 +8,21 @@ import java.util.Set;
 
 public class DistinctGuardPositionsCountSolver implements LabMapSolver {
     public int solve(LabMap map) {
-        Set<Position> distinctPositions = new HashSet<>();
-        distinctPositions.add(map.guard().getPosition());
-        do {
+        Set<Position> distinctGuardPositions = new HashSet<>();
+        distinctGuardPositions.add(map.guard().getPosition());
+        // TODO check if this can be reused in an abstract base class
+        // TODO template method using abstract method getting called in loop
+        while (map.obstacleMap().containsKey(map.guard().getNextPosition())) {
             if (map.obstacleMap().get(map.guard().getNextPosition())) {
                 map.guard().turnRight();
-            } else {
-                map.guard().move();
+                continue;
             }
 
-            distinctPositions.add(map.guard().getPosition());
-        } while (map.obstacleMap().containsKey(map.guard().getNextPosition()));
+            map.guard().move();
+            distinctGuardPositions.add(map.guard().getPosition());
+        }
 
-        return distinctPositions.size();
+        return distinctGuardPositions.size();
     }
 
     // TODO hints for part 2
