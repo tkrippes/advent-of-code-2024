@@ -35,8 +35,7 @@ public class DistinctObstructionPositionsCountSolver implements LabMapSolver {
 
             guard.move();
 
-            if (distinctGuardPositionsAndOrientations.containsKey(guard.getPosition()) &&
-                    distinctGuardPositionsAndOrientations.get(guard.getPosition()).contains(guard.getOrientation())) {
+            if (guardAlreadyPassedPosition(guard, distinctGuardPositionsAndOrientations)) {
                 return true;
             }
 
@@ -45,5 +44,14 @@ public class DistinctObstructionPositionsCountSolver implements LabMapSolver {
         }
 
         return false;
+    }
+
+    private static boolean guardAlreadyPassedPosition(Guard guard, Map<Position,
+            Set<Guard.Orientation>> distinctGuardPositionsAndOrientations) {
+        Position position = guard.getPosition();
+        Guard.Orientation orientation = guard.getOrientation();
+
+        return distinctGuardPositionsAndOrientations.containsKey(position) &&
+                distinctGuardPositionsAndOrientations.get(position).contains(orientation);
     }
 }
