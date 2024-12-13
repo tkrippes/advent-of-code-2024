@@ -10,9 +10,24 @@ public class DistinctObstructionPositionsCountSolver implements LabMapSolver {
     public int solve(LabMap map) {
         Map<Position, Boolean> obstacleMap = map.obstacleMap();
         Guard guard = map.guard();
+
+        Set<Position> distinctGuardPositions = new HashSet<>();
+        distinctGuardPositions.add(guard.getPosition());
+
+        Guard newGuard = new Guard(guard.getPosition(), guard.getOrientation());
+        while (obstacleMap.containsKey(newGuard.getNextPosition())) {
+            if (obstacleMap.get(newGuard.getNextPosition())) {
+                newGuard.turnRight();
+                continue;
+            }
+
+            newGuard.move();
+            distinctGuardPositions.add(newGuard.getPosition());
+        }
+
         int distinctObstructionPositionsCount = 0;
 
-        for (Position position : obstacleMap.keySet()) {
+        for (Position position : distinctGuardPositions) {
             Map<Position, Boolean> newObstacleMap = new HashMap<>(obstacleMap);
             newObstacleMap.put(position, true);
 
