@@ -13,12 +13,12 @@ import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class DistinctPositionsSolverTest {
-    private DistinctPositionsSolver solver;
+public class DistinctGuardPositionsCountSolverTest {
+    private DistinctGuardPositionsCountSolver solver;
 
     @BeforeEach
     public void setUp() {
-        solver = new DistinctPositionsSolver();
+        solver = new DistinctGuardPositionsCountSolver();
     }
 
     @Test

@@ -6,7 +6,7 @@ import tkrippes.com.github.adventofcode2024.day06.map.Position;
 import java.util.HashSet;
 import java.util.Set;
 
-public class DistinctPositionsSolver {
+public class DistinctGuardPositionsCountSolver implements LabMapSolver {
     public int solve(LabMap map) {
         Set<Position> distinctPositions = new HashSet<>();
         distinctPositions.add(map.guard().getPosition());
