@@ -8,12 +8,12 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class DistinctGuardPositionsCountSolver implements LabMapSolver {
+public class VisitedGuardPositionsCountSolver implements LabMapSolver {
     public int solve(LabMap map) {
         Map<Position, Boolean> obstacleMap = map.obstacleMap();
         Guard guard = map.guard();
-        Set<Position> distinctGuardPositions = new HashSet<>();
-        distinctGuardPositions.add(guard.getPosition());
+        Set<Position> visitedGuardPositions = new HashSet<>();
+        visitedGuardPositions.add(guard.getPosition());
 
         while (obstacleMap.containsKey(guard.getNextPosition())) {
             if (obstacleMap.get(guard.getNextPosition())) {
@@ -22,9 +22,9 @@ public class DistinctGuardPositionsCountSolver implements LabMapSolver {
             }
 
             guard.move();
-            distinctGuardPositions.add(guard.getPosition());
+            visitedGuardPositions.add(guard.getPosition());
         }
 
-        return distinctGuardPositions.size();
+        return visitedGuardPositions.size();
     }
 }

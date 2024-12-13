@@ -16,9 +16,9 @@ public class Guard {
         this.orientation = Orientation.UP;
     }
 
-    public Guard(Position position, Orientation orientation) {
-        this.position = position;
-        this.orientation = orientation;
+    public Guard(Guard other) {
+        this.position = other.position;
+        this.orientation = other.orientation;
     }
 
     public Position getPosition() {

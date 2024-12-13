@@ -11,28 +11,25 @@ public class DistinctObstructionPositionsCountSolver implements LabMapSolver {
         Map<Position, Boolean> obstacleMap = map.obstacleMap();
         Guard guard = map.guard();
 
-        Set<Position> distinctGuardPositions = new HashSet<>();
-        distinctGuardPositions.add(guard.getPosition());
-
-        Guard newGuard = new Guard(guard.getPosition(), guard.getOrientation());
-        while (obstacleMap.containsKey(newGuard.getNextPosition())) {
-            if (obstacleMap.get(newGuard.getNextPosition())) {
-                newGuard.turnRight();
+        Set<Position> visitedGuardPositions = new HashSet<>();
+        visitedGuardPositions.add(guard.getPosition());
+        Guard visitorGuard = new Guard(guard);
+        while (obstacleMap.containsKey(visitorGuard.getNextPosition())) {
+            if (obstacleMap.get(visitorGuard.getNextPosition())) {
+                visitorGuard.turnRight();
                 continue;
             }
 
-            newGuard.move();
-            distinctGuardPositions.add(newGuard.getPosition());
+            visitorGuard.move();
+            visitedGuardPositions.add(visitorGuard.getPosition());
         }
 
         int distinctObstructionPositionsCount = 0;
-
-        for (Position position : distinctGuardPositions) {
+        for (Position position : visitedGuardPositions) {
             Map<Position, Boolean> newObstacleMap = new HashMap<>(obstacleMap);
             newObstacleMap.put(position, true);
 
-            if (isGuardStuckInALoop(newObstacleMap, new Guard(guard.getPosition(),
-                    guard.getOrientation()))) {
+            if (isGuardStuckInALoop(newObstacleMap, new Guard(guard))) {
                 distinctObstructionPositionsCount++;
             }
         }
@@ -50,7 +47,7 @@ public class DistinctObstructionPositionsCountSolver implements LabMapSolver {
 
             guard.move();
 
-            if (guardAlreadyPassedPosition(guard, distinctGuardPositionsAndOrientations)) {
+            if (guardAlreadyVisitedPosition(guard, distinctGuardPositionsAndOrientations)) {
                 return true;
             }
 
@@ -61,7 +58,7 @@ public class DistinctObstructionPositionsCountSolver implements LabMapSolver {
         return false;
     }
 
-    private static boolean guardAlreadyPassedPosition(Guard guard, Map<Position,
+    private static boolean guardAlreadyVisitedPosition(Guard guard, Map<Position,
             Set<Guard.Orientation>> distinctGuardPositionsAndOrientations) {
         Position position = guard.getPosition();
         Guard.Orientation orientation = guard.getOrientation();
