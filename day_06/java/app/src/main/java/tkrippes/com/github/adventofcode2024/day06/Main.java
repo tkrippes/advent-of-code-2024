@@ -3,6 +3,7 @@ package tkrippes.com.github.adventofcode2024.day06;
 import tkrippes.com.github.adventofcode2024.day06.map.LabMap;
 import tkrippes.com.github.adventofcode2024.day06.parser.LabMapParser;
 import tkrippes.com.github.adventofcode2024.day06.solver.DistinctGuardPositionsCountSolver;
+import tkrippes.com.github.adventofcode2024.day06.solver.DistinctObstructionPositionsCountSolver;
 import tkrippes.com.github.adventofcode2024.day06.solver.LabMapSolver;
 
 public class Main {
@@ -10,6 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Result of day 6 part 1: " + result(new DistinctGuardPositionsCountSolver()));
+        System.out.println("Result of day 6 part 2: " + result(new DistinctObstructionPositionsCountSolver()));
     }
 
     public static int result(LabMapSolver solver) {

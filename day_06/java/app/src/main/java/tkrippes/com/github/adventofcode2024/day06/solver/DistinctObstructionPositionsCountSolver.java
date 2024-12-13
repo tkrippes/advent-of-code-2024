@@ -8,47 +8,45 @@ import java.util.*;
 
 public class DistinctObstructionPositionsCountSolver implements LabMapSolver {
     public int solve(LabMap map) {
-        Map<Position, Set<Guard.Orientation>> obstaclesBumpedIntoMap = new HashMap<>();
         Set<Position> distinctObstructionPositions = new HashSet<>();
-        distinctObstructionPositions.add(map.guard().getPosition());
         while (map.obstacleMap().containsKey(map.guard().getNextPosition())) {
             if (map.obstacleMap().get(map.guard().getNextPosition())) {
-                obstaclesBumpedIntoMap.putIfAbsent(map.guard().getNextPosition(), new HashSet<>());
-                obstaclesBumpedIntoMap.get(map.guard().getNextPosition()).add(map.guard().getOrientation());
-
                 map.guard().turnRight();
                 continue;
             }
 
-            map.guard().move();
-            // TODO
-            Optional<Position> nextObstacle = getNextRightObstaclePosition(map);
-            if (nextObstacle.isEmpty()) {
-                System.err.println("No next obstacle found for guard position: " + map.guard().getPosition() + " and " +
-                        "orientation: " + map.guard().getOrientation());
-            } else {
-                System.err.println("Next obstacle found for guard position: " + map.guard().getPosition() + " and " +
-                        "orientation: " + map.guard().getOrientation() + " is: " + nextObstacle.get());
+            LabMap newMap = new LabMap(new HashMap<>(map.obstacleMap()), new Guard(map.guard().getPosition(),
+                    map.guard().getOrientation()));
+            newMap.obstacleMap().put(map.guard().getNextPosition(), true);
+            if (isGuardStuckInALoop(newMap)) {
+                distinctObstructionPositions.add(map.guard().getNextPosition());
             }
 
-            distinctObstructionPositions.add(map.guard().getPosition());
+            map.guard().move();
         }
 
         return distinctObstructionPositions.size();
     }
 
-    Optional<Position> getNextRightObstaclePosition(LabMap map) {
-        Guard guard = new Guard(map.guard().getPosition(), map.guard().getOrientation());
-        guard.turnRight();
-
-        while (map.obstacleMap().containsKey(guard.getNextPosition())) {
-            if (map.obstacleMap().get(guard.getNextPosition())) {
-                return Optional.of(guard.getNextPosition());
+    boolean isGuardStuckInALoop(LabMap map) {
+        Map<Position, Set<Guard.Orientation>> distinctGuardPositionsAndOrientations = new HashMap<>();
+        while (map.obstacleMap().containsKey(map.guard().getNextPosition())) {
+            if (map.obstacleMap().get(map.guard().getNextPosition())) {
+                map.guard().turnRight();
+                continue;
             }
 
-            guard.move();
+            map.guard().move();
+
+            if (distinctGuardPositionsAndOrientations.containsKey(map.guard().getPosition()) &&
+                    distinctGuardPositionsAndOrientations.get(map.guard().getPosition()).contains(map.guard().getOrientation())) {
+                return true;
+            }
+
+            distinctGuardPositionsAndOrientations.putIfAbsent(map.guard().getPosition(), new HashSet<>());
+            distinctGuardPositionsAndOrientations.get(map.guard().getPosition()).add(map.guard().getOrientation());
         }
 
-        return Optional.empty();
+        return false;
     }
 }

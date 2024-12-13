@@ -24,14 +24,4 @@ public class DistinctGuardPositionsCountSolver implements LabMapSolver {
 
         return distinctGuardPositions.size();
     }
-
-    // TODO hints for part 2
-    // create map of already "bumped into" obstacles including the information from which side (Map<Position,
-    // List<Orientation>>)
-    // for every move, check if turning right would lead to bumping into an already "bumped into" obstacle from the
-    // correct side
-    // add new obstacle (unique set, since it could result in obstacles)
-    // create new solver (ObstaclePositionSolver or similar)
-    // add getNextOrientation method to Guard
-    // add nextObstacle method to solver (call getNextPosition until hitting an obstacle or leaving map)
 }
