@@ -8,43 +8,40 @@ import java.util.*;
 
 public class DistinctObstructionPositionsCountSolver implements LabMapSolver {
     public int solve(LabMap map) {
-        Set<Position> distinctObstructionPositions = new HashSet<>();
-        while (map.obstacleMap().containsKey(map.guard().getNextPosition())) {
-            if (map.obstacleMap().get(map.guard().getNextPosition())) {
-                map.guard().turnRight();
-                continue;
-            }
+        Map<Position, Boolean> obstacleMap = map.obstacleMap();
+        Guard guard = map.guard();
+        int distinctObstructionPositionsCount = 0;
 
-            LabMap newMap = new LabMap(new HashMap<>(map.obstacleMap()), new Guard(map.guard().getPosition(),
-                    map.guard().getOrientation()));
-            newMap.obstacleMap().put(map.guard().getNextPosition(), true);
-            if (isGuardStuckInALoop(newMap)) {
-                distinctObstructionPositions.add(map.guard().getNextPosition());
-            }
+        for (Position position : obstacleMap.keySet()) {
+            Map<Position, Boolean> newObstacleMap = new HashMap<>(obstacleMap);
+            newObstacleMap.put(position, true);
 
-            map.guard().move();
+            if (isGuardStuckInALoop(newObstacleMap, new Guard(guard.getPosition(),
+                    guard.getOrientation()))) {
+                distinctObstructionPositionsCount++;
+            }
         }
 
-        return distinctObstructionPositions.size();
+        return distinctObstructionPositionsCount;
     }
 
-    boolean isGuardStuckInALoop(LabMap map) {
+    boolean isGuardStuckInALoop(Map<Position, Boolean> obstacleMap, Guard guard) {
         Map<Position, Set<Guard.Orientation>> distinctGuardPositionsAndOrientations = new HashMap<>();
-        while (map.obstacleMap().containsKey(map.guard().getNextPosition())) {
-            if (map.obstacleMap().get(map.guard().getNextPosition())) {
-                map.guard().turnRight();
+        while (obstacleMap.containsKey(guard.getNextPosition())) {
+            if (obstacleMap.get(guard.getNextPosition())) {
+                guard.turnRight();
                 continue;
             }
 
-            map.guard().move();
+            guard.move();
 
-            if (distinctGuardPositionsAndOrientations.containsKey(map.guard().getPosition()) &&
-                    distinctGuardPositionsAndOrientations.get(map.guard().getPosition()).contains(map.guard().getOrientation())) {
+            if (distinctGuardPositionsAndOrientations.containsKey(guard.getPosition()) &&
+                    distinctGuardPositionsAndOrientations.get(guard.getPosition()).contains(guard.getOrientation())) {
                 return true;
             }
 
-            distinctGuardPositionsAndOrientations.putIfAbsent(map.guard().getPosition(), new HashSet<>());
-            distinctGuardPositionsAndOrientations.get(map.guard().getPosition()).add(map.guard().getOrientation());
+            distinctGuardPositionsAndOrientations.putIfAbsent(guard.getPosition(), new HashSet<>());
+            distinctGuardPositionsAndOrientations.get(guard.getPosition()).add(guard.getOrientation());
         }
 
         return false;
