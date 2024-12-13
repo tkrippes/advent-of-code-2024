@@ -6,23 +6,11 @@ import tkrippes.com.github.adventofcode2024.day06.map.Position;
 
 import java.util.*;
 
-public class DistinctObstructionPositionsCountSolver implements LabMapSolver {
+public class DistinctObstructionPositionsCountSolver extends LabMapSolver {
     public int solve(LabMap map) {
         Map<Position, Boolean> obstacleMap = map.obstacleMap();
         Guard guard = map.guard();
-
-        Set<Position> visitedGuardPositions = new HashSet<>();
-        visitedGuardPositions.add(guard.getPosition());
-        Guard visitorGuard = new Guard(guard);
-        while (obstacleMap.containsKey(visitorGuard.getNextPosition())) {
-            if (obstacleMap.get(visitorGuard.getNextPosition())) {
-                visitorGuard.turnRight();
-                continue;
-            }
-
-            visitorGuard.move();
-            visitedGuardPositions.add(visitorGuard.getPosition());
-        }
+        Set<Position> visitedGuardPositions = getVisitedGuardPositions(obstacleMap, new Guard(guard));
 
         int distinctObstructionPositionsCount = 0;
         for (Position position : visitedGuardPositions) {
