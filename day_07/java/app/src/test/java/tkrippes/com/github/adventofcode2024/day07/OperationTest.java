@@ -29,6 +29,15 @@ public class OperationTest {
     }
 
     @Test
+    public void getAllPossiblePermutationsShouldReturnCorrectPermutationsForOneOperation() {
+        List<List<Operation>> expectedPermutations = List.of(
+                List.of(Operation.ADDITION),
+                List.of(Operation.MULTIPLICATION));
+
+        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(1));
+    }
+
+    @Test
     public void getAllPossiblePermutationsShouldReturnCorrectPermutationsForTwoOperations() {
         List<List<Operation>> expectedPermutations = List.of(
                 List.of(Operation.ADDITION, Operation.ADDITION),
