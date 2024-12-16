@@ -14,7 +14,7 @@ public enum Operation {
         };
     }
 
-    static public List<List<Operation>> getAllPossiblePermutations(int numberOfOperations) {
+    public static List<List<Operation>> getAllPossiblePermutations(int numberOfOperations) {
         List<List<Operation>> permutations = new ArrayList<>();
         List<Operation> operations = List.of(Operation.values());
         generatePermutations(new ArrayList<>(), numberOfOperations, operations, permutations);
@@ -22,7 +22,7 @@ public enum Operation {
         return permutations;
     }
 
-    static private void generatePermutations(List<Operation> currentPermutation, int numberOfOperations,
+    private static void generatePermutations(List<Operation> currentPermutation, int numberOfOperations,
                                              List<Operation> operations,
                                              List<List<Operation>> permutations) {
         if (currentPermutation.size() == numberOfOperations) {
