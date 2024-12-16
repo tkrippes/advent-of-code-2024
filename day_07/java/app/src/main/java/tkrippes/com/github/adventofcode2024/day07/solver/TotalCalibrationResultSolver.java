@@ -6,10 +6,10 @@ import tkrippes.com.github.adventofcode2024.day07.Operation;
 import java.util.List;
 
 public class TotalCalibrationResultSolver {
-    public int solve(List<Equation> equations) {
+    public long solve(List<Equation> equations) {
         return equations.stream()
                 .filter(this::isEquationSolvable)
-                .mapToInt(Equation::result)
+                .mapToLong(Equation::result)
                 .sum();
     }
 
@@ -18,7 +18,7 @@ public class TotalCalibrationResultSolver {
 
         return Operation.getAllPossiblePermutations(numberOfOperations).stream()
                 .anyMatch(permutation -> {
-                    int currentResult = equation.operands().getFirst();
+                    long currentResult = equation.operands().getFirst();
                     for (int i = 0; i < numberOfOperations; i++) {
                         Operation operation = permutation.get(i);
                         currentResult = operation.apply(currentResult, equation.operands().get(i + 1));

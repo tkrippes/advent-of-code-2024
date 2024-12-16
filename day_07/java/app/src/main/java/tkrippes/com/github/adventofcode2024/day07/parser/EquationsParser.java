@@ -31,9 +31,9 @@ public class EquationsParser {
 
     private Equation parseEquation(String input) {
         String[] equationParts = input.split(":");
-        int result = Integer.parseInt(equationParts[0]);
-        List<Integer> operands = Stream.of(equationParts[1].trim().split(" "))
-                .map(Integer::parseInt)
+        long result = Long.parseLong(equationParts[0]);
+        List<Long> operands = Stream.of(equationParts[1].trim().split(" "))
+                .map(Long::parseLong)
                 .toList();
 
         return new Equation(result, operands);

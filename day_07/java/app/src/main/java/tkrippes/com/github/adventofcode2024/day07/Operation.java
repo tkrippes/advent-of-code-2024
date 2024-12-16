@@ -7,7 +7,7 @@ public enum Operation {
     ADDITION,
     MULTIPLICATION;
 
-    public int apply(int operand1, int operand2) {
+    public long apply(long operand1, long operand2) {
         return switch (this) {
             case ADDITION -> operand1 + operand2;
             case MULTIPLICATION -> operand1 * operand2;

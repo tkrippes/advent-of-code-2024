@@ -31,15 +31,15 @@ public class EquationsParserTest {
         String validInputFileName = "../../input/test_input.txt";
         List<Equation> expectedEquations = new ArrayList<>();
 
-        expectedEquations.add(new Equation(190, List.of(10, 19)));
-        expectedEquations.add(new Equation(3267, List.of(81, 40, 27)));
-        expectedEquations.add(new Equation(83, List.of(17, 5)));
-        expectedEquations.add(new Equation(156, List.of(15, 6)));
-        expectedEquations.add(new Equation(7290, List.of(6, 8, 6, 15)));
-        expectedEquations.add(new Equation(161011, List.of(16, 10, 13)));
-        expectedEquations.add(new Equation(192, List.of(17, 8, 14)));
-        expectedEquations.add(new Equation(21037, List.of(9, 7, 18, 13)));
-        expectedEquations.add(new Equation(292, List.of(11, 6, 16, 20)));
+        expectedEquations.add(new Equation(190, List.of(10L, 19L)));
+        expectedEquations.add(new Equation(3267, List.of(81L, 40L, 27L)));
+        expectedEquations.add(new Equation(83, List.of(17L, 5L)));
+        expectedEquations.add(new Equation(156, List.of(15L, 6L)));
+        expectedEquations.add(new Equation(7290, List.of(6L, 8L, 6L, 15L)));
+        expectedEquations.add(new Equation(161011, List.of(16L, 10L, 13L)));
+        expectedEquations.add(new Equation(192, List.of(17L, 8L, 14L)));
+        expectedEquations.add(new Equation(21037, List.of(9L, 7L, 18L, 13L)));
+        expectedEquations.add(new Equation(292, List.of(11L, 6L, 16L, 20L)));
 
         assertEquals(expectedEquations, parser.parse(validInputFileName));
     }

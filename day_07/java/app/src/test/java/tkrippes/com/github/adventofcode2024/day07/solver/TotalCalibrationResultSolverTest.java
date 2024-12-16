@@ -20,29 +20,29 @@ public class TotalCalibrationResultSolverTest {
 
     @Test
     void isEquationSolvableForTestInputsShouldReturnCorrectly() {
-        assertTrue(solver.isEquationSolvable(new Equation(190, List.of(10, 19))));
-        assertTrue(solver.isEquationSolvable(new Equation(3267, List.of(81, 40, 27))));
-        assertFalse(solver.isEquationSolvable(new Equation(83, List.of(17, 5))));
-        assertFalse(solver.isEquationSolvable(new Equation(156, List.of(15, 6))));
-        assertFalse(solver.isEquationSolvable(new Equation(7290, List.of(6, 8, 6, 15))));
-        assertFalse(solver.isEquationSolvable(new Equation(161011, List.of(16, 10, 13))));
-        assertFalse(solver.isEquationSolvable(new Equation(192, List.of(17, 8, 14))));
-        assertFalse(solver.isEquationSolvable(new Equation(21037, List.of(9, 7, 18, 13))));
-        assertTrue(solver.isEquationSolvable(new Equation(292, List.of(11, 6, 16, 20))));
+        assertTrue(solver.isEquationSolvable(new Equation(190, List.of(10L, 19L))));
+        assertTrue(solver.isEquationSolvable(new Equation(3267, List.of(81L, 40L, 27L))));
+        assertFalse(solver.isEquationSolvable(new Equation(83, List.of(17L, 5L))));
+        assertFalse(solver.isEquationSolvable(new Equation(156, List.of(15L, 6L))));
+        assertFalse(solver.isEquationSolvable(new Equation(7290, List.of(6L, 8L, 6L, 15L))));
+        assertFalse(solver.isEquationSolvable(new Equation(161011, List.of(16L, 10L, 13L))));
+        assertFalse(solver.isEquationSolvable(new Equation(192, List.of(17L, 8L, 14L))));
+        assertFalse(solver.isEquationSolvable(new Equation(21037, List.of(9L, 7L, 18L, 13L))));
+        assertTrue(solver.isEquationSolvable(new Equation(292, List.of(11L, 6L, 16L, 20L))));
     }
 
     @Test
     void solveForTestInputShouldReturnCorrectly() {
         List<Equation> equations = List.of(
-                new Equation(190, List.of(10, 19)),
-                new Equation(3267, List.of(81, 40, 27)),
-                new Equation(83, List.of(17, 5)),
-                new Equation(156, List.of(15, 6)),
-                new Equation(7290, List.of(6, 8, 6, 15)),
-                new Equation(161011, List.of(16, 10, 13)),
-                new Equation(192, List.of(17, 8, 14)),
-                new Equation(21037, List.of(9, 7, 18, 13)),
-                new Equation(292, List.of(11, 6, 16, 20))
+                new Equation(190, List.of(10L, 19L)),
+                new Equation(3267, List.of(81L, 40L, 27L)),
+                new Equation(83, List.of(17L, 5L)),
+                new Equation(156, List.of(15L, 6L)),
+                new Equation(7290, List.of(6L, 8L, 6L, 15L)),
+                new Equation(161011, List.of(16L, 10L, 13L)),
+                new Equation(192, List.of(17L, 8L, 14L)),
+                new Equation(21037, List.of(9L, 7L, 18L, 13L)),
+                new Equation(292, List.of(11L, 6L, 16L, 20L))
         );
 
         assertEquals(3749, solver.solve(equations));
