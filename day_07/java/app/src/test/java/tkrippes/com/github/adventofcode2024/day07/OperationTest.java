@@ -36,7 +36,7 @@ public class OperationTest {
                 List.of(Operation.MULTIPLICATION, Operation.ADDITION),
                 List.of(Operation.MULTIPLICATION, Operation.MULTIPLICATION));
 
-        assertEquals(expectedPermutations, additionOperation.getAllPossiblePermutations(2));
+        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(2));
     }
 
     @Test
@@ -51,7 +51,7 @@ public class OperationTest {
                 List.of(Operation.MULTIPLICATION, Operation.MULTIPLICATION, Operation.ADDITION),
                 List.of(Operation.MULTIPLICATION, Operation.MULTIPLICATION, Operation.MULTIPLICATION));
 
-        assertEquals(expectedPermutations, additionOperation.getAllPossiblePermutations(3));
+        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(3));
     }
 
     @AfterEach
