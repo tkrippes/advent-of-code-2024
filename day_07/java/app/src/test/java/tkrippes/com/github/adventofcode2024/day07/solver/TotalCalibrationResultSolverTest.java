@@ -31,6 +31,23 @@ public class TotalCalibrationResultSolverTest {
         assertTrue(solver.isEquationSolvable(new Equation(292, List.of(11, 6, 16, 20))));
     }
 
+    @Test
+    void solveForTestInputShouldReturnCorrectly() {
+        List<Equation> equations = List.of(
+                new Equation(190, List.of(10, 19)),
+                new Equation(3267, List.of(81, 40, 27)),
+                new Equation(83, List.of(17, 5)),
+                new Equation(156, List.of(15, 6)),
+                new Equation(7290, List.of(6, 8, 6, 15)),
+                new Equation(161011, List.of(16, 10, 13)),
+                new Equation(192, List.of(17, 8, 14)),
+                new Equation(21037, List.of(9, 7, 18, 13)),
+                new Equation(292, List.of(11, 6, 16, 20))
+        );
+
+        assertEquals(3749, solver.solve(equations));
+    }
+
     @AfterEach
     void tearDown() {
     }
