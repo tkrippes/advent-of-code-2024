@@ -16,10 +16,6 @@ public enum Operation {
         };
     }
 
-    public static List<List<Operation>> getAllPossiblePermutations(int numberOfOperations) {
-        return getAllPossiblePermutations(numberOfOperations, false);
-    }
-
     public static List<List<Operation>> getAllPossiblePermutations(int numberOfOperations,
                                                                    boolean includeConcatenation) {
         List<List<Operation>> permutations = new ArrayList<>();

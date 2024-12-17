@@ -39,7 +39,7 @@ public class OperationTest {
                 List.of(Operation.ADDITION),
                 List.of(Operation.MULTIPLICATION));
 
-        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(1));
+        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(1, false));
     }
 
     @Test
@@ -60,7 +60,7 @@ public class OperationTest {
                 List.of(Operation.MULTIPLICATION, Operation.ADDITION),
                 List.of(Operation.MULTIPLICATION, Operation.MULTIPLICATION));
 
-        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(2));
+        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(2, false));
     }
 
     @Test
@@ -91,7 +91,7 @@ public class OperationTest {
                 List.of(Operation.MULTIPLICATION, Operation.MULTIPLICATION, Operation.ADDITION),
                 List.of(Operation.MULTIPLICATION, Operation.MULTIPLICATION, Operation.MULTIPLICATION));
 
-        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(3));
+        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(3, false));
     }
 
     @AfterEach
