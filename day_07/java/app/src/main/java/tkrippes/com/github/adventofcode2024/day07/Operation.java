@@ -3,8 +3,6 @@ package tkrippes.com.github.adventofcode2024.day07;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO plit up into 2 operation and 3 operation enum implementing interface
-// TODO use 2 operation enum for 3 operation enum implementation
 public enum Operation {
     ADDITION,
     MULTIPLICATION,

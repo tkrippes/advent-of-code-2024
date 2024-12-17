@@ -5,7 +5,7 @@ import tkrippes.com.github.adventofcode2024.day07.Operation;
 
 import java.util.List;
 
-public class TotalCalibrationResultSolver {
+public abstract class TotalCalibrationResultSolver {
     public long solve(List<Equation> equations) {
         return equations.stream()
                 .filter(this::isEquationSolvable)
@@ -13,18 +13,9 @@ public class TotalCalibrationResultSolver {
                 .sum();
     }
 
-    public long solve(List<Equation> equations, boolean includeConcatenation) {
-        return equations.stream()
-                .filter(equation -> isEquationSolvable(equation, includeConcatenation))
-                .mapToLong(Equation::result)
-                .sum();
-    }
+    protected abstract boolean isEquationSolvable(Equation equation);
 
-    boolean isEquationSolvable(Equation equation) {
-        return isEquationSolvable(equation, false);
-    }
-
-    boolean isEquationSolvable(Equation equation, boolean includeConcatenation) {
+    protected boolean isEquationSolvable(Equation equation, boolean includeConcatenation) {
         int numberOfOperations = equation.operands().size() - 1;
 
         return Operation.getAllPossiblePermutations(numberOfOperations, includeConcatenation).stream()
