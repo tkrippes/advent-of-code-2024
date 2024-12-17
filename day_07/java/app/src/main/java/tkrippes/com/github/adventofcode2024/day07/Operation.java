@@ -3,20 +3,30 @@ package tkrippes.com.github.adventofcode2024.day07;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO plit up into 2 operation and 3 operation enum implementing interface
+// TODO use 2 operation enum for 3 operation enum implementation
 public enum Operation {
     ADDITION,
-    MULTIPLICATION;
+    MULTIPLICATION,
+    CONCATENATION;
 
     public long apply(long operand1, long operand2) {
         return switch (this) {
             case ADDITION -> operand1 + operand2;
             case MULTIPLICATION -> operand1 * operand2;
+            case CONCATENATION -> operand1 * 10 + operand2;
         };
     }
 
     public static List<List<Operation>> getAllPossiblePermutations(int numberOfOperations) {
+        return getAllPossiblePermutations(numberOfOperations, false);
+    }
+
+    public static List<List<Operation>> getAllPossiblePermutations(int numberOfOperations,
+                                                                   boolean includeConcatenation) {
         List<List<Operation>> permutations = new ArrayList<>();
-        List<Operation> operations = List.of(Operation.values());
+        List<Operation> operations = includeConcatenation ? List.of(Operation.values()) :
+                List.of(ADDITION, MULTIPLICATION);
         generatePermutations(new ArrayList<>(), numberOfOperations, operations, permutations);
 
         return permutations;

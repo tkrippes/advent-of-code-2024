@@ -29,12 +29,27 @@ public class OperationTest {
     }
 
     @Test
+    public void applyShouldReturnCorrectResultForConcatenation() {
+        assertEquals(23, Operation.CONCATENATION.apply(2, 3));
+    }
+
+    @Test
     public void getAllPossiblePermutationsShouldReturnCorrectPermutationsForOneOperation() {
         List<List<Operation>> expectedPermutations = List.of(
                 List.of(Operation.ADDITION),
                 List.of(Operation.MULTIPLICATION));
 
         assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(1));
+    }
+
+    @Test
+    public void getAllPossiblePermutationsShouldReturnCorrectPermutationsForOneOperationIncludingConcatenation() {
+        List<List<Operation>> expectedPermutations = List.of(
+                List.of(Operation.ADDITION),
+                List.of(Operation.MULTIPLICATION),
+                List.of(Operation.CONCATENATION));
+
+        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(1, true));
     }
 
     @Test
@@ -46,6 +61,22 @@ public class OperationTest {
                 List.of(Operation.MULTIPLICATION, Operation.MULTIPLICATION));
 
         assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(2));
+    }
+
+    @Test
+    public void getAllPossiblePermutationsShouldReturnCorrectPermutationsForTwoOperationsIncludingConcatenation() {
+        List<List<Operation>> expectedPermutations = List.of(
+                List.of(Operation.ADDITION, Operation.ADDITION),
+                List.of(Operation.ADDITION, Operation.MULTIPLICATION),
+                List.of(Operation.ADDITION, Operation.CONCATENATION),
+                List.of(Operation.MULTIPLICATION, Operation.ADDITION),
+                List.of(Operation.MULTIPLICATION, Operation.MULTIPLICATION),
+                List.of(Operation.MULTIPLICATION, Operation.CONCATENATION),
+                List.of(Operation.CONCATENATION, Operation.ADDITION),
+                List.of(Operation.CONCATENATION, Operation.MULTIPLICATION),
+                List.of(Operation.CONCATENATION, Operation.CONCATENATION));
+
+        assertEquals(expectedPermutations, Operation.getAllPossiblePermutations(2, true));
     }
 
     @Test
