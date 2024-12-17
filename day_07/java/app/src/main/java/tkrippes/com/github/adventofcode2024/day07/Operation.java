@@ -14,7 +14,7 @@ public enum Operation {
         return switch (this) {
             case ADDITION -> operand1 + operand2;
             case MULTIPLICATION -> operand1 * operand2;
-            case CONCATENATION -> operand1 * 10 + operand2;
+            case CONCATENATION -> Long.parseLong(operand1 + "" + operand2);
         };
     }
 
