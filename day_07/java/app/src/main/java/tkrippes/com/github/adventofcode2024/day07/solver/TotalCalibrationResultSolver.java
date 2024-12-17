@@ -13,10 +13,21 @@ public class TotalCalibrationResultSolver {
                 .sum();
     }
 
+    public long solve(List<Equation> equations, boolean includeConcatenation) {
+        return equations.stream()
+                .filter(equation -> isEquationSolvable(equation, includeConcatenation))
+                .mapToLong(Equation::result)
+                .sum();
+    }
+
     boolean isEquationSolvable(Equation equation) {
+        return isEquationSolvable(equation, false);
+    }
+
+    boolean isEquationSolvable(Equation equation, boolean includeConcatenation) {
         int numberOfOperations = equation.operands().size() - 1;
 
-        return Operation.getAllPossiblePermutations(numberOfOperations).stream()
+        return Operation.getAllPossiblePermutations(numberOfOperations, includeConcatenation).stream()
                 .anyMatch(permutation -> {
                     long currentResult = equation.operands().getFirst();
                     for (int i = 0; i < numberOfOperations; i++) {
