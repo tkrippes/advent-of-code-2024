@@ -13,17 +13,17 @@ public class AntinodesSolver {
                 .flatMap(frequency -> Position.getPositionsPairCombinations(map.getFrequencyPositions(frequency)).stream())
                 .flatMap(frequencyPositionPair -> {
                     List<Position> frequencyPositionPairList = List.copyOf(frequencyPositionPair);
-                    return getAntinodesPositions(frequencyPositionPairList.get(0), frequencyPositionPairList.get(1)).stream();
+                    return getAntinodePositions(frequencyPositionPairList.get(0), frequencyPositionPairList.get(1)).stream();
                 }).filter(map::isInBounds).distinct().count();
     }
 
-    static Set<Position> getAntinodesPositions(Position antennaPosition1, Position antennaPosition2) {
-        Position vectorFromAntenna1ToAntenna2 = antennaPosition2.subtract(antennaPosition1);
+    static Set<Position> getAntinodePositions(Position antennaPosition1, Position antennaPosition2) {
+        Position antenna1ToAntenna2Vector = antennaPosition2.subtract(antennaPosition1);
 
-        Set<Position> antinodesPositions = new HashSet<>();
-        antinodesPositions.add(antennaPosition1.subtract(vectorFromAntenna1ToAntenna2));
-        antinodesPositions.add(antennaPosition2.add(vectorFromAntenna1ToAntenna2));
+        Set<Position> antinodePositions = new HashSet<>();
+        antinodePositions.add(antennaPosition1.subtract(antenna1ToAntenna2Vector));
+        antinodePositions.add(antennaPosition2.add(antenna1ToAntenna2Vector));
 
-        return antinodesPositions;
+        return antinodePositions;
     }
 }

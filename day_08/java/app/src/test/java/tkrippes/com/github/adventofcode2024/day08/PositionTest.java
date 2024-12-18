@@ -29,6 +29,11 @@ public class PositionTest {
     }
 
     @Test
+    public void negateShouldReturnCorrectPosition() {
+        assertEquals(new Position(-5, -8), firstPosition.negate());
+    }
+
+    @Test
     public void getPositionsPairCombinationsShouldBeEmptyForOnePosition() {
         assertTrue(Position.getPositionsPairCombinations(Set.of(new Position(1, 1))).isEmpty());
     }

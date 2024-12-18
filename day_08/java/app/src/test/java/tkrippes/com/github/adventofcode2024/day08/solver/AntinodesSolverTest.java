@@ -18,73 +18,73 @@ public class AntinodesSolverTest {
     }
 
     @Test
-    public void getAntinodesPositionsFromTwoOverlappingAntennasShouldReturnTheSamePosition() {
-        assertEquals(Set.of(new Position(3, 3)), AntinodesSolver.getAntinodesPositions(new Position(3, 3),
+    public void getAntinodePositionsFromTwoOverlappingAntennasShouldReturnTheSamePosition() {
+        assertEquals(Set.of(new Position(3, 3)), AntinodesSolver.getAntinodePositions(new Position(3, 3),
                 new Position(3, 3)));
     }
 
     @Test
-    public void getAntinodesPositionsFromTwoHorizontallyAdjacentAntennasShouldReturnTwoAntinodesAdjacentToThem() {
+    public void getAntinodesPositionsFromTwoHorizontallyAdjacentAntennasShouldReturnTwoAntinodeAdjacentToThem() {
         assertEquals(Set.of(new Position(3, 2), new Position(3, 5)),
-                AntinodesSolver.getAntinodesPositions(new Position(3, 3),
+                AntinodesSolver.getAntinodePositions(new Position(3, 3),
                         new Position(3, 4)));
     }
 
     @Test
-    public void getAntinodesPositionsFromTwoHorizontallyAdjacentReversedAntennasShouldReturnTwoAntinodesAdjacentToThem() {
+    public void getAntinodesPositionsFromTwoHorizontallyAdjacentReversedAntennasShouldReturnTwoAntinodeAdjacentToThem() {
         assertEquals(Set.of(new Position(3, 2), new Position(3, 5)),
-                AntinodesSolver.getAntinodesPositions(new Position(3, 4),
+                AntinodesSolver.getAntinodePositions(new Position(3, 4),
                         new Position(3, 3)));
     }
 
     @Test
-    public void getAntinodesPositionsFromTwoVerticallyAdjacentAntennasShouldReturnTwoAntinodesAdjacentToThem() {
+    public void getAntinodesPositionsFromTwoVerticallyAdjacentAntennasShouldReturnTwoAntinodeAdjacentToThem() {
         assertEquals(Set.of(new Position(2, 3), new Position(5, 3)),
-                AntinodesSolver.getAntinodesPositions(new Position(3, 3),
+                AntinodesSolver.getAntinodePositions(new Position(3, 3),
                         new Position(4, 3)));
     }
 
     @Test
-    public void getAntinodesPositionsFromTwoVerticallyAdjacentReversedAntennasShouldReturnTwoAntinodesAdjacentToThem() {
+    public void getAntinodesPositionsFromTwoVerticallyAdjacentReversedAntennasShouldReturnTwoAntinodeAdjacentToThem() {
         assertEquals(Set.of(new Position(2, 3), new Position(5, 3)),
-                AntinodesSolver.getAntinodesPositions(new Position(4, 3),
+                AntinodesSolver.getAntinodePositions(new Position(4, 3),
                         new Position(3, 3)));
     }
 
     @Test
-    public void getAntinodesPositionsFromTwoPrimaryDiagonallyAdjacentAntennasShouldReturnTwoAntinodesAdjacentToThem() {
+    public void getAntinodesPositionsFromTwoPrimaryDiagonallyAdjacentAntennasShouldReturnTwoAntinodeAdjacentToThem() {
         assertEquals(Set.of(new Position(2, 2), new Position(5, 5)),
-                AntinodesSolver.getAntinodesPositions(new Position(3, 3),
+                AntinodesSolver.getAntinodePositions(new Position(3, 3),
                         new Position(4, 4)));
     }
 
     @Test
-    public void getAntinodesPositionsFromTwoPrimaryDiagonallyAdjacentReversedAntennasShouldReturnTwoAntinodesAdjacentToThem() {
+    public void getAntinodesPositionsFromTwoPrimaryDiagonallyAdjacentReversedAntennasShouldReturnTwoAntinodeAdjacentToThem() {
         assertEquals(Set.of(new Position(2, 2), new Position(5, 5)),
-                AntinodesSolver.getAntinodesPositions(new Position(4, 4),
+                AntinodesSolver.getAntinodePositions(new Position(4, 4),
                         new Position(3, 3)));
     }
 
     @Test
     public void
-    getAntinodesPositionsFromTwoSecondaryDiagonallyAdjacentAntennasShouldReturnTwoAntinodesAdjacentToThem() {
+    getAntinodesPositionsFromTwoSecondaryDiagonallyAdjacentAntennasShouldReturnTwoAntinodeAdjacentToThem() {
         assertEquals(Set.of(new Position(5, 1), new Position(2, 4)),
-                AntinodesSolver.getAntinodesPositions(new Position(3, 3),
+                AntinodesSolver.getAntinodePositions(new Position(3, 3),
                         new Position(4, 2)));
     }
 
     @Test
     public void
-    getAntinodesPositionsFromTwoSecondaryDiagonallyAdjacentReversedAntennasShouldReturnTwoAntinodesAdjacentToThem() {
+    getAntinodesPositionsFromTwoSecondaryDiagonallyAdjacentReversedAntennasShouldReturnTwoAntinodeAdjacentToThem() {
         assertEquals(Set.of(new Position(5, 1), new Position(2, 4)),
-                AntinodesSolver.getAntinodesPositions(new Position(4, 2),
+                AntinodesSolver.getAntinodePositions(new Position(4, 2),
                         new Position(3, 3)));
     }
 
     @Test
-    public void getAntinodesPositionsFromTwoAntennasWithDifferentCoordinatesShouldReturnTheTwoCorrectAntinodes() {
+    public void getAntinodesPositionsFromTwoAntennasWithDifferentCoordinatesShouldReturnTheTwoCorrectAntinode() {
         assertEquals(Set.of(new Position(6, 17), new Position(12, -7)),
-                AntinodesSolver.getAntinodesPositions(new Position(8, 9),
+                AntinodesSolver.getAntinodePositions(new Position(8, 9),
                         new Position(10, 1)));
     }
 
@@ -101,8 +101,6 @@ public class AntinodesSolverTest {
 
         assertEquals(14, AntinodesSolver.solve(antennaMap));
     }
-
-    // TODO add input tests
 
     @AfterEach
     public void tearDown() {

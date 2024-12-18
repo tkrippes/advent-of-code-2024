@@ -13,6 +13,10 @@ public record Position(int row, int column) {
         return new Position(row - otherPosition.row(), column - otherPosition.column());
     }
 
+    public Position negate() {
+        return new Position(-row, -column);
+    }
+
     public static Set<Set<Position>> getPositionsPairCombinations(Set<Position> positions) {
         List<Position> positionsList = List.copyOf(positions);
         Set<Set<Position>> positionsPairCombinations = new HashSet<>();
