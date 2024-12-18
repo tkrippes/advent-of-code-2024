@@ -14,16 +14,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AntennaMapParserTest {
-    private AntennaMapParser parser;
-
     @BeforeEach
     public void setUp() {
-        parser = new AntennaMapParser();
     }
 
     @Test
     public void parseThrowsForInvalidInputFileName() {
-        assertThrows(FileNotFoundException.class, () -> parser.parse("../../input/invalid_test_input.txt"));
+        assertThrows(FileNotFoundException.class, () -> AntennaMapParser.parse("../../input/invalid_test_input.txt"));
     }
 
     @Test
@@ -39,7 +36,7 @@ public class AntennaMapParserTest {
                 new Position(8, 8), 'A',
                 new Position(9, 9), 'A'), 12, 12);
 
-        assertEquals(expectedAntennaMap, parser.parse(validInputFileName));
+        assertEquals(expectedAntennaMap, AntennaMapParser.parse(validInputFileName));
     }
 
     @AfterEach

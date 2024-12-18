@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 public class AntennaMapParser {
-    public AntennaMap parse(String inputFileName) throws IOException {
+    public static AntennaMap parse(String inputFileName) throws IOException {
         File inputFile = new File(inputFileName);
         if (!inputFile.exists()) {
             throw new FileNotFoundException("Could not find input file: " + inputFileName);
@@ -27,7 +27,7 @@ public class AntennaMapParser {
         return map;
     }
 
-    private AntennaMap parseAntennaMap(List<String> inputLines) {
+    private static AntennaMap parseAntennaMap(List<String> inputLines) {
         int mapWidth = inputLines.getFirst().length();
         int mapHeight = inputLines.size();
 

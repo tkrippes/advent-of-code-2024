@@ -6,7 +6,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class AntinodesSolver {
-    Set<Position> getAntinodesPositions(Position antennaPosition1, Position antennaPosition2) {
+    static Set<Position> getAntinodesPositions(Position antennaPosition1, Position antennaPosition2) {
         Position vectorFromAntenna1ToAntenna2 = antennaPosition2.subtract(antennaPosition1);
 
         Set<Position> antinodesPositions = new HashSet<>();
