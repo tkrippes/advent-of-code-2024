@@ -28,19 +28,19 @@ public class AntennaMapParser {
     }
 
     private AntennaMap parseAntennaMap(List<String> inputLines) {
-        int width = inputLines.getFirst().length();
-        int height = inputLines.size();
+        int mapWidth = inputLines.getFirst().length();
+        int mapHeight = inputLines.size();
 
-        Map<Position, Character> map = new HashMap<>();
+        Map<Position, Character> frequencyMap = new HashMap<>();
         for (int row = 0; row < inputLines.size(); row++) {
             String inputLine = inputLines.get(row);
             for (int column = 0; column < inputLine.length(); column++) {
                 if (inputLine.charAt(column) != '.') {
-                    map.put(new Position(row, column), inputLine.charAt(column));
+                    frequencyMap.put(new Position(row, column), inputLine.charAt(column));
                 }
             }
         }
 
-        return new AntennaMap(map, width, height);
+        return new AntennaMap(frequencyMap, mapWidth, mapHeight);
     }
 }

@@ -5,14 +5,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public record AntennaMap(Map<Position, Character> map, int width, int height) {
-    public Set<Character> getAntennaFrequencies() {
-        return new HashSet<>(map.values());
+public record AntennaMap(Map<Position, Character> frequencyMap, int mapWidth, int mapHeight) {
+    public Set<Character> getFrequencies() {
+        return new HashSet<>(frequencyMap.values());
     }
 
-    public Set<Position> getAntennaFrequencyPositions(char antennaFrequency) {
-        return map.entrySet().stream()
-                .filter(frequency -> frequency.getValue() == antennaFrequency)
+    public Set<Position> getFrequencyPositions(char frequency) {
+        return frequencyMap.entrySet().stream()
+                .filter(frequencyEntry -> frequencyEntry.getValue() == frequency)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toSet());
     }

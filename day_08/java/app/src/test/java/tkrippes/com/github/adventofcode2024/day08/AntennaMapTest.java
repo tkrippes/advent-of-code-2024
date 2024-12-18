@@ -25,28 +25,28 @@ public class AntennaMapTest {
     }
 
     @Test
-    public void getAntennaFrequenciesShouldReturnZeroAndCapitalA() {
-        assertEquals(Set.of('0', 'A'), map.getAntennaFrequencies());
+    public void getFrequenciesShouldReturnZeroAndCapitalA() {
+        assertEquals(Set.of('0', 'A'), map.getFrequencies());
     }
 
     @Test
-    public void getAntennaFrequencyPositionsShouldReturnCorrectPositionsForZero() {
+    public void getFrequencyPositionsShouldReturnCorrectPositionsForZero() {
         assertEquals(Set.of(
                         new Position(1, 8),
                         new Position(2, 5),
                         new Position(3, 7),
                         new Position(4, 4)),
-                map.getAntennaFrequencyPositions('0'));
+                map.getFrequencyPositions('0'));
 
     }
 
     @Test
-    public void getAntennaFrequencyPositionsShouldReturnCorrectPositionsForCapitalA() {
+    public void getFrequencyPositionsShouldReturnCorrectPositionsForCapitalA() {
         assertEquals(Set.of(
                         new Position(5, 6),
                         new Position(8, 8),
                         new Position(9, 9)),
-                map.getAntennaFrequencyPositions('A'));
+                map.getFrequencyPositions('A'));
     }
 
     @AfterEach
