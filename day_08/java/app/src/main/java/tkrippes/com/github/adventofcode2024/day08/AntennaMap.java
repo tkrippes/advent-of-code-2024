@@ -16,4 +16,9 @@ public record AntennaMap(Map<Position, Character> frequencyMap, int mapWidth, in
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toSet());
     }
+
+    public boolean isInBounds(Position position) {
+        return position.row() >= 0 && position.row() < mapHeight &&
+                position.column() >= 0 && position.column() < mapWidth;
+    }
 }
