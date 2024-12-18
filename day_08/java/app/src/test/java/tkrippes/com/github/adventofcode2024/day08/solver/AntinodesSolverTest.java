@@ -86,41 +86,6 @@ public class AntinodesSolverTest {
                         new Position(10, 1)));
     }
 
-    @Test
-    public void getPositionsPairCombinationsShouldBeEmptyForOnePosition() {
-        assertTrue(AntinodesSolver.getPositionsPairCombinations(Set.of(new Position(1, 1))).isEmpty());
-    }
-
-    @Test
-    public void getPositionsPairCombinationsShouldReturnAllCombinationsForTwoPositions() {
-        assertEquals(Set.of(Set.of(new Position(1, 1), new Position(2, 2))),
-                AntinodesSolver.getPositionsPairCombinations(Set.of(new Position(1, 1),
-                        new Position(2, 2))));
-    }
-
-    @Test
-    public void getPositionsPairCombinationsShouldReturnAllCombinationsForThreePositions() {
-        assertEquals(Set.of(
-                        Set.of(new Position(1, 1), new Position(2, 2)),
-                        Set.of(new Position(1, 1), new Position(3, 3)),
-                        Set.of(new Position(2, 2), new Position(3, 3))),
-                AntinodesSolver.getPositionsPairCombinations(Set.of(new Position(1, 1),
-                        new Position(2, 2), new Position(3, 3))));
-    }
-
-    @Test
-    public void getPositionsPairCombinationsShouldReturnAllCombinationsForFourPositions() {
-        assertEquals(Set.of(
-                        Set.of(new Position(1, 1), new Position(2, 2)),
-                        Set.of(new Position(1, 1), new Position(3, 3)),
-                        Set.of(new Position(1, 1), new Position(4, 4)),
-                        Set.of(new Position(2, 2), new Position(3, 3)),
-                        Set.of(new Position(2, 2), new Position(4, 4)),
-                        Set.of(new Position(3, 3), new Position(4, 4))),
-                AntinodesSolver.getPositionsPairCombinations(Set.of(new Position(1, 1),
-                        new Position(2, 2), new Position(3, 3), new Position(4, 4))));
-    }
-
     // TODO add input tests
 
     @AfterEach
