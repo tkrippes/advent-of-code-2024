@@ -1,11 +1,12 @@
 package tkrippes.com.github.adventofcode2024.day09;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
 import tkrippes.com.github.adventofcode2024.day09.disk.File;
 import tkrippes.com.github.adventofcode2024.day09.disk.FileFreeSpaceBlock;
 import tkrippes.com.github.adventofcode2024.day09.disk.FreeSpace;
+
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.List;
 import java.util.Optional;
