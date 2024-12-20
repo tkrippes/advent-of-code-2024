@@ -5,10 +5,10 @@ import tkrippes.com.github.adventofcode2024.day09.DiskMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FilesystemChecksumSolver {
-    public static int solve(DiskMap map) {
+    public static long solve(DiskMap map) {
         return calculateChecksum(getCompactedFilesystem(map));
     }
-    
+
     static String getCompactedFilesystem(DiskMap map) {
         String filesystem = map.toString();
         int frontIndex = 0;
@@ -35,12 +35,12 @@ public class FilesystemChecksumSolver {
         return filesystem;
     }
 
-    static int calculateChecksum(String compactedFilesystem) {
+    static long calculateChecksum(String compactedFilesystem) {
         AtomicInteger index = new AtomicInteger();
 
         return compactedFilesystem.chars()
                 .takeWhile(ch -> ch != '.')
-                .map(Character::getNumericValue)
-                .reduce(0, (sum, value) -> sum + index.getAndIncrement() * value);
+                .mapToLong(Character::getNumericValue)
+                .reduce(0L, (sum, value) -> sum + index.getAndIncrement() * value);
     }
 }
