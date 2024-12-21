@@ -153,6 +153,13 @@ public class FilesystemChecksumSolver {
 
         return filesystemLayout.stream()
                 .mapToLong(Integer::longValue)
-                .reduce(0L, (sum, value) -> value == -1 ? sum : sum + index.getAndIncrement() * value);
+                .reduce(0L, (sum, value) -> {
+                    if (value != -1) {
+                        sum += index.get() * value;
+                    }
+                    index.getAndIncrement();
+
+                    return sum;
+                });
     }
 }
