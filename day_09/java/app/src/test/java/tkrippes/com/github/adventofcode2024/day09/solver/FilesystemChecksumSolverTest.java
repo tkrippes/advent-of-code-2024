@@ -45,7 +45,7 @@ public class FilesystemChecksumSolverTest {
     }
 
     @Test
-    public void getCompactedFilesystemLayoutForTestInputShouldReturnCorrectFilesystem() {
+    public void compactFilesystemLayoutForTestInputShouldReturnCorrectFilesystemLayout() {
         List<Integer> layout = List.of(0, 0, -1, -1, -1, 1, 1, 1, -1, -1, -1, 2, -1, -1, -1,
                 3, 3, 3, -1, 4, 4, -1, 5, 5, 5, 5, -1, 6, 6, 6, 6, -1, 7, 7, 7, -1, 8, 8, 8, 8, 9, 9);
 
@@ -53,11 +53,11 @@ public class FilesystemChecksumSolverTest {
                 4, 6, 5, 5, 5, 5, 6, 6, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
 
         assertEquals(expectedCompactedLayout,
-                FilesystemChecksumSolver.getCompactedFilesystemLayout(layout));
+                FilesystemChecksumSolver.compactFilesystemLayout(layout));
     }
 
     @Test
-    public void getCompactedFilesystemLayoutForTestInputPlusTwoDigitsFileIdShouldReturnCorrectFilesystem() {
+    public void compactFilesystemLayoutForTestInputPlusTwoDigitsFileIdShouldReturnCorrectFilesystemLayout() {
         List<Integer> layout = List.of(0, 0, -1, -1, -1, 1, 1, 1, -1, -1, -1, 2, -1, -1, -1,
                 3, 3, 3, -1, 4, 4, -1, 5, 5, 5, 5, -1, 6, 6, 6, 6, -1, 7, 7, 7, -1, 8, 8, 8, 8, 9, 9, -1, 10);
 
@@ -65,7 +65,7 @@ public class FilesystemChecksumSolverTest {
                 4, 4, 6, 5, 5, 5, 5, 6, 6, 6, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
 
         assertEquals(expectedCompactedLayout,
-                FilesystemChecksumSolver.getCompactedFilesystemLayout(layout));
+                FilesystemChecksumSolver.compactFilesystemLayout(layout));
     }
 
     @Test

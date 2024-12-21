@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class FilesystemChecksumSolver {
     public static long solve(DiskMap map) {
-        return calculateChecksum(getCompactedFilesystemLayout(getFilesystemLayout(map)));
+        return calculateChecksum(compactFilesystemLayout(getFilesystemLayout(map)));
     }
 
     static List<Integer> getFilesystemLayout(DiskMap map) {
@@ -27,7 +27,7 @@ public class FilesystemChecksumSolver {
                 }).toList();
     }
 
-    static List<Integer> getCompactedFilesystemLayout(List<Integer> filesystemLayout) {
+    static List<Integer> compactFilesystemLayout(List<Integer> filesystemLayout) {
         int frontIndex = 0;
         int backIndex = filesystemLayout.size() - 1;
         List<Integer> compactedFilesystemLayout = new ArrayList<>(filesystemLayout);
