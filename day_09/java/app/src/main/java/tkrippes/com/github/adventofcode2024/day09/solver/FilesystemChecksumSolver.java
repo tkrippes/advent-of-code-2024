@@ -12,11 +12,11 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 public class FilesystemChecksumSolver {
     public static long solve(DiskMap map) {
-        return calculateChecksum(compactFilesystemLayout(getFilesystemLayout(map)));
+        return calculateChecksum(compactFilesystemLayout(getFilesystemLayout(map.filesystem())));
     }
 
-    static List<Integer> getFilesystemLayout(DiskMap map) {
-        return map.filesystem().stream()
+    static List<Integer> getFilesystemLayout(List<FilesystemEntity> filesystem) {
+        return filesystem.stream()
                 .flatMap(entity -> {
                     if (entity instanceof File(int size, int id)) {
                         return java.util.Collections.nCopies(size, id).stream();
