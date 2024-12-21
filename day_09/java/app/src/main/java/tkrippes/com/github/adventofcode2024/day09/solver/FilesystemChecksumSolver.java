@@ -15,6 +15,7 @@ public class FilesystemChecksumSolver {
         return calculateChecksum(compactFilesystemLayout(getFilesystemLayout(map.filesystem())));
     }
 
+    // TODO create new solver for V2?
     public static long solveV2(DiskMap map) {
         return calculateChecksum(getFilesystemLayout(compactFilesystem(map.filesystem())));
     }
@@ -103,15 +104,6 @@ public class FilesystemChecksumSolver {
         return backIndex;
     }
 
-    private static int doSwapFreeSpaceAndFile(int backIndex, File file, List<FilesystemEntity> compactedFilesystem,
-                                              int frontIndex) {
-        compactedFilesystem.add(frontIndex, file);
-        backIndex++;
-        compactedFilesystem.set(backIndex, new FreeSpace(file.size()));
-
-        return backIndex;
-    }
-
     private static int shrinkFreeSpaceAtBeginning(int fileSize, int freeSpaceSize,
                                                   List<FilesystemEntity> compactedFilesystem, int frontIndex,
                                                   int backIndex) {
@@ -121,6 +113,15 @@ public class FilesystemChecksumSolver {
             compactedFilesystem.remove(frontIndex);
             backIndex--;
         }
+
+        return backIndex;
+    }
+
+    private static int doSwapFreeSpaceAndFile(int backIndex, File file, List<FilesystemEntity> compactedFilesystem,
+                                              int frontIndex) {
+        compactedFilesystem.add(frontIndex, file);
+        backIndex++;
+        compactedFilesystem.set(backIndex, new FreeSpace(file.size()));
 
         return backIndex;
     }
