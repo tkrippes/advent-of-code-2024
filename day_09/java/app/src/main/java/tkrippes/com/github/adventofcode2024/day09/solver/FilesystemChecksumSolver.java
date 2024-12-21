@@ -45,12 +45,11 @@ public class FilesystemChecksumSolver {
         return compactedFilesystemLayout;
     }
 
-    static long calculateChecksum(List<Integer> compactedFilesystemLayout) {
+    static long calculateChecksum(List<Integer> filesystemLayout) {
         AtomicInteger index = new AtomicInteger();
 
-        return compactedFilesystemLayout.stream()
-                .takeWhile(i -> i != -1)
+        return filesystemLayout.stream()
                 .mapToLong(Integer::longValue)
-                .reduce(0L, (sum, value) -> sum + index.getAndIncrement() * value);
+                .reduce(0L, (sum, value) -> value == -1 ? sum : sum + index.getAndIncrement() * value);
     }
 }
