@@ -34,8 +34,13 @@ public class DiskMapParser {
         int currentFileId = 0;
         for (int i = 0; i < input.length(); i += 2) {
             filesystem.add(new File(Character.getNumericValue(input.charAt(i)), currentFileId));
+            
             if (i + 1 < input.length()) {
-                filesystem.add(new FreeSpace(Character.getNumericValue(input.charAt(i + 1))));
+                int freeSpaceSize = Character.getNumericValue(input.charAt(i + 1));
+
+                if (freeSpaceSize > 0) {
+                    filesystem.add(new FreeSpace(freeSpaceSize));
+                }
             }
 
             currentFileId++;

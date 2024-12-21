@@ -33,7 +33,7 @@ public class DiskMapParserTest {
                 new File(1, 2), new FreeSpace(3), new File(3, 3), new FreeSpace(1),
                 new File(2, 4), new FreeSpace(1), new File(4, 5), new FreeSpace(1),
                 new File(4, 6), new FreeSpace(1), new File(3, 7), new FreeSpace(1),
-                new File(4, 8), new FreeSpace(0), new File(2, 9)));
+                new File(4, 8), new File(2, 9)));
 
         assertEquals(expectedMap, DiskMapParser.parse(validInputFileName));
     }

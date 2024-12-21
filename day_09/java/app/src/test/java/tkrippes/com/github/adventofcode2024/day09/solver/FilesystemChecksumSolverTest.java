@@ -24,7 +24,7 @@ public class FilesystemChecksumSolverTest {
                 new File(1, 2), new FreeSpace(3), new File(3, 3), new FreeSpace(1),
                 new File(2, 4), new FreeSpace(1), new File(4, 5), new FreeSpace(1),
                 new File(4, 6), new FreeSpace(1), new File(3, 7), new FreeSpace(1),
-                new File(4, 8), new FreeSpace(0), new File(2, 9)));
+                new File(4, 8), new File(2, 9)));
 
         assertEquals(1928, FilesystemChecksumSolver.solve(map));
     }
@@ -36,7 +36,7 @@ public class FilesystemChecksumSolverTest {
                 new File(1, 2), new FreeSpace(3), new File(3, 3), new FreeSpace(1),
                 new File(2, 4), new FreeSpace(1), new File(4, 5), new FreeSpace(1),
                 new File(4, 6), new FreeSpace(1), new File(3, 7), new FreeSpace(1),
-                new File(4, 8), new FreeSpace(0), new File(2, 9)));
+                new File(4, 8), new File(2, 9)));
 
         List<Integer> expectedLayout = List.of(0, 0, -1, -1, -1, 1, 1, 1, -1, -1, -1, 2, -1, -1, -1, 3, 3, 3, -1, 4,
                 4, -1, 5, 5, 5, 5, -1, 6, 6, 6, 6, -1, 7, 7, 7, -1, 8, 8, 8, 8, 9, 9);
