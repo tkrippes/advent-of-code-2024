@@ -15,6 +15,10 @@ public class FilesystemChecksumSolver {
         return calculateChecksum(compactFilesystemLayout(getFilesystemLayout(map.filesystem())));
     }
 
+    public static long solveV2(DiskMap map) {
+        return calculateChecksum(getFilesystemLayout(compactFilesystem(map.filesystem())));
+    }
+
     static List<Integer> getFilesystemLayout(List<FilesystemEntity> filesystem) {
         return filesystem.stream()
                 .flatMap(entity -> {

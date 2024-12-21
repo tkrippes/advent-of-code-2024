@@ -31,6 +31,18 @@ public class FilesystemChecksumSolverTest {
     }
 
     @Test
+    public void solveV2ForTestInputShouldReturnCorrectChecksum() {
+        DiskMap map = new DiskMap(List.of(
+                new File(2, 0), new FreeSpace(3), new File(3, 1), new FreeSpace(3),
+                new File(1, 2), new FreeSpace(3), new File(3, 3), new FreeSpace(1),
+                new File(2, 4), new FreeSpace(1), new File(4, 5), new FreeSpace(1),
+                new File(4, 6), new FreeSpace(1), new File(3, 7), new FreeSpace(1),
+                new File(4, 8), new File(2, 9)));
+
+        assertEquals(2858, FilesystemChecksumSolver.solveV2(map));
+    }
+
+    @Test
     public void getFilesystemLayoutForTestInputShouldReturnCorrectFilesystemLayout() {
         DiskMap map = new DiskMap(List.of(
                 new File(2, 0), new FreeSpace(3), new File(3, 1), new FreeSpace(3),
