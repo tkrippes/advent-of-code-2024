@@ -2,7 +2,6 @@ package tkrippes.com.github.adventofcode2024.day09.solver;
 
 import tkrippes.com.github.adventofcode2024.day09.DiskMap;
 import tkrippes.com.github.adventofcode2024.day09.disk.File;
-import tkrippes.com.github.adventofcode2024.day09.disk.FilesystemEntity;
 import tkrippes.com.github.adventofcode2024.day09.disk.FreeSpace;
 
 import org.junit.jupiter.api.AfterEach;
@@ -19,7 +18,7 @@ public class FilesystemChecksumSolverTest {
     }
 
     @Test
-    public void solveForTestInputShouldReturnCorrectChecksum() {
+    public void solveShouldThrow() {
         DiskMap map = new DiskMap(List.of(
                 new File(2, 0), new FreeSpace(3), new File(3, 1), new FreeSpace(3),
                 new File(1, 2), new FreeSpace(3), new File(3, 3), new FreeSpace(1),
@@ -27,19 +26,7 @@ public class FilesystemChecksumSolverTest {
                 new File(4, 6), new FreeSpace(1), new File(3, 7), new FreeSpace(1),
                 new File(4, 8), new File(2, 9)));
 
-        assertEquals(1928, FilesystemChecksumSolver.solve(map));
-    }
-
-    @Test
-    public void solveV2ForTestInputShouldReturnCorrectChecksum() {
-        DiskMap map = new DiskMap(List.of(
-                new File(2, 0), new FreeSpace(3), new File(3, 1), new FreeSpace(3),
-                new File(1, 2), new FreeSpace(3), new File(3, 3), new FreeSpace(1),
-                new File(2, 4), new FreeSpace(1), new File(4, 5), new FreeSpace(1),
-                new File(4, 6), new FreeSpace(1), new File(3, 7), new FreeSpace(1),
-                new File(4, 8), new File(2, 9)));
-
-        assertEquals(2858, FilesystemChecksumSolver.solveV2(map));
+        assertThrows(UnsupportedOperationException.class, () -> FilesystemChecksumSolver.solve(map));
     }
 
     @Test
@@ -58,54 +45,19 @@ public class FilesystemChecksumSolverTest {
     }
 
     @Test
-    public void compactFilesystemLayoutForTestInputShouldReturnCorrectFilesystemLayout() {
-        List<Integer> layout = List.of(0, 0, -1, -1, -1, 1, 1, 1, -1, -1, -1, 2, -1, -1, -1,
-                3, 3, 3, -1, 4, 4, -1, 5, 5, 5, 5, -1, 6, 6, 6, 6, -1, 7, 7, 7, -1, 8, 8, 8, 8, 9, 9);
-
-        List<Integer> expectedCompactedLayout = List.of(0, 0, 9, 9, 8, 1, 1, 1, 8, 8, 8, 2, 7, 7, 7, 3, 3, 3, 6, 4,
-                4, 6, 5, 5, 5, 5, 6, 6, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
-
-        assertEquals(expectedCompactedLayout,
-                FilesystemChecksumSolver.compactFilesystemLayout(layout));
-    }
-
-    @Test
-    public void compactFilesystemLayoutForTestInputPlusTwoDigitsFileIdShouldReturnCorrectFilesystemLayout() {
-        List<Integer> layout = List.of(0, 0, -1, -1, -1, 1, 1, 1, -1, -1, -1, 2, -1, -1, -1,
-                3, 3, 3, -1, 4, 4, -1, 5, 5, 5, 5, -1, 6, 6, 6, 6, -1, 7, 7, 7, -1, 8, 8, 8, 8, 9, 9, -1, 10);
-
-        List<Integer> expectedCompactedLayout = List.of(0, 0, 10, 9, 9, 1, 1, 1, 8, 8, 8, 2, 8, 7, 7, 3, 3, 3, 7,
-                4, 4, 6, 5, 5, 5, 5, 6, 6, 6, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
-
-        assertEquals(expectedCompactedLayout,
-                FilesystemChecksumSolver.compactFilesystemLayout(layout));
-    }
-
-    @Test
-    public void compactFilesystemForTestInputShouldReturnCorrectFilesystem() {
-        List<FilesystemEntity> filesystem = List.of(
-                new File(2, 0), new FreeSpace(3), new File(3, 1), new FreeSpace(3),
-                new File(1, 2), new FreeSpace(3), new File(3, 3), new FreeSpace(1),
-                new File(2, 4), new FreeSpace(1), new File(4, 5), new FreeSpace(1),
-                new File(4, 6), new FreeSpace(1), new File(3, 7), new FreeSpace(1),
-                new File(4, 8), new File(2, 9));
-
-        List<FilesystemEntity> expectedFilesystem = List.of(
-                new File(2, 0), new File(2, 9), new File(1, 2), new File(3, 1),
-                new File(3, 7), new FreeSpace(1), new File(2, 4), new FreeSpace(1),
-                new File(3, 3), new FreeSpace(4), new File(4, 5), new FreeSpace(1),
-                new File(4, 6), new FreeSpace(5), new File(4, 8), new FreeSpace(2));
-
-        assertEquals(expectedFilesystem,
-                FilesystemChecksumSolver.compactFilesystem(filesystem));
-    }
-
-    @Test
-    public void calculateChecksumForTestInputShouldReturnCorrectChecksum() {
+    public void calculateChecksumForTestInputPart1ShouldReturnCorrectChecksum() {
         List<Integer> compactedLayout = List.of(0, 0, 9, 9, 8, 1, 1, 1, 8, 8, 8, 2, 7, 7, 7, 3, 3, 3, 6, 4,
                 4, 6, 5, 5, 5, 5, 6, 6, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1);
 
         assertEquals(1928, FilesystemChecksumSolver.calculateChecksum(compactedLayout));
+    }
+
+    @Test
+    public void calculateChecksumForTestInputPart2ShouldReturnCorrectChecksum() {
+        List<Integer> compactedLayout = List.of(0, 0, 9, 9, 2, 1, 1, 1, 7, 7, 7, -1, 4, 4, -1, 3, 3, 3, -1, -1, -1,
+                -1, 5, 5, 5, 5, -1, 6, 6, 6, 6, -1, -1, -1, -1, -1, 8, 8, 8, 8, -1, -1);
+
+        assertEquals(2858, FilesystemChecksumSolver.calculateChecksum(compactedLayout));
     }
 
     @AfterEach
