@@ -10,8 +10,8 @@ public class Main {
     private static final String inputFileName = "../../input/input.txt";
 
     public static void main(String[] args) {
-        System.out.println("Result of day 7 part 1: " + result(AntinodesSolver::solve));
-        System.out.println("Result of day 7 part 2: " + result(AntinodesResonantHarmonicsSolver::solve));
+        System.out.println("Result of day 8 part 1: " + result(AntinodesSolver::solve));
+        System.out.println("Result of day 8 part 2: " + result(AntinodesResonantHarmonicsSolver::solve));
     }
 
     private static int result(Function<AntennaMap, Integer> solve) {
