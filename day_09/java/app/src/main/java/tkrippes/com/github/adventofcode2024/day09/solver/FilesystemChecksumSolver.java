@@ -61,6 +61,9 @@ public class FilesystemChecksumSolver {
 
             while (frontIndex < backIndex) {
                 frontIndex = skipFilesAtBeginning(compactedFilesystem, frontIndex);
+                if (frontIndex >= backIndex) {
+                    break;
+                }
 
                 int freeSpaceSize = ((FreeSpace) compactedFilesystem.get(frontIndex)).size();
                 File file = (File) compactedFilesystem.get(backIndex);
