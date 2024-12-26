@@ -32,6 +32,20 @@ public class TopographicMap {
                 .collect(Collectors.toSet());
     }
 
+    public Set<Map.Entry<Position, Integer>> getNeighbours(Position position) {
+        Position upperNeighbourPosition = new Position(position.row() - 1, position.column());
+        Position leftNeighbourPosition = new Position(position.row(), position.column() - 1);
+        Position rightNeighbourPosition = new Position(position.row(), position.column() + 1);
+        Position lowerNeighbourPosition = new Position(position.row() + 1, position.column());
+
+        return heightMap.entrySet().stream().filter(e -> {
+            Position neighbourPosition = e.getKey();
+
+            return neighbourPosition.equals(upperNeighbourPosition) || neighbourPosition.equals(leftNeighbourPosition) ||
+                    neighbourPosition.equals(rightNeighbourPosition) || neighbourPosition.equals(lowerNeighbourPosition);
+        }).collect(Collectors.toSet());
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
