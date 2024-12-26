@@ -5,17 +5,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TopographicMap {
-    private final int trailheadValue = 0;
-    private final int trailEndValue = 9;
-
     private final Map<Position, Integer> heightMap;
-    private final int mapWidth;
-    private final int mapHeight;
 
-    public TopographicMap(Map<Position, Integer> heightMap, int mapWidth, int mapHeight) {
+    public TopographicMap(Map<Position, Integer> heightMap) {
         this.heightMap = heightMap;
-        this.mapWidth = mapWidth;
-        this.mapHeight = mapHeight;
     }
 
     public int getHeight(Position position) {
@@ -23,15 +16,16 @@ public class TopographicMap {
     }
 
     public Set<Position> getTrailheadPositions() {
-        return heightMap.entrySet().stream()
-                .filter(e -> e.getValue() == trailheadValue)
-                .map(Map.Entry::getKey)
-                .collect(Collectors.toSet());
+        return getPositions(0);
     }
 
     public Set<Position> getTrailEndPositions() {
+        return getPositions(9);
+    }
+
+    private Set<Position> getPositions(int height) {
         return heightMap.entrySet().stream()
-                .filter(e -> e.getValue() == trailEndValue)
+                .filter(e -> e.getValue() == height)
                 .map(Map.Entry::getKey)
                 .collect(Collectors.toSet());
     }
@@ -66,6 +60,6 @@ public class TopographicMap {
 
         TopographicMap other = (TopographicMap) obj;
 
-        return heightMap.equals(other.heightMap) && mapWidth == other.mapWidth && mapHeight == other.mapHeight;
+        return heightMap.equals(other.heightMap);
     }
 }

@@ -23,7 +23,7 @@ public class TopographicMapTestInputHelper {
         heightMap.put(new Position(3, 2), 7);
         heightMap.put(new Position(3, 3), 6);
 
-        return new TopographicMap(heightMap, 4, 4);
+        return new TopographicMap(heightMap);
     }
 
     public static TopographicMap getTestInput2TopographicMap() {
@@ -45,7 +45,7 @@ public class TopographicMapTestInputHelper {
         heightMap.put(new Position(6, 0), 9);
         heightMap.put(new Position(6, 6), 9);
 
-        return new TopographicMap(heightMap, 7, 7);
+        return new TopographicMap(heightMap);
     }
 
     public static TopographicMap getTestInput3TopographicMap() {
@@ -78,7 +78,7 @@ public class TopographicMapTestInputHelper {
         heightMap.put(new Position(6, 1), 8);
         heightMap.put(new Position(6, 2), 7);
 
-        return new TopographicMap(heightMap, 7, 7);
+        return new TopographicMap(heightMap);
     }
 
     public static TopographicMap getTestInput4TopographicMap() {
@@ -104,7 +104,7 @@ public class TopographicMapTestInputHelper {
         heightMap.put(new Position(6, 5), 0);
         heightMap.put(new Position(6, 6), 1);
 
-        return new TopographicMap(heightMap, 7, 7);
+        return new TopographicMap(heightMap);
     }
 
     public static TopographicMap getTestInput5TopographicMap() {
@@ -174,6 +174,6 @@ public class TopographicMapTestInputHelper {
         heightMap.put(new Position(7, 6), 3);
         heightMap.put(new Position(7, 7), 2);
 
-        return new TopographicMap(heightMap, 8, 8);
+        return new TopographicMap(heightMap);
     }
 }

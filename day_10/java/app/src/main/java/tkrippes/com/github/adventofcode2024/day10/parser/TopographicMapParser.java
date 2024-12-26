@@ -28,9 +28,6 @@ public class TopographicMapParser {
     }
 
     private static TopographicMap parseTopographicMap(List<String> inputLines) {
-        int mapWidth = inputLines.getFirst().length();
-        int mapHeight = inputLines.size();
-
         Map<Position, Integer> heightMap = new HashMap<>();
         for (int row = 0; row < inputLines.size(); row++) {
             String inputLine = inputLines.get(row);
@@ -41,6 +38,6 @@ public class TopographicMapParser {
             }
         }
 
-        return new TopographicMap(heightMap, mapWidth, mapHeight);
+        return new TopographicMap(heightMap);
     }
 }
