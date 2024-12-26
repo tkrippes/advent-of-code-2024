@@ -18,6 +18,10 @@ public class TopographicMap {
         this.mapHeight = mapHeight;
     }
 
+    public int getHeight(Position position) {
+        return heightMap.getOrDefault(position, -1);
+    }
+
     public Set<Position> getTrailheadPositions() {
         return heightMap.entrySet().stream()
                 .filter(e -> e.getValue() == trailheadValue)
