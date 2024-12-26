@@ -31,6 +31,21 @@ public class TrailheadScoreSolverTest {
     }
 
     @Test
+    public void solveForTestInput2ShouldReturnCorrectScore() {
+        assertEquals(2, TrailheadScoreSolver.solve(testInput2Map));
+    }
+
+    @Test
+    public void solveForTestInput3ShouldReturnCorrectScore() {
+        assertEquals(4, TrailheadScoreSolver.solve(testInput3Map));
+    }
+
+    @Test
+    public void solveForTestInput4ShouldReturnCorrectScore() {
+        assertEquals(3, TrailheadScoreSolver.solve(testInput4Map));
+    }
+
+    @Test
     public void solveForTestInput5ShouldReturnCorrectScore() {
         assertEquals(36, TrailheadScoreSolver.solve(testInput5Map));
     }
