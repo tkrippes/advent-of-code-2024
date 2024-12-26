@@ -176,4 +176,68 @@ public class TopographicMapTestInputHelper {
 
         return new TopographicMap(heightMap);
     }
+
+    public static TopographicMap getTestInput6TopographicMap() {
+        Map<Position, Integer> heightMap = new HashMap<>();
+        heightMap.put(new Position(0, 5), 0);
+        heightMap.put(new Position(1, 2), 4);
+        heightMap.put(new Position(1, 3), 3);
+        heightMap.put(new Position(1, 4), 2);
+        heightMap.put(new Position(1, 5), 1);
+        heightMap.put(new Position(2, 2), 5);
+        heightMap.put(new Position(2, 5), 2);
+        heightMap.put(new Position(3, 2), 6);
+        heightMap.put(new Position(3, 3), 5);
+        heightMap.put(new Position(3, 4), 4);
+        heightMap.put(new Position(3, 5), 3);
+        heightMap.put(new Position(4, 2), 7);
+        heightMap.put(new Position(4, 5), 4);
+        heightMap.put(new Position(5, 2), 8);
+        heightMap.put(new Position(5, 3), 7);
+        heightMap.put(new Position(5, 4), 6);
+        heightMap.put(new Position(5, 5), 5);
+        heightMap.put(new Position(6, 2), 9);
+
+        return new TopographicMap(heightMap);
+    }
+
+    public static TopographicMap getTestInput7TopographicMap() {
+        Map<Position, Integer> heightMap = new HashMap<>();
+        heightMap.put(new Position(0, 0), 0);
+        heightMap.put(new Position(0, 1), 1);
+        heightMap.put(new Position(0, 2), 2);
+        heightMap.put(new Position(0, 3), 3);
+        heightMap.put(new Position(0, 4), 4);
+        heightMap.put(new Position(0, 5), 5);
+        heightMap.put(new Position(1, 0), 1);
+        heightMap.put(new Position(1, 1), 2);
+        heightMap.put(new Position(1, 2), 3);
+        heightMap.put(new Position(1, 3), 4);
+        heightMap.put(new Position(1, 4), 5);
+        heightMap.put(new Position(1, 5), 6);
+        heightMap.put(new Position(2, 0), 2);
+        heightMap.put(new Position(2, 1), 3);
+        heightMap.put(new Position(2, 2), 4);
+        heightMap.put(new Position(2, 3), 5);
+        heightMap.put(new Position(2, 4), 6);
+        heightMap.put(new Position(2, 5), 7);
+        heightMap.put(new Position(3, 0), 3);
+        heightMap.put(new Position(3, 1), 4);
+        heightMap.put(new Position(3, 2), 5);
+        heightMap.put(new Position(3, 3), 6);
+        heightMap.put(new Position(3, 4), 7);
+        heightMap.put(new Position(3, 5), 8);
+        heightMap.put(new Position(4, 0), 4);
+        heightMap.put(new Position(4, 2), 6);
+        heightMap.put(new Position(4, 3), 7);
+        heightMap.put(new Position(4, 4), 8);
+        heightMap.put(new Position(4, 5), 9);
+        heightMap.put(new Position(5, 0), 5);
+        heightMap.put(new Position(5, 1), 6);
+        heightMap.put(new Position(5, 2), 7);
+        heightMap.put(new Position(5, 3), 8);
+        heightMap.put(new Position(5, 4), 9);
+
+        return new TopographicMap(heightMap);
+    }
 }

@@ -62,6 +62,22 @@ public class TopographicMapParserTest {
                 TopographicMapParser.parse(validInputFileName));
     }
 
+    @Test
+    public void parseShouldParseInputFile6Correctly() throws IOException {
+        String validInputFileName = "../../input/test_input_6.txt";
+
+        assertEquals(TopographicMapTestInputHelper.getTestInput6TopographicMap(),
+                TopographicMapParser.parse(validInputFileName));
+    }
+
+    @Test
+    public void parseShouldParseInputFile7Correctly() throws IOException {
+        String validInputFileName = "../../input/test_input_7.txt";
+
+        assertEquals(TopographicMapTestInputHelper.getTestInput7TopographicMap(),
+                TopographicMapParser.parse(validInputFileName));
+    }
+
     @AfterEach
     public void tearDown() {
     }
