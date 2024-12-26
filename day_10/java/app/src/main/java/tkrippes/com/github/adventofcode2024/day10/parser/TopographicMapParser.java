@@ -1,7 +1,7 @@
-package tkrippes.com.github.adventofcode2024.day10.Main.parser;
+package tkrippes.com.github.adventofcode2024.day10.parser;
 
-import tkrippes.com.github.adventofcode2024.day10.Main.Position;
-import tkrippes.com.github.adventofcode2024.day10.Main.TopographicMap;
+import tkrippes.com.github.adventofcode2024.day10.Position;
+import tkrippes.com.github.adventofcode2024.day10.TopographicMap;
 
 import java.io.*;
 import java.util.HashMap;
@@ -35,10 +35,8 @@ public class TopographicMapParser {
         for (int row = 0; row < inputLines.size(); row++) {
             String inputLine = inputLines.get(row);
             for (int column = 0; column < inputLine.length(); column++) {
-                if (inputLine.charAt(column) != '.') {
+                if (Character.isDigit(inputLine.charAt(column))) {
                     heightMap.put(new Position(row, column), Character.getNumericValue(inputLine.charAt(column)));
-                } else {
-                    heightMap.put(new Position(row, column), -1);
                 }
             }
         }

@@ -1,4 +1,4 @@
-package tkrippes.com.github.adventofcode2024.day10.Main;
+package tkrippes.com.github.adventofcode2024.day10;
 
 import java.util.Map;
 import java.util.Set;

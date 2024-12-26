@@ -1,34 +1,10 @@
-package tkrippes.com.github.adventofcode2024.day10.Main.parser;
+package tkrippes.com.github.adventofcode2024.day10;
 
-import tkrippes.com.github.adventofcode2024.day10.Main.Position;
-import tkrippes.com.github.adventofcode2024.day10.Main.TopographicMap;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-public class TopographicMapParserTest {
-    @BeforeEach
-    public void setUp() {
-    }
-
-    @Test
-    public void parseThrowsForInvalidInputFileName() {
-        assertThrows(FileNotFoundException.class, () -> TopographicMapParser.parse("../../input/invalid_test_input" +
-                ".txt"));
-    }
-
-    @Test
-    public void parseShouldParseInputFile1Correctly() throws IOException {
-        String validInputFileName = "../../input/test_input_1.txt";
-
+public class TopographicMapTestInputHelper {
+    public static TopographicMap getTestInput1TopographicMap() {
         Map<Position, Integer> heightMap = new HashMap<>();
         heightMap.put(new Position(0, 0), 0);
         heightMap.put(new Position(0, 1), 1);
@@ -46,15 +22,92 @@ public class TopographicMapParserTest {
         heightMap.put(new Position(3, 1), 8);
         heightMap.put(new Position(3, 2), 7);
         heightMap.put(new Position(3, 3), 6);
-        TopographicMap expectedTopographicMap = new TopographicMap(heightMap, 4, 4);
 
-        assertEquals(expectedTopographicMap, TopographicMapParser.parse(validInputFileName));
+        return new TopographicMap(heightMap, 4, 4);
     }
 
-    @Test
-    public void parseShouldParseInputFile5Correctly() throws IOException {
-        String validInputFileName = "../../input/test_input_5.txt";
+    public static TopographicMap getTestInput2TopographicMap() {
+        Map<Position, Integer> heightMap = new HashMap<>();
+        heightMap.put(new Position(0, 3), 0);
+        heightMap.put(new Position(1, 3), 1);
+        heightMap.put(new Position(2, 3), 2);
+        heightMap.put(new Position(3, 0), 6);
+        heightMap.put(new Position(3, 1), 5);
+        heightMap.put(new Position(3, 2), 4);
+        heightMap.put(new Position(3, 3), 3);
+        heightMap.put(new Position(3, 4), 4);
+        heightMap.put(new Position(3, 5), 5);
+        heightMap.put(new Position(3, 6), 6);
+        heightMap.put(new Position(4, 0), 7);
+        heightMap.put(new Position(4, 6), 7);
+        heightMap.put(new Position(5, 0), 8);
+        heightMap.put(new Position(5, 6), 8);
+        heightMap.put(new Position(6, 0), 9);
+        heightMap.put(new Position(6, 6), 9);
 
+        return new TopographicMap(heightMap, 7, 7);
+    }
+
+    public static TopographicMap getTestInput3TopographicMap() {
+        Map<Position, Integer> heightMap = new HashMap<>();
+        heightMap.put(new Position(0, 2), 9);
+        heightMap.put(new Position(0, 3), 0);
+        heightMap.put(new Position(0, 6), 9);
+        heightMap.put(new Position(1, 3), 1);
+        heightMap.put(new Position(1, 5), 9);
+        heightMap.put(new Position(1, 6), 8);
+        heightMap.put(new Position(2, 3), 2);
+        heightMap.put(new Position(2, 6), 7);
+        heightMap.put(new Position(3, 0), 6);
+        heightMap.put(new Position(3, 1), 5);
+        heightMap.put(new Position(3, 2), 4);
+        heightMap.put(new Position(3, 3), 3);
+        heightMap.put(new Position(3, 4), 4);
+        heightMap.put(new Position(3, 5), 5);
+        heightMap.put(new Position(3, 6), 6);
+        heightMap.put(new Position(4, 0), 7);
+        heightMap.put(new Position(4, 1), 6);
+        heightMap.put(new Position(4, 2), 5);
+        heightMap.put(new Position(4, 4), 9);
+        heightMap.put(new Position(4, 5), 8);
+        heightMap.put(new Position(4, 6), 7);
+        heightMap.put(new Position(5, 0), 8);
+        heightMap.put(new Position(5, 1), 7);
+        heightMap.put(new Position(5, 2), 6);
+        heightMap.put(new Position(6, 0), 9);
+        heightMap.put(new Position(6, 1), 8);
+        heightMap.put(new Position(6, 2), 7);
+
+        return new TopographicMap(heightMap, 7, 7);
+    }
+
+    public static TopographicMap getTestInput4TopographicMap() {
+        Map<Position, Integer> heightMap = new HashMap<>();
+        heightMap.put(new Position(0, 0), 1);
+        heightMap.put(new Position(0, 1), 0);
+        heightMap.put(new Position(0, 4), 9);
+        heightMap.put(new Position(1, 0), 2);
+        heightMap.put(new Position(1, 4), 8);
+        heightMap.put(new Position(2, 0), 3);
+        heightMap.put(new Position(2, 4), 7);
+        heightMap.put(new Position(3, 0), 4);
+        heightMap.put(new Position(3, 1), 5);
+        heightMap.put(new Position(3, 2), 6);
+        heightMap.put(new Position(3, 3), 7);
+        heightMap.put(new Position(3, 4), 6);
+        heightMap.put(new Position(3, 5), 5);
+        heightMap.put(new Position(3, 6), 4);
+        heightMap.put(new Position(4, 3), 8);
+        heightMap.put(new Position(4, 6), 3);
+        heightMap.put(new Position(5, 3), 9);
+        heightMap.put(new Position(5, 6), 2);
+        heightMap.put(new Position(6, 5), 0);
+        heightMap.put(new Position(6, 6), 1);
+
+        return new TopographicMap(heightMap, 7, 7);
+    }
+
+    public static TopographicMap getTestInput5TopographicMap() {
         Map<Position, Integer> heightMap = new HashMap<>();
         heightMap.put(new Position(0, 0), 8);
         heightMap.put(new Position(0, 1), 9);
@@ -120,12 +173,7 @@ public class TopographicMapParserTest {
         heightMap.put(new Position(7, 5), 7);
         heightMap.put(new Position(7, 6), 3);
         heightMap.put(new Position(7, 7), 2);
-        TopographicMap expectedTopographicMap = new TopographicMap(heightMap, 8, 8);
 
-        assertEquals(expectedTopographicMap, TopographicMapParser.parse(validInputFileName));
-    }
-
-    @AfterEach
-    public void tearDown() {
+        return new TopographicMap(heightMap, 8, 8);
     }
 }

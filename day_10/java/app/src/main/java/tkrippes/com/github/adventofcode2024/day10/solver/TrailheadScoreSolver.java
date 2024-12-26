@@ -1,7 +1,7 @@
-package tkrippes.com.github.adventofcode2024.day10.Main.solver;
+package tkrippes.com.github.adventofcode2024.day10.solver;
 
-import tkrippes.com.github.adventofcode2024.day10.Main.Position;
-import tkrippes.com.github.adventofcode2024.day10.Main.TopographicMap;
+import tkrippes.com.github.adventofcode2024.day10.Position;
+import tkrippes.com.github.adventofcode2024.day10.TopographicMap;
 
 import java.util.HashSet;
 import java.util.Map;
