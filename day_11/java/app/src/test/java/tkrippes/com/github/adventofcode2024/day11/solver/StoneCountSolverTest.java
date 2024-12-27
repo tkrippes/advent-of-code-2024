@@ -19,6 +19,11 @@ public class StoneCountSolverTest {
     }
 
     @Test
+    public void solveShouldReturnCorrectStoneCount() {
+        assertEquals(55312, StoneCountSolver.solve(initialStones));
+    }
+
+    @Test
     public void blinkOnceShouldReturnCorrectStones() {
         assertEquals(List.of(new PlutonianPebble(253000), new PlutonianPebble(1), new PlutonianPebble(7)),
                 StoneCountSolver.blink(initialStones));
