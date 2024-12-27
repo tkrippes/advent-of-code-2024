@@ -20,7 +20,7 @@ public class StoneCountSolverTest {
 
     @Test
     public void solveShouldReturnCorrectStoneCount() {
-        assertEquals(55312, StoneCountSolver.solve(initialStones));
+        assertEquals(55312, StoneCountSolver.solve(initialStones, 25));
     }
 
     @Test

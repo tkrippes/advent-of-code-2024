@@ -6,9 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StoneCountSolver {
-    private static final int numberOfBlinks = 25;
-
-    public static int solve(List<PlutonianPebble> stones) {
+    public static int solve(List<PlutonianPebble> stones, int numberOfBlinks) {
         List<PlutonianPebble> result = new ArrayList<>(stones);
         for (int i = 0; i < numberOfBlinks; i++) {
             result = blink(result);

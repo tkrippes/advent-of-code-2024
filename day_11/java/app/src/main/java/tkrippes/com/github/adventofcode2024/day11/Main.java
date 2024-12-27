@@ -9,10 +9,11 @@ public class Main {
     private static final String inputFileName = "../../input/input.txt";
 
     public static void main(String[] args) {
-        System.out.println("Result of day 11 part 1: " + resultPart1());
+        System.out.println("Result of day 11 part 1: " + result(25));
+        System.out.println("Result of day 11 part 2: " + result(75));
     }
 
-    private static int resultPart1() {
+    private static int result(int numberOfBlinks) {
         List<PlutonianPebble> stones;
         try {
             stones = PlutonianPebblesParser.parse(inputFileName);
@@ -22,6 +23,6 @@ public class Main {
             return 0;
         }
 
-        return StoneCountSolver.solve(stones);
+        return StoneCountSolver.solve(stones, numberOfBlinks);
     }
 }
