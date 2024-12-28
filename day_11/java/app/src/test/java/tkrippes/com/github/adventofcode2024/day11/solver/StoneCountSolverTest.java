@@ -6,7 +6,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,116 +18,38 @@ public class StoneCountSolverTest {
     }
 
     @Test
-    public void solveShouldReturnCorrectStoneCount() {
+    public void solveForOneBlinkShouldReturnCorrectStoneCount() {
+        assertEquals(3, StoneCountSolver.solve(initialStones, 1));
+    }
+
+    @Test
+    public void solveForTwoBlinksShouldReturnCorrectStoneCount() {
+        assertEquals(4, StoneCountSolver.solve(initialStones, 2));
+    }
+
+    @Test
+    public void solveForThreeBlinksShouldReturnCorrectStoneCount() {
+        assertEquals(5, StoneCountSolver.solve(initialStones, 3));
+    }
+
+    @Test
+    public void solveForFourBlinksShouldReturnCorrectStoneCount() {
+        assertEquals(9, StoneCountSolver.solve(initialStones, 4));
+    }
+
+    @Test
+    public void solveForFiveBlinksShouldReturnCorrectStoneCount() {
+        assertEquals(13, StoneCountSolver.solve(initialStones, 5));
+    }
+
+    @Test
+    public void solveForSixBlinksShouldReturnCorrectStoneCount() {
+        assertEquals(22, StoneCountSolver.solve(initialStones, 6));
+    }
+
+    @Test
+    public void solveForTwentyFiveBlinksShouldReturnCorrectStoneCount() {
         assertEquals(55312, StoneCountSolver.solve(initialStones, 25));
-    }
-
-    @Test
-    public void blinkOnceShouldReturnCorrectStones() {
-        assertEquals(List.of(new PlutonianPebble(253000), new PlutonianPebble(1), new PlutonianPebble(7)),
-                StoneCountSolver.blink(initialStones));
-    }
-
-    @Test
-    public void blinkTwiceShouldReturnCorrectStones() {
-        List<PlutonianPebble> expectedStones = List.of(
-                new PlutonianPebble(253),
-                new PlutonianPebble(0),
-                new PlutonianPebble(2024),
-                new PlutonianPebble(14168)
-        );
-
-        assertEquals(expectedStones, getPlutonianPebbles(2));
-    }
-
-    @Test
-    public void blinkThreeTimesShouldReturnCorrectStones() {
-        List<PlutonianPebble> expectedStones = List.of(
-                new PlutonianPebble(512072),
-                new PlutonianPebble(1),
-                new PlutonianPebble(20),
-                new PlutonianPebble(24),
-                new PlutonianPebble(28676032)
-        );
-
-        assertEquals(expectedStones, getPlutonianPebbles(3));
-    }
-
-    @Test
-    public void blinkFourTimesShouldReturnCorrectStones() {
-        List<PlutonianPebble> expectedStones = List.of(
-                new PlutonianPebble(512),
-                new PlutonianPebble(72),
-                new PlutonianPebble(2024),
-                new PlutonianPebble(2),
-                new PlutonianPebble(0),
-                new PlutonianPebble(2),
-                new PlutonianPebble(4),
-                new PlutonianPebble(2867),
-                new PlutonianPebble(6032)
-        );
-
-        assertEquals(expectedStones, getPlutonianPebbles(4));
-    }
-
-    @Test
-    public void blinkFiveTimesShouldReturnCorrectStones() {
-        List<PlutonianPebble> expectedStones = List.of(
-                new PlutonianPebble(1036288),
-                new PlutonianPebble(7),
-                new PlutonianPebble(2),
-                new PlutonianPebble(20),
-                new PlutonianPebble(24),
-                new PlutonianPebble(4048),
-                new PlutonianPebble(1),
-                new PlutonianPebble(4048),
-                new PlutonianPebble(8096),
-                new PlutonianPebble(28),
-                new PlutonianPebble(67),
-                new PlutonianPebble(60),
-                new PlutonianPebble(32)
-        );
-
-        assertEquals(expectedStones, getPlutonianPebbles(5));
-    }
-
-    @Test
-    public void blinkSixTimesShouldReturnCorrectStones() {
-        List<PlutonianPebble> expectedStones = List.of(
-                new PlutonianPebble(2097446912),
-                new PlutonianPebble(14168),
-                new PlutonianPebble(4048),
-                new PlutonianPebble(2),
-                new PlutonianPebble(0),
-                new PlutonianPebble(2),
-                new PlutonianPebble(4),
-                new PlutonianPebble(40),
-                new PlutonianPebble(48),
-                new PlutonianPebble(2024),
-                new PlutonianPebble(40),
-                new PlutonianPebble(48),
-                new PlutonianPebble(80),
-                new PlutonianPebble(96),
-                new PlutonianPebble(2),
-                new PlutonianPebble(8),
-                new PlutonianPebble(6),
-                new PlutonianPebble(7),
-                new PlutonianPebble(6),
-                new PlutonianPebble(0),
-                new PlutonianPebble(3),
-                new PlutonianPebble(2)
-        );
-
-        assertEquals(expectedStones, getPlutonianPebbles(6));
-    }
-
-    private List<PlutonianPebble> getPlutonianPebbles(int numberOfBlinks) {
-        List<PlutonianPebble> finalStones = new ArrayList<>(initialStones);
-        for (int i = 0; i < numberOfBlinks; i++) {
-            finalStones = StoneCountSolver.blink(finalStones);
-        }
-
-        return finalStones;
     }
 
     @AfterEach

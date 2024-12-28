@@ -11,7 +11,7 @@ public class StoneCountSolver {
                 .sum();
     }
 
-    static long calculateStoneCount(PlutonianPebble stone, int numberOfBlinks) {
+    private static long calculateStoneCount(PlutonianPebble stone, int numberOfBlinks) {
         return numberOfBlinks == 0 ? 1 :
                 stone.blink().stream().mapToLong(newStone -> calculateStoneCount(newStone, numberOfBlinks - 1)).sum();
     }
