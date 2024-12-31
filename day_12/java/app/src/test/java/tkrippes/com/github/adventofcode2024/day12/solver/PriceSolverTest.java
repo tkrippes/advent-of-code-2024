@@ -27,6 +27,32 @@ public class PriceSolverTest {
         assertEquals(1930, PriceSolver.solve(GardenPlotsTestInputHelper.getTestInput3GardenPlots()));
     }
 
+    // TODO move tests to different file once the solver is split
+    @Test
+    public void solveV2ForTestInput1ShouldReturnCorrectScore() {
+        assertEquals(80, PriceSolver.solveV2(GardenPlotsTestInputHelper.getTestInput1GardenPlots()));
+    }
+
+    @Test
+    public void solveV2ForTestInput2ShouldReturnCorrectScore() {
+        assertEquals(436, PriceSolver.solveV2(GardenPlotsTestInputHelper.getTestInput2GardenPlots()));
+    }
+
+    @Test
+    public void solveV2ForTestInput3ShouldReturnCorrectScore() {
+        assertEquals(1206, PriceSolver.solveV2(GardenPlotsTestInputHelper.getTestInput3GardenPlots()));
+    }
+
+    @Test
+    public void solveV2ForTestInput4ShouldReturnCorrectScore() {
+        assertEquals(236, PriceSolver.solveV2(GardenPlotsTestInputHelper.getTestInput4GardenPlots()));
+    }
+
+    @Test
+    public void solveV2ForTestInput5ShouldReturnCorrectScore() {
+        assertEquals(368, PriceSolver.solveV2(GardenPlotsTestInputHelper.getTestInput5GardenPlots()));
+    }
+
     @AfterEach
     public void tearDown() {
     }
