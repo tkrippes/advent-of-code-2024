@@ -45,6 +45,22 @@ public class GardenPlotsParserTest {
                 GardenPlotsParser.parse(validInputFileName));
     }
 
+    @Test
+    public void parseShouldParseInputFile4Correctly() throws IOException {
+        String validInputFileName = "../../input/test_input_4.txt";
+
+        assertEquals(GardenPlotsTestInputHelper.getTestInput4GardenPlots(),
+                GardenPlotsParser.parse(validInputFileName));
+    }
+
+    @Test
+    public void parseShouldParseInputFile5Correctly() throws IOException {
+        String validInputFileName = "../../input/test_input_5.txt";
+
+        assertEquals(GardenPlotsTestInputHelper.getTestInput5GardenPlots(),
+                GardenPlotsParser.parse(validInputFileName));
+    }
+
     @AfterEach
     public void tearDown() {
     }

@@ -162,4 +162,78 @@ public class GardenPlotsTestInputHelper {
 
         return new GardenPlots(plots);
     }
+
+    public static GardenPlots getTestInput4GardenPlots() {
+        Map<Position, Character> plots = new HashMap<>();
+        plots.put(new Position(0, 0), 'E');
+        plots.put(new Position(0, 1), 'E');
+        plots.put(new Position(0, 2), 'E');
+        plots.put(new Position(0, 3), 'E');
+        plots.put(new Position(0, 4), 'E');
+        plots.put(new Position(1, 0), 'E');
+        plots.put(new Position(1, 1), 'X');
+        plots.put(new Position(1, 2), 'X');
+        plots.put(new Position(1, 3), 'X');
+        plots.put(new Position(1, 4), 'X');
+        plots.put(new Position(2, 0), 'E');
+        plots.put(new Position(2, 1), 'E');
+        plots.put(new Position(2, 2), 'E');
+        plots.put(new Position(2, 3), 'E');
+        plots.put(new Position(2, 4), 'E');
+        plots.put(new Position(3, 0), 'E');
+        plots.put(new Position(3, 1), 'X');
+        plots.put(new Position(3, 2), 'X');
+        plots.put(new Position(3, 3), 'X');
+        plots.put(new Position(3, 4), 'X');
+        plots.put(new Position(4, 0), 'E');
+        plots.put(new Position(4, 1), 'E');
+        plots.put(new Position(4, 2), 'E');
+        plots.put(new Position(4, 3), 'E');
+        plots.put(new Position(4, 4), 'E');
+        plots.put(new Position(4, 4), 'E');
+
+        return new GardenPlots(plots);
+    }
+
+    public static GardenPlots getTestInput5GardenPlots() {
+        Map<Position, Character> plots = new HashMap<>();
+        plots.put(new Position(0, 0), 'A');
+        plots.put(new Position(0, 1), 'A');
+        plots.put(new Position(0, 2), 'A');
+        plots.put(new Position(0, 3), 'A');
+        plots.put(new Position(0, 4), 'A');
+        plots.put(new Position(0, 5), 'A');
+        plots.put(new Position(1, 0), 'A');
+        plots.put(new Position(1, 1), 'A');
+        plots.put(new Position(1, 2), 'A');
+        plots.put(new Position(1, 3), 'B');
+        plots.put(new Position(1, 4), 'B');
+        plots.put(new Position(1, 5), 'A');
+        plots.put(new Position(2, 0), 'A');
+        plots.put(new Position(2, 1), 'A');
+        plots.put(new Position(2, 2), 'A');
+        plots.put(new Position(2, 3), 'B');
+        plots.put(new Position(2, 4), 'B');
+        plots.put(new Position(2, 5), 'A');
+        plots.put(new Position(3, 0), 'A');
+        plots.put(new Position(3, 1), 'B');
+        plots.put(new Position(3, 2), 'B');
+        plots.put(new Position(3, 3), 'A');
+        plots.put(new Position(3, 4), 'A');
+        plots.put(new Position(3, 5), 'A');
+        plots.put(new Position(4, 0), 'A');
+        plots.put(new Position(4, 1), 'B');
+        plots.put(new Position(4, 2), 'B');
+        plots.put(new Position(4, 3), 'A');
+        plots.put(new Position(4, 4), 'A');
+        plots.put(new Position(4, 5), 'A');
+        plots.put(new Position(5, 0), 'A');
+        plots.put(new Position(5, 1), 'A');
+        plots.put(new Position(5, 2), 'A');
+        plots.put(new Position(5, 3), 'A');
+        plots.put(new Position(5, 4), 'A');
+        plots.put(new Position(5, 5), 'A');
+
+        return new GardenPlots(plots);
+    }
 }
