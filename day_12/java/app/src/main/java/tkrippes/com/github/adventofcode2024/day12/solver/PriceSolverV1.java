@@ -5,6 +5,7 @@ import tkrippes.com.github.adventofcode2024.day12.Position;
 
 import java.util.List;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 public class PriceSolverV1 extends PriceSolver {
     public static long solve(GardenPlots plots) {
@@ -34,18 +35,12 @@ public class PriceSolverV1 extends PriceSolver {
     }
 
     private static int getNumberOfNeighboursInRegion(Position position, List<Position> region) {
-        int numberOfNeighbours = 0;
-
-        for (Position neighbourPosition : List.of(
-                new Position(position.row() - 1, position.column()),
-                new Position(position.row() + 1, position.column()),
-                new Position(position.row(), position.column() - 1),
-                new Position(position.row(), position.column() + 1))) {
-            if (region.contains(neighbourPosition)) {
-                numberOfNeighbours++;
-            }
-        }
-
-        return numberOfNeighbours;
+        return (int) Stream.of(
+                        new Position(position.row() - 1, position.column()),
+                        new Position(position.row() + 1, position.column()),
+                        new Position(position.row(), position.column() - 1),
+                        new Position(position.row(), position.column() + 1))
+                .filter(region::contains)
+                .count();
     }
 }

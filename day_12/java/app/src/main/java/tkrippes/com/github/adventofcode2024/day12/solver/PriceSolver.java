@@ -3,28 +3,23 @@ package tkrippes.com.github.adventofcode2024.day12.solver;
 import tkrippes.com.github.adventofcode2024.day12.Position;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class PriceSolver {
     protected static List<List<Position>> getRegions(Map<Position, Character> plots) {
         List<List<Position>> regions = new ArrayList<>();
         Map<Position, Boolean> visitedPlots = getInitialVisitedPositions(plots);
 
-        for (Map.Entry<Position, Character> plot : plots.entrySet()) {
-            if (plotNotVisitedYet(plot, visitedPlots)) {
-                regions.add(getRegionContainingPlot(plot, plots, visitedPlots));
-            }
-        }
+        plots.entrySet().stream()
+                .filter(plot -> plotNotVisitedYet(plot, visitedPlots))
+                .forEach(plot -> regions.add(getRegionContainingPlot(plot, plots, visitedPlots)));
 
         return regions;
     }
 
     private static Map<Position, Boolean> getInitialVisitedPositions(Map<Position, Character> plots) {
-        Map<Position, Boolean> visitedPositions = new HashMap<>();
-        for (Position position : plots.keySet()) {
-            visitedPositions.put(position, false);
-        }
-
-        return visitedPositions;
+        return plots.keySet().stream()
+                .collect(Collectors.toMap(position -> position, _ -> false));
     }
 
     private static boolean plotNotVisitedYet(Map.Entry<Position, Character> plot,
@@ -42,14 +37,12 @@ public class PriceSolver {
 
         while (!plotsToVisit.isEmpty()) {
             Map.Entry<Position, Character> currentPlot = plotsToVisit.removeFirst();
-            for (Map.Entry<Position, Character> neighbourPlot :
-                    getNeighbourPlotsWithSamePlantType(currentPlot.getKey(),
-                            currentPlot.getValue(), plots)) {
-                if (plotNotVisitedYet(neighbourPlot, visitedPlots)) {
-                    addPlotToRegion(neighbourPlot, region);
-                    updateVisitingPlots(neighbourPlot, visitedPlots, plotsToVisit);
-                }
-            }
+            getNeighbourPlotsWithSamePlantType(currentPlot.getKey(), currentPlot.getValue(), plots).stream()
+                    .filter(neighbourPlot -> plotNotVisitedYet(neighbourPlot, visitedPlots))
+                    .forEach(neighbourPlot -> {
+                        addPlotToRegion(neighbourPlot, region);
+                        updateVisitingPlots(neighbourPlot, visitedPlots, plotsToVisit);
+                    });
         }
 
         return region;
@@ -69,18 +62,18 @@ public class PriceSolver {
     private static List<Map.Entry<Position, Character>> getNeighbourPlotsWithSamePlantType(Position position,
                                                                                            Character plantType,
                                                                                            Map<Position, Character> plots) {
-        List<Map.Entry<Position, Character>> neighbourPlots = new ArrayList<>();
-        for (Position neighbourPosition : List.of(
+        return getNeighbourPlotPositions(position).stream()
+                .filter(neighbourPosition -> plots.get(neighbourPosition) == plantType)
+                .map(neighbourPosition -> Map.entry(neighbourPosition, plots.get(neighbourPosition)))
+                .toList();
+    }
+
+    private static List<Position> getNeighbourPlotPositions(Position position) {
+        return List.of(
                 new Position(position.row() - 1, position.column()),
                 new Position(position.row() + 1, position.column()),
                 new Position(position.row(), position.column() - 1),
-                new Position(position.row(), position.column() + 1))) {
-            if (plots.get(neighbourPosition) == plantType) {
-                neighbourPlots.add(Map.entry(neighbourPosition, plots.get(neighbourPosition)));
-            }
-        }
-
-        return neighbourPlots;
+                new Position(position.row(), position.column() + 1));
     }
 
     protected static List<Long> getAreas(List<List<Position>> regions) {
