@@ -18,39 +18,64 @@ public class PriceSolver {
     }
 
     private static List<List<Position>> getRegions(Map<Position, Character> plots) {
-        // TODO refactor
         List<List<Position>> regions = new ArrayList<>();
+        Map<Position, Boolean> visitedPlots = getInitialVisitedPositions(plots);
+
+        for (Map.Entry<Position, Character> plot : plots.entrySet()) {
+            if (plotNotVisitedYet(plot, visitedPlots)) {
+                regions.add(getRegionContainingPlot(plot, plots, visitedPlots));
+            }
+        }
+
+        return regions;
+    }
+
+    private static Map<Position, Boolean> getInitialVisitedPositions(Map<Position, Character> plots) {
         Map<Position, Boolean> visitedPositions = new HashMap<>();
         for (Position position : plots.keySet()) {
             visitedPositions.put(position, false);
         }
 
-        for (Map.Entry<Position, Character> plot : plots.entrySet()) {
-            if (!visitedPositions.get(plot.getKey())) {
-                List<Position> region = new ArrayList<>();
-                List<Map.Entry<Position, Character>> queue = new ArrayList<>();
-                queue.add(plot);
-                visitedPositions.put(plot.getKey(), true);
-                region.add(plot.getKey());
+        return visitedPositions;
+    }
 
-                while (!queue.isEmpty()) {
-                    Map.Entry<Position, Character> currentPlot = queue.removeFirst();
-                    for (Map.Entry<Position, Character> neighbourPlot :
-                            getNeighbourPlotsWithSamePlantType(currentPlot.getKey(),
-                                    currentPlot.getValue(), plots)) {
-                        if (!visitedPositions.get(neighbourPlot.getKey())) {
-                            queue.add(neighbourPlot);
-                            visitedPositions.put(neighbourPlot.getKey(), true);
-                            region.add(neighbourPlot.getKey());
-                        }
-                    }
+    private static boolean plotNotVisitedYet(Map.Entry<Position, Character> plot,
+                                             Map<Position, Boolean> visitedPositions) {
+        return !visitedPositions.get(plot.getKey());
+    }
+
+    private static List<Position> getRegionContainingPlot(Map.Entry<Position, Character> plot,
+                                                          Map<Position, Character> plots,
+                                                          Map<Position, Boolean> visitedPlots) {
+        List<Position> region = new ArrayList<>();
+        List<Map.Entry<Position, Character>> plotsToVisit = new ArrayList<>();
+        addPlotToRegion(plot, region);
+        updateVisitingPlots(plot, visitedPlots, plotsToVisit);
+
+        while (!plotsToVisit.isEmpty()) {
+            Map.Entry<Position, Character> currentPlot = plotsToVisit.removeFirst();
+            for (Map.Entry<Position, Character> neighbourPlot :
+                    getNeighbourPlotsWithSamePlantType(currentPlot.getKey(),
+                            currentPlot.getValue(), plots)) {
+                if (plotNotVisitedYet(neighbourPlot, visitedPlots)) {
+                    addPlotToRegion(neighbourPlot, region);
+                    updateVisitingPlots(neighbourPlot, visitedPlots, plotsToVisit);
                 }
-
-                regions.add(region);
             }
         }
 
-        return regions;
+        return region;
+    }
+
+    private static void addPlotToRegion(Map.Entry<Position, Character> plot, List<Position> region) {
+        region.add(plot.getKey());
+    }
+
+    private static void updateVisitingPlots(Map.Entry<Position, Character> plot,
+                                            Map<Position, Boolean> visitedPositions,
+                                            List<Map.Entry<Position, Character>> plotsToVisit) {
+        plotsToVisit.add(plot);
+        visitedPositions.put(plot.getKey(), true);
     }
 
     private static List<Map.Entry<Position, Character>> getNeighbourPlotsWithSamePlantType(Position position,
