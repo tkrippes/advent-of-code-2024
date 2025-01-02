@@ -12,7 +12,7 @@ public class Main {
         System.out.println("Result of day 12 part 1: " + resultPart1());
     }
 
-    private static int resultPart1() {
+    private static long resultPart1() {
         List<MachineConfiguration> machineConfigurations;
         try {
             machineConfigurations = MachineConfigurationsParser.parse(inputFileName);

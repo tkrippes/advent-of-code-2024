@@ -11,11 +11,11 @@ public class TokenOptimizerSolver {
     private static final Map<Character, Integer> buttonTokenCostMap = Map.of('A', 3, 'B', 1);
     private static final int maxNumberOfPresses = 100;
 
-    public static int solve(List<MachineConfiguration> machineConfigurations) {
-        return machineConfigurations.stream().map(TokenOptimizerSolver::calculateTokenCosts).filter(cost -> cost != -1).reduce(0, Integer::sum);
+    public static long solve(List<MachineConfiguration> machineConfigurations) {
+        return machineConfigurations.stream().map(TokenOptimizerSolver::calculateTokenCosts).filter(cost -> cost != -1).reduce(0L, Long::sum);
     }
 
-    private static int calculateTokenCosts(MachineConfiguration machineConfiguration) {
+    private static long calculateTokenCosts(MachineConfiguration machineConfiguration) {
         double buttonAPresses = calculateButtonAPresses(machineConfiguration);
         if (isInvalidPresses(buttonAPresses)) {
             return -1;
@@ -26,7 +26,7 @@ public class TokenOptimizerSolver {
             return -1;
         }
 
-        return ((int) buttonAPresses * buttonTokenCostMap.get('A') + (int) buttonBPresses * buttonTokenCostMap.get('B'));
+        return ((long) buttonAPresses * buttonTokenCostMap.get('A') + (long) buttonBPresses * buttonTokenCostMap.get('B'));
     }
 
     private static double calculateButtonAPresses(MachineConfiguration machineConfiguration) {
@@ -54,6 +54,6 @@ public class TokenOptimizerSolver {
     }
 
     private static boolean isNotInteger(double number) {
-        return number != (int) number;
+        return number != (long) number;
     }
 }
