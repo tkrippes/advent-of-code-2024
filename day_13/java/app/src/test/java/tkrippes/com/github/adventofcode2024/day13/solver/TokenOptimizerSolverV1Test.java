@@ -12,7 +12,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class TokenOptimizerSolverTest {
+public class TokenOptimizerSolverV1Test {
     @BeforeEach
     public void setUp() {
     }
@@ -27,7 +27,7 @@ public class TokenOptimizerSolverTest {
                 )
         );
 
-        assertEquals(480, TokenOptimizerSolver.solve(machineConfigurations));
+        assertEquals(480, TokenOptimizerSolverV1.solve(machineConfigurations));
     }
 
 
